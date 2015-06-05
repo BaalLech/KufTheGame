@@ -23,3 +23,28 @@ c:\users\v.indzhev\documents\visual studio 2013\Projects\KufTheGame\KufTheGame\b
 c:\users\v.indzhev\documents\visual studio 2013\Projects\KufTheGame\KufTheGame\obj\x86\Debug\KufTheGame.csprojResolveAssemblyReference.cache
 c:\users\v.indzhev\documents\visual studio 2013\Projects\KufTheGame\KufTheGame\obj\x86\Debug\KufTheGame.exe
 c:\users\v.indzhev\documents\visual studio 2013\Projects\KufTheGame\KufTheGame\obj\x86\Debug\KufTheGame.pdb
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\obj\x86\Debug\KufTheGame.exe
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\obj\x86\Debug\KufTheGame.pdb
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\KufTheGame.exe
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\KufTheGame.pdb
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\Spas\Desktop\KufTheGame\KufTheGame\obj\x86\Debug\KufTheGame.csprojResolveAssemblyReference.cache
