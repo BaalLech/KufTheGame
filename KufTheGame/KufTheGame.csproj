@@ -38,7 +38,32 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Core\ExceptionHandler.cs" />
+    <Compile Include="Core\KeyListener.cs" />
+    <Compile Include="Core\Validate.cs" />
     <Compile Include="KufTheGame.cs" />
+    <Compile Include="Models\Abstracts\Character.cs" />
+    <Compile Include="Models\Abstracts\Consumable.cs" />
+    <Compile Include="Models\Abstracts\Enemy.cs" />
+    <Compile Include="Models\Abstracts\GameObject.cs" />
+    <Compile Include="Models\Abstracts\Item.cs" />
+    <Compile Include="Models\Abstracts\Obsticle.cs" />
+    <Compile Include="Models\Abstracts\Potion.cs" />
+    <Compile Include="Models\Enums\Armors.cs" />
+    <Compile Include="Models\Enums\Rarities.cs" />
+    <Compile Include="Models\Enums\Weapons.cs" />
+    <Compile Include="Models\Game.Models\Characters\Mage.cs" />
+    <Compile Include="Models\Game.Models\Characters\Player.cs" />
+    <Compile Include="Models\Game.Models\Items\Armor.cs" />
+    <Compile Include="Models\Game.Models\Items\HealthPotion.cs" />
+    <Compile Include="Models\Game.Models\Items\Weapon.cs" />
+    <Compile Include="Models\Game.Models\Specialty.cs" />
+    <Compile Include="Models\Interfaces\IAttackable.cs" />
+    <Compile Include="Models\Interfaces\ICharacter.cs" />
+    <Compile Include="Models\Interfaces\IItem.cs" />
+    <Compile Include="Models\Interfaces\IMoveable.cs" />
+    <Compile Include="Models\Interfaces\IPlayer.cs" />
+    <Compile Include="Models\Interfaces\ISoundable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,6 +79,13 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Game.Models\Obsticles\" />
+    <Folder Include="UI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
