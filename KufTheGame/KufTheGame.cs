@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using KufTheGame.Models.Game.Models.Characters;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,12 +10,16 @@ namespace KufTheGame
     /// </summary>
     public class KufTheGame : Game
     {
+        private Player player;
+        private SpriteFont gameFont;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
 
         public KufTheGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -26,8 +31,7 @@ namespace KufTheGame
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            this.player = new Player(100, 100, "Pesho", 3, 2, 0, 50);
             base.Initialize();
         }
 
@@ -40,7 +44,7 @@ namespace KufTheGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            this.gameFont = Content.Load<SpriteFont>("Fonts/GameFont");
         }
 
         /// <summary>
@@ -59,8 +63,20 @@ namespace KufTheGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
-
+            if (this.player.HealthPoints >= 1)
+            {
+                this.player.HealthPoints -= 1;
+            }
+            else if (this.player.Lives > 1)
+            {
+                this.player.Lives -= 1;
+                this.player.HealthPoints = 50;
+            }
+            else
+            {
+                this.player.Lives = 0;
+            }
+            
             base.Update(gameTime);
         }
 
@@ -72,7 +88,29 @@ namespace KufTheGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            #region //* ------------- CREATING DRAWING PEN ------------- *//
+
+            var pen = new Texture2D(graphics.GraphicsDevice, 1, 1);
+            pen.SetData(new[] { Color.White });
+
+            #endregion
+
+            #region //* ------------- DRAWING CHARACTER INFO ------------- *//
+
+            /* ------------- Drawing Players' HUD Lives -------------*/  
+            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 5), Color.White);
+
+            /* ------------- Drawing Players' HUD Background -------------*/
+            spriteBatch.Draw(pen, new Rectangle(5, 30, 200, 20), Color.White);
+
+            /* ------------- Drawing Players' HUD HealthBar -------------*/
+            spriteBatch.Draw(pen, new Rectangle(5, 30, 200 - (50 - (int)this.player.HealthPoints) * 4, 20), Color.Red);
+            #endregion
+
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
