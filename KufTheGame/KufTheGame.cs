@@ -12,15 +12,22 @@ namespace KufTheGame
     {
         private Player player;
         private SpriteFont gameFont;
-        GraphicsDeviceManager graphics;
+        readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         
 
         public KufTheGame()
         {
-            graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
-            Content.RootDirectory = "Content";
+            //Creating Game Screen And Setting Initial Size
+            this.graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = 1600,
+                PreferredBackBufferHeight = 900,
+                IsFullScreen = true
+            };
+            //this.graphics.ApplyChanges();
+
+            this.Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -42,9 +49,8 @@ namespace KufTheGame
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            this.gameFont = Content.Load<SpriteFont>("Fonts/GameFont");
+            this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            this.gameFont = this.Content.Load<SpriteFont>("Fonts/GameFont");
         }
 
         /// <summary>
@@ -63,6 +69,7 @@ namespace KufTheGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            //I did this just to test how HP bar is going to look like /it's crap (puke)/
             if (this.player.HealthPoints >= 1)
             {
                 this.player.HealthPoints -= 1;
@@ -76,6 +83,33 @@ namespace KufTheGame
             {
                 this.player.Lives = 0;
             }
+
+            //TODO Validation for character location
+            #region //* ------------- MOVING CHARACTER ------------- *//
+           
+            var keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
+            {
+               // Move Up
+                this.player.Y -= 1;
+            }
+            if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
+            {
+               // Move Down
+                this.player.Y += 1;
+            }
+            if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
+            {
+               // Move left
+                this.player.X -= 1;
+            }
+            if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
+            {
+               // Move right
+                this.player.X += 1;
+            }
+
+            #endregion
             
             base.Update(gameTime);
         }
@@ -86,13 +120,13 @@ namespace KufTheGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            this.spriteBatch.Begin();
 
             #region //* ------------- CREATING DRAWING PEN ------------- *//
 
-            var pen = new Texture2D(graphics.GraphicsDevice, 1, 1);
+            var pen = new Texture2D(this.graphics.GraphicsDevice, 1, 1);
             pen.SetData(new[] { Color.White });
 
             #endregion
@@ -103,14 +137,17 @@ namespace KufTheGame
             this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 5), Color.White);
 
             /* ------------- Drawing Players' HUD Background -------------*/
-            spriteBatch.Draw(pen, new Rectangle(5, 30, 200, 20), Color.White);
+            this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200, 20), Color.White);
 
             /* ------------- Drawing Players' HUD HealthBar -------------*/
-            spriteBatch.Draw(pen, new Rectangle(5, 30, 200 - (50 - (int)this.player.HealthPoints) * 4, 20), Color.Red);
+            this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200 - (50 - (int)this.player.HealthPoints) * 4, 20), Color.Red);
             #endregion
 
+            #region //* ------------- DRAWING CHARACTER ------------- *//
+            this.spriteBatch.Draw(pen, new Rectangle(this.player.X, this.player.Y, 20, 20), Color.Chocolate);
+            #endregion
 
-            spriteBatch.End();
+            this.spriteBatch.End();
 
             base.Draw(gameTime);
         }
