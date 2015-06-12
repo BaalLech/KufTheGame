@@ -19,7 +19,7 @@ namespace KufTheGame.Models.Abstracts
             this.AddDrops();
         }
 
-        public IList<IItem> Drops { get; private set; }
+        public ICollection<IItem> Drops { get; private set; }
         
         public override void Move()
         {
@@ -90,10 +90,9 @@ namespace KufTheGame.Models.Abstracts
         {
             var rngNum = RandomGenerator.Randomize(1, 3);
             var rarity = Rarity.GetRandomRarity();
-            var rarityType = (Rarities)Enum.Parse(typeof(Rarities), rarity.Keys.First(), true);
+            var rarityType = rarity.Keys.First();
             var rarityCoef = rarity.Values.First();
             
-
             switch (rngNum)
             {
                 case 1:
@@ -104,12 +103,22 @@ namespace KufTheGame.Models.Abstracts
                 case 2:
                     var armorType = RandomGenerator.GetRandomItem<Armors>();
                     Armor armor = new Armor((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
-                        armorType, 10 * rarityCoef);
+                        armorType, 5 * rarityCoef);
                     return armor;
                 case 3:
-                    Potion potion = new HealthPotion((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
-                         100 * rarityCoef);
-                    return potion;
+                    var rngPotionNum = RandomGenerator.Randomize(1, 2);
+                    if (rngPotionNum == 1)
+                    {
+                        Potion potion = new HealthPotion((int) this.Velocity.X, (int) this.Velocity.Y, rarityType,
+                            25 * rarityCoef);
+                        return potion;
+                    }
+                    else
+                    {
+                        Potion potion = new ImmortalilyPotion((int) this.Velocity.X, (int) this.Velocity.Y, rarityType,
+                            2 * (int) rarityCoef + 1);
+                        return potion;
+                    }
                 default:
                     return null;
             }

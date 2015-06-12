@@ -4,9 +4,15 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+<<<<<<< HEAD
     <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
     <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Items/Weapons/Sword.png</File>
     <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
     <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Characters/Players/PlayerSprite.png</File>
+=======
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Items/Weapons/Sword.png</File>
+>>>>>>> fe6ff0ccf36bd399205af9ef3588337f915ca073
   </SourceFiles>
 </SourceFileCollection>
