@@ -50,7 +50,7 @@ namespace KufTheGame
         {
             timer = 500;
             backroundPart = 0;
-            this.player = new Player(100, 750, "Pesho", 3, 2, 0, 50);
+            this.player = new Player(Content.Load<Texture2D>("Character/Player"), 100, 750, "Pesho", 3, 2, 0, 50);
             this.enemies.Add(new Mage(800, 500, 10, 10, 100));
             this.enemies.Add(new Mage(880, 700, 10, 10, 100));
             this.enemies.Add(new Mage(800, 640, 10, 10, 100));
@@ -72,7 +72,7 @@ namespace KufTheGame
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
             this.gameFont = this.Content.Load<SpriteFont>("Fonts/GameFont");
             this.background = this.Content.Load<Texture2D>("Backgrounds/background");
-            this.weapon = this.Content.Load<Texture2D>("Items/Weapons/Sword");
+            this.weapon = this.Content.Load<Texture2D>(weapon);
         }
 
         /// <summary>
@@ -170,25 +170,28 @@ namespace KufTheGame
             #region //* ------------- DRAWING CHARACTER INFO ------------- *//
 
             /* ------------- Drawing Players' HUD Lives -------------*/
-            this.spriteBatch.DrawString(this.gameFont, "KUF THE WARRIOR Lives:  " + this.player.Lives, new Vector2(5, 5), Color.White);
+            this.spriteBatch.Draw(pen, new Rectangle(0, 0, 220, 120), new Color(Color.Black, 0.8F));
+
+            this.spriteBatch.DrawString(this.gameFont, "KUF THE WARRIOR", new Vector2(5, 5), Color.Red);
+            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 25), Color.White);
 
             /* ------------- Drawing Players' HUD Background -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200, 20), Color.White);
+            this.spriteBatch.Draw(pen, new Rectangle(5, 50, 200, 20), Color.White);
 
             /* ------------- Drawing Players' HUD HealthBar -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 55, 200 - (int)(this.player.BaseHealthPoints - (int)this.player.HealthPoints) * 4, 20), Color.Red);
+            this.spriteBatch.Draw(pen, new Rectangle(5, 50, 200 - (int)(this.player.BaseHealthPoints - (int)this.player.HealthPoints) * 4, 20), Color.Red);
 
             /* ------------- Drawing Players' HUD Stash -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 53, 200, 40), Color.DarkGreen);
+            this.spriteBatch.Draw(pen, new Rectangle(5, 73, 200, 40), Color.DarkGreen);
 
-            this.spriteBatch.Draw(pen, new Rectangle(7, 55, 35, 35), Color.DarkBlue);
-            this.spriteBatch.Draw(pen, new Rectangle(47, 55, 35, 35), Color.DarkBlue);
-            this.spriteBatch.Draw(pen, new Rectangle(87, 55, 35, 35), Color.DarkBlue);
-            this.spriteBatch.Draw(pen, new Rectangle(127, 55, 35, 35), Color.DarkBlue);
-            this.spriteBatch.Draw(pen, new Rectangle(167, 55, 35, 35), Color.DarkBlue);
+            this.spriteBatch.Draw(pen, new Rectangle(7, 75, 35, 35), Color.DarkBlue);
+            this.spriteBatch.Draw(pen, new Rectangle(47, 75, 35, 35), Color.DarkBlue);
+            this.spriteBatch.Draw(pen, new Rectangle(87, 75, 35, 35), Color.DarkBlue);
+            this.spriteBatch.Draw(pen, new Rectangle(127, 75, 35, 35), Color.DarkBlue);
+            this.spriteBatch.Draw(pen, new Rectangle(167, 75, 35, 35), Color.DarkBlue);
 
             /* ------------- Drawing Players' HUD Items -------------*/
-            this.spriteBatch.Draw(this.weapon, new Rectangle(7, 55, 35, 35), Color.White);
+            this.spriteBatch.Draw(this.weapon, new Rectangle(7, 75, 35, 35), Color.White);
             #endregion
 
             #region //* ------------- DRAWING CHARACTER ------------- *//

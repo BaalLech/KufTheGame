@@ -10,7 +10,7 @@
   <Class Name="KufTheGame.Core.KeyListener" Collapsed="true">
     <Position X="16" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\KeyListener.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,7 +24,7 @@
   <Class Name="KufTheGame.KufTheGame" Collapsed="true">
     <Position X="17.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAEEAAAAAAAwAAAAAAAAAAAAAAAAgAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAQAEEAAAAAAAwAAQACAAAAACAAAAAgBAAAAAAAAIAQ=</HashCode>
       <FileName>KufTheGame.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,7 +38,7 @@
   <Class Name="KufTheGame.Models.Abstracts.Character" Collapsed="true">
     <Position X="10.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAgAAAQIAACAAAAAAQIAAIAIAAAAQAAAAAAQAAAAA=</HashCode>
+      <HashCode>AQAAgAAAQICACAAAAAAQIAAIAIAAAAQAAAAAAQAAAAA=</HashCode>
       <FileName>Models\Abstracts\Character.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -53,14 +53,14 @@
   <Class Name="KufTheGame.Models.Abstracts.Enemy" Collapsed="true">
     <Position X="9.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAgAAAAIAQAgAAAAAAAAAAAIAAAAAoAAAAAAAAAAA=</HashCode>
       <FileName>Models\Abstracts\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="KufTheGame.Models.Abstracts.GameObject" Collapsed="true">
     <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAQAgBAAAAAAAAAAAAAACAoAAAAAAAAYAA=</HashCode>
+      <HashCode>AAAAAAAAAAAQAgBAAAAAAAAAAAAAADAoAAAAAAAEAAA=</HashCode>
       <FileName>Models\Abstracts\GameObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
