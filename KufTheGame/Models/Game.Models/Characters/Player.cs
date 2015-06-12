@@ -1,4 +1,5 @@
-﻿using KufTheGame.Models.Abstracts;
+﻿using KufTheGame.Core;
+using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
@@ -45,7 +46,7 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void Move()
         {
-            throw new System.NotImplementedException();
+            KeyListener.GetKey();
         }
 
         public override void Attack(Character target)
