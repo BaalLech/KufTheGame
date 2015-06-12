@@ -8,20 +8,17 @@ namespace KufTheGame.Models.Abstracts
     {
         protected GameObject(int x, int y)
         {
-            this.Velocity = new Vector2(x, y);
+            this.X = x;
+            this.Y = y;
         }
 
-        public Vector2 Velocity { get; set; }
+        public int X { get; set; }
 
-        public abstract int DrawOrder
-        {
-            get;
-        }
+        public int Y { get; set; }
 
-        public abstract bool Visible
-        {
-            get;
-        }
+        public abstract int DrawOrder { get; }
+
+        public abstract bool Visible { get; }
 
         // Image
 
