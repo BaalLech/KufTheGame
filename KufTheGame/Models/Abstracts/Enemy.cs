@@ -7,6 +7,7 @@ using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
 using KufTheGame.Models.Structures;
 
+
 namespace KufTheGame.Models.Abstracts
 {
     public abstract class Enemy : Character, IEnemy

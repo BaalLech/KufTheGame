@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</SourceFile>
-  <SourceTime>2015-06-12T15:50:13.8580917+03:00</SourceTime>
-  <DestFile>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/bin/Windows/Backgrounds/background.xnb</DestFile>
-  <DestTime>2015-06-12T15:50:56.2861298+03:00</DestTime>
+  <SourceFile>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</SourceFile>
+  <SourceTime>2015-06-12T15:55:10.153114+03:00</SourceTime>
+  <DestFile>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/bin/Windows/Backgrounds/background.xnb</DestFile>
+  <DestTime>2015-06-12T15:57:03.5295987+03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T20:14:44+03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
