@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Core\ExceptionHandler.cs" />
     <Compile Include="Core\KeyListener.cs" />
+    <Compile Include="Core\RandomGenerator.cs" />
     <Compile Include="Core\Validate.cs" />
     <Compile Include="KufTheGame.cs" />
     <Compile Include="Models\Abstracts\Character.cs" />
@@ -61,10 +62,12 @@
     <Compile Include="Models\Game.Models\Specialty.cs" />
     <Compile Include="Models\Interfaces\IAttackable.cs" />
     <Compile Include="Models\Interfaces\ICharacter.cs" />
+    <Compile Include="Models\Interfaces\IEnemy.cs" />
     <Compile Include="Models\Interfaces\IItem.cs" />
     <Compile Include="Models\Interfaces\IMoveable.cs" />
     <Compile Include="Models\Interfaces\IPlayer.cs" />
     <Compile Include="Models\Interfaces\ISoundable.cs" />
+    <Compile Include="Models\Structures\Rarity.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
