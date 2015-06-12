@@ -1,4 +1,6 @@
-﻿using KufTheGame.Core;
+﻿using System.Collections.Generic;
+using System.Linq;
+using KufTheGame.Core;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Items;
@@ -46,7 +48,93 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void Move()
         {
-            KeyListener.GetKey();
+            IList<PressedKey> keys = KeyListener.GetKey();
+
+            switch (keys.Count())
+            {
+                case 1:
+                    switch (keys[0])
+                    {
+                        case PressedKey.MoveUp:
+                            this.Velocity.Y--;
+                            
+                            break;
+
+                        case PressedKey.MoveDown:
+                            this.Velocity.Y++;
+                            break;
+
+                        case PressedKey.MoveLeft:
+                            this.Velocity.X--;
+                            break;
+
+                        case PressedKey.MoveRight:
+                            this.Velocity.X++;
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (keys[0])
+                    {
+                        case PressedKey.MoveUp:
+                            switch (keys[1])
+                            {
+                                case PressedKey.MoveLeft:
+                                    this.Velocity.X--;
+                                    break;
+
+                                case PressedKey.MoveRight:
+                                    this.Velocity.X++;
+                                    break;
+                            }
+                            this.Velocity.Y--;
+                            break;
+
+                        case PressedKey.MoveDown:
+                            switch (keys[1])
+                            {
+                                case PressedKey.MoveLeft:
+                                    this.Velocity.X--;
+                                    break;
+
+                                case PressedKey.MoveRight:
+                                    this.Velocity.X++;
+                                    break;
+                            }
+                            this.Velocity.Y++;
+                            break;
+
+                        case PressedKey.MoveLeft:
+                            switch (keys[1])
+                            {
+                                case PressedKey.MoveUp:
+                                    this.Velocity.Y--;
+                                    break;
+
+                                case PressedKey.MoveDown:
+                                    this.Velocity.Y++;
+                                    break;
+                            }
+                            this.Velocity.X--;
+                            break;
+
+                        case PressedKey.MoveRight:
+                            switch (keys[1])
+                            {
+                                case PressedKey.MoveUp:
+                                    this.Velocity.Y--;
+                                    break;
+
+                                case PressedKey.MoveDown:
+                                    this.Velocity.Y++;
+                                    break;
+                            }
+                            this.Velocity.X++;
+                            break;
+                    }
+                    break;
+                    
+            }
         }
 
         public override void Attack(Character target)

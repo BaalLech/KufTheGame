@@ -119,27 +119,29 @@ namespace KufTheGame
             //TODO Validation for character location
             #region //* ------------- MOVING CHARACTER ------------- *//
 
-            var keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
-            {
-                // Move Up
-                this.player.Y -= 1;
-            }
-            if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
-            {
-                // Move Down
-                this.player.Y += 1;
-            }
-            if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
-            {
-                // Move left
-                this.player.X -= 1;
-            }
-            if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
-            {
-                // Move right
-                this.player.X += 1;
-            }
+            //var keyboardState = Keyboard.GetState();
+            //if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
+            //{
+            //    // Move Up
+            //    this.player.Y -= 1;
+            //}
+            //if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
+            //{
+            //    // Move Down
+            //    this.player.Y += 1;
+            //}
+            //if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
+            //{
+            //    // Move left
+            //    this.player.X -= 1;
+            //}
+            //if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
+            //{
+            //    // Move right
+            //    this.player.X += 1;
+            //}
+
+            player.Move();
 
             #endregion
 
