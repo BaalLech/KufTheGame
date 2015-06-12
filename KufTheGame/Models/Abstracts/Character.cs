@@ -13,6 +13,7 @@ namespace KufTheGame.Models.Abstracts
             this.AttackPoints = attackPoints;
             this.DefencePoints = defencePoints;
             this.HealthPoints = healthPoints;
+            this.BaseHealthPoints = healthPoints;
         }
 
         // TODO : Validate for negative values;
@@ -21,6 +22,8 @@ namespace KufTheGame.Models.Abstracts
         public double DefencePoints { get; set; }
 
         public double HealthPoints { get; set; }
+
+        public double BaseHealthPoints { get; private set; }
 
         public IList<Specialty> Specialties { get; set; }
         public void RemoveHp(double hp)
@@ -34,12 +37,7 @@ namespace KufTheGame.Models.Abstracts
 
         public bool IsAlive()
         {
-            if (this.HealthPoints == 0)
-            {
-                return false;
-            }
-
-            return true;
+            return this.HealthPoints != 0;
         }
 
         public abstract void Move();

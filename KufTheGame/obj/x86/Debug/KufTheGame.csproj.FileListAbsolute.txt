@@ -49,3 +49,5 @@ C:\Users\Spas\Desktop\KufTheGame\KufTheGame\bin\Windows\Debug\SharpDX.Direct3D9.
 C:\Users\Spas\Desktop\KufTheGame\KufTheGame\obj\x86\Debug\KufTheGame.csprojResolveAssemblyReference.cache
 C:\Users\v.indzhev\Documents\Visual Studio 2013\Projects\KufTheGame\KufTheGame\obj\x86\Debug\KufTheGame.csprojResolveAssemblyReference.cache
 C:\Users\v.indzhev\Documents\Visual Studio 2013\Projects\KufTheGame\KufTheGame\bin\Windows\Debug\Content\Fonts\GameFont.xnb
+C:\Users\v.indzhev\documents\visual studio 2013\Projects\KufTheGame\KufTheGame\bin\Windows\Debug\Content\Backgrounds\background.xnb
+C:\Users\v.indzhev\documents\visual studio 2013\Projects\KufTheGame\KufTheGame\bin\Windows\Debug\Content\Items\Weapons\Sword.xnb

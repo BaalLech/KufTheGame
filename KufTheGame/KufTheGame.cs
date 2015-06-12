@@ -10,6 +10,9 @@ namespace KufTheGame
     /// </summary>
     public class KufTheGame : Game
     {
+        private Texture2D background, weapon;
+        private int timer;
+        private int backroundPart;
         private Player player;
         private SpriteFont gameFont;
         readonly GraphicsDeviceManager graphics;
@@ -21,11 +24,13 @@ namespace KufTheGame
             //Creating Game Screen And Setting Initial Size
             this.graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferWidth = 1600,
-                PreferredBackBufferHeight = 900,
-                IsFullScreen = true
+                PreferredBackBufferWidth = 1000,
+                PreferredBackBufferHeight = 800,
+                //IsFullScreen = true
             };
-            //this.graphics.ApplyChanges();
+
+            this.timer = 500;
+            //this.background = new Texture2D(this.graphics.GraphicsDevice, 800, 800);
 
             this.Content.RootDirectory = "Content";
         }
@@ -38,7 +43,9 @@ namespace KufTheGame
         /// </summary>
         protected override void Initialize()
         {
-            this.player = new Player(100, 100, "Pesho", 3, 2, 0, 50);
+            timer = 500;
+            backroundPart = 0;
+            this.player = new Player(100, 750, "Pesho", 3, 2, 0, 50);
             base.Initialize();
         }
 
@@ -51,6 +58,8 @@ namespace KufTheGame
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
             this.gameFont = this.Content.Load<SpriteFont>("Fonts/GameFont");
+            this.background = this.Content.Load<Texture2D>("Backgrounds/background");
+            this.weapon = this.Content.Load<Texture2D>("Items/Weapons/Sword");
         }
 
         /// <summary>
@@ -69,6 +78,16 @@ namespace KufTheGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (this.timer != 0)
+            {
+                this.timer -= 1;
+            }
+            else
+            {
+                this.timer = 500;
+                this.backroundPart = (this.backroundPart + 1) % 3;
+            }
+
             //I did this just to test how HP bar is going to look like /it's crap (puke)/
             if (this.player.HealthPoints >= 1)
             {
@@ -76,7 +95,7 @@ namespace KufTheGame
             }
             else if (this.player.Lives > 1)
             {
-                this.player.Lives -= 1;
+                this.player.RemoveLive();
                 this.player.HealthPoints = 50;
             }
             else
@@ -124,6 +143,8 @@ namespace KufTheGame
 
             this.spriteBatch.Begin();
 
+            this.spriteBatch.Draw(this.background, new Rectangle((this.backroundPart * (-1000)), 0, 3072, 800), Color.White);
+
             #region //* ------------- CREATING DRAWING PEN ------------- *//
 
             var pen = new Texture2D(this.graphics.GraphicsDevice, 1, 1);
@@ -134,17 +155,27 @@ namespace KufTheGame
             #region //* ------------- DRAWING CHARACTER INFO ------------- *//
 
             /* ------------- Drawing Players' HUD Lives -------------*/  
-            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 5), Color.White);
+            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 5), Color.Black);
 
             /* ------------- Drawing Players' HUD Background -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200, 20), Color.White);
 
             /* ------------- Drawing Players' HUD HealthBar -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200 - (50 - (int)this.player.HealthPoints) * 4, 20), Color.Red);
+            this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200 - (int)(this.player.BaseHealthPoints - (int)this.player.HealthPoints) * 4, 20), Color.Red);
+
+            /* ------------- Drawing Players' HUD Stash -------------*/
+            this.spriteBatch.Draw(pen, new Rectangle(7, 55, 35, 35), Color.Black);
+            this.spriteBatch.Draw(pen, new Rectangle(47, 55, 35, 35), Color.Black);
+            this.spriteBatch.Draw(pen, new Rectangle(87, 55, 35, 35), Color.Black);
+            this.spriteBatch.Draw(pen, new Rectangle(127, 55, 35, 35), Color.Black);
+            this.spriteBatch.Draw(pen, new Rectangle(167, 55, 35, 35), Color.Black);
+
+            /* ------------- Drawing Players' HUD Items -------------*/
+            this.spriteBatch.Draw(this.weapon, new Rectangle(7, 55, 35,35), Color.White);
             #endregion
 
             #region //* ------------- DRAWING CHARACTER ------------- *//
-            this.spriteBatch.Draw(pen, new Rectangle(this.player.X, this.player.Y, 20, 20), Color.Chocolate);
+            this.spriteBatch.Draw(pen, new Rectangle(this.player.X, this.player.Y, 20, 20), Color.Black);
             #endregion
 
             this.spriteBatch.End();
