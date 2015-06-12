@@ -60,7 +60,6 @@
     <Compile Include="Models\Game.Models\Items\HealthPotion.cs" />
     <Compile Include="Models\Game.Models\Items\Weapon.cs" />
     <Compile Include="Models\Game.Models\Specialty.cs" />
-    <Compile Include="Models\Game.Models\Structures\Rarity.cs" />
     <Compile Include="Models\Interfaces\IAttackable.cs" />
     <Compile Include="Models\Interfaces\ICharacter.cs" />
     <Compile Include="Models\Interfaces\IEnemy.cs" />

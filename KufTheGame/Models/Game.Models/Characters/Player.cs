@@ -15,7 +15,7 @@ namespace KufTheGame.Models.Game.Models.Characters
         private const int InitialLives = 3;
         private const double InitialAttackPoints = 2;
         private const double InitialDefencePoints = 0;
-        private const double InitialHealthPoints = 100;
+        private const double InitialHealthPoints = 50;
 
         public Player(Texture2D playerTexture, int x, int y, string name)
             : base(x, y, InitialAttackPoints, InitialDefencePoints, InitialHealthPoints)
