@@ -50,7 +50,7 @@ namespace KufTheGame
         {
             timer = 500;
             backroundPart = 0;
-            this.player = new Player(Content.Load<Texture2D>("Character/Player"), 100, 750, "Pesho", 3, 2, 0, 50);
+            this.player = new Player(Content.Load<Texture2D>("Items/Weapons/Sword"), 100, 750, "Pesho");
             this.enemies.Add(new Mage(800, 500, 10, 10, 100));
             this.enemies.Add(new Mage(880, 700, 10, 10, 100));
             this.enemies.Add(new Mage(800, 640, 10, 10, 100));
@@ -72,7 +72,7 @@ namespace KufTheGame
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
             this.gameFont = this.Content.Load<SpriteFont>("Fonts/GameFont");
             this.background = this.Content.Load<Texture2D>("Backgrounds/background");
-            this.weapon = this.Content.Load<Texture2D>(weapon);
+            this.weapon = this.Content.Load<Texture2D>("Items/Weapons/Sword");
         }
 
         /// <summary>

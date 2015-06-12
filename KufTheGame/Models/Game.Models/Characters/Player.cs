@@ -12,15 +12,16 @@ namespace KufTheGame.Models.Game.Models.Characters
 {
     public class Player: Character, IPlayer
     {
+        private const int InitialLives = 3;
         private const double InitialAttackPoints = 2;
         private const double InitialDefencePoints = 0;
         private const double InitialHealthPoints = 100;
 
-        public Player(Texture2D playerTexture, int x, int y, string name, int lives)
+        public Player(Texture2D playerTexture, int x, int y, string name)
             : base(x, y, InitialAttackPoints, InitialDefencePoints, InitialHealthPoints)
         {
             this.Name = name;
-            this.Lives = lives;
+            this.Lives = InitialLives;
             this.Texture = playerTexture;
         }
 
