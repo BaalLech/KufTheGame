@@ -12,7 +12,7 @@ namespace KufTheGame.Models.Abstracts
         }
 
         public Vector2 Velocity { get; set; }
-
+        
         public abstract int DrawOrder { get; }
 
         public abstract bool Visible { get; }

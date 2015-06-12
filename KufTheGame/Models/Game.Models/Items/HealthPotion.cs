@@ -6,6 +6,8 @@ namespace KufTheGame.Models.Game.Models.Items
 {
     public class HealthPotion: Potion
     {
+        private const string ImagePath = "";
+
         public HealthPotion(int x, int y, Rarities rarity, double health) : base(x, y, rarity)
         {
             this.Health = health;
