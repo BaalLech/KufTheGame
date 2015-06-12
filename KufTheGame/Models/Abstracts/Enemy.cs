@@ -15,6 +15,7 @@ namespace KufTheGame.Models.Abstracts
         protected Enemy(int x, int y, double attackPoints, double defencePoints, double healthPoints)
             : base(x, y, attackPoints, defencePoints, healthPoints)
         {
+            this.Drops = new List<IItem>();
             this.AddDrops();
         }
 
@@ -87,31 +88,31 @@ namespace KufTheGame.Models.Abstracts
 
         private Item GetItem()
         {
-            var rngNum = RandomGenerator.Randomize(0, 3);
+            var rngNum = RandomGenerator.Randomize(1, 3);
             var rarity = Rarity.GetRandomRarity();
             var rarityType = (Rarities)Enum.Parse(typeof(Rarities), rarity.Keys.First(), true);
             var rarityCoef = rarity.Values.First();
-            Item item = null;
+            
 
             switch (rngNum)
             {
                 case 1:
                     var weaponType = RandomGenerator.GetRandomItem<Weapons>();
-                    item = new Weapon((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
+                    Weapon wep = new Weapon((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
                         weaponType, 10 * rarityCoef);
-                    break;
+                    return wep;
                 case 2:
                     var armorType = RandomGenerator.GetRandomItem<Armors>();
-                    item = new Armor((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
+                    Armor armor = new Armor((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
                         armorType, 10 * rarityCoef);
-                    break;
+                    return armor;
                 case 3:
-                    item = new HealthPotion((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
+                    Potion potion = new HealthPotion((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
                          100 * rarityCoef);
-                    break;
+                    return potion;
+                default:
+                    return null;
             }
-
-            return item;
         }
     }
 }
