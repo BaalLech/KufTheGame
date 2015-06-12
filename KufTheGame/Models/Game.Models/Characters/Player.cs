@@ -65,7 +65,6 @@ namespace KufTheGame.Models.Game.Models.Characters
                     {
                         case PressedKey.MoveUp:
                             this.Velocity=new Vector2(this.Velocity.X,this.Velocity.Y-1);
-                            
                             break;
 
                         case PressedKey.MoveDown:
@@ -77,7 +76,7 @@ namespace KufTheGame.Models.Game.Models.Characters
                             break;
 
                         case PressedKey.MoveRight:
-                            this.Velocity=new Vector2(this.Velocity.X+1,this.Velocity.Y-1);
+                            this.Velocity=new Vector2(this.Velocity.X+1,this.Velocity.Y);
                             break;
                     }
                     break;
