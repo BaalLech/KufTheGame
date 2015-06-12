@@ -58,6 +58,7 @@
     <Compile Include="Models\Game.Models\Characters\Player.cs" />
     <Compile Include="Models\Game.Models\Items\Armor.cs" />
     <Compile Include="Models\Game.Models\Items\HealthPotion.cs" />
+    <Compile Include="Models\Game.Models\Items\ImmortalilyPotion.cs" />
     <Compile Include="Models\Game.Models\Items\Weapon.cs" />
     <Compile Include="Models\Game.Models\Specialty.cs" />
     <Compile Include="Models\Interfaces\IAttackable.cs" />
@@ -87,7 +88,6 @@
   <ItemGroup>
     <Folder Include="Content\Fonts\" />
     <Folder Include="Models\Game.Models\Obsticles\" />
-    <Folder Include="UI\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

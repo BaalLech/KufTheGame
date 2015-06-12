@@ -7,6 +7,6 @@ namespace KufTheGame.Models.Interfaces
 {
     interface IEnemy
     {
-        IList<IItem> Drops { get; }
+        ICollection<IItem> Drops { get; }
     }
 }
