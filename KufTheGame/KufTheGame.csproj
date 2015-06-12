@@ -68,6 +68,7 @@
     <Compile Include="Models\Interfaces\IMoveable.cs" />
     <Compile Include="Models\Interfaces\IPlayer.cs" />
     <Compile Include="Models\Interfaces\ISoundable.cs" />
+    <Compile Include="Models\Structures\Rarity.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
