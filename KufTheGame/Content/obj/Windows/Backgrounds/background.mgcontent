@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</SourceFile>
-  <SourceTime>2015-06-12T12:16:59.8286213+03:00</SourceTime>
-  <DestFile>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/bin/Windows/Backgrounds/background.xnb</DestFile>
-  <DestTime>2015-06-12T12:40:40.2898671+03:00</DestTime>
+<<<<<<< HEAD
+  <SourceFile>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</SourceFile>
+  <SourceTime>2015-06-12T12:57:42.7275891+03:00</SourceTime>
+  <DestFile>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/bin/Windows/Backgrounds/background.xnb</DestFile>
+  <DestTime>2015-06-12T13:06:59.6585035+03:00</DestTime>
+=======
+  <SourceFile>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</SourceFile>
+  <SourceTime>2015-06-12T10:37:00.250049+03:00</SourceTime>
+  <DestFile>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/bin/Windows/Backgrounds/background.xnb</DestFile>
+  <DestTime>2015-06-12T13:09:02.5333856+03:00</DestTime>
+>>>>>>> e2249b00d7af00f42754eb750ecbb9670a281ccb
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T20:14:44+03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

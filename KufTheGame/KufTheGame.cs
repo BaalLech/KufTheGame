@@ -170,7 +170,7 @@ namespace KufTheGame
             #region //* ------------- DRAWING CHARACTER INFO ------------- *//
 
             /* ------------- Drawing Players' HUD Lives -------------*/
-            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 5), Color.White);
+            this.spriteBatch.DrawString(this.gameFont, "KUF THE WARRIOR Lives:  " + this.player.Lives, new Vector2(5, 5), Color.White);
 
             /* ------------- Drawing Players' HUD Background -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200, 20), Color.White);
