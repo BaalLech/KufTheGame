@@ -26,7 +26,7 @@ namespace KufTheGame
             {
                 PreferredBackBufferWidth = 1000,
                 PreferredBackBufferHeight = 800,
-                //IsFullScreen = true
+                IsFullScreen = true
             };
 
             this.timer = 500;
