@@ -1,3 +1,2 @@
-_ReSharper.*
-bin
-obj
+bin/
+obj/
