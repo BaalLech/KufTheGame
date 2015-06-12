@@ -14,6 +14,7 @@ namespace KufTheGame
     public class KufTheGame : Game
     {
         private Texture2D background, weapon;
+        private float time, frameTime = 0.1f, frameIndex;
         private int timer;
         private int backroundPart;
         private Player player;
@@ -50,7 +51,7 @@ namespace KufTheGame
         {
             timer = 500;
             backroundPart = 0;
-            this.player = new Player(Content.Load<Texture2D>("Items/Weapons/Sword"), 100, 750, "Pesho");
+            this.player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, "Pesho");
             this.enemies.Add(new Mage(800, 500, 10, 10, 100));
             this.enemies.Add(new Mage(880, 700, 10, 10, 100));
             this.enemies.Add(new Mage(800, 640, 10, 10, 100));
@@ -145,6 +146,19 @@ namespace KufTheGame
 
             #endregion
 
+            time += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            while (time > frameTime)
+            {
+                // Play the next frame in the SpriteSheet
+                frameIndex += 1;
+
+                // reset elapsed time
+                time = 0f;
+            }
+
+            frameIndex %= 9;
+            
+
             base.Update(gameTime);
         }
 
@@ -195,13 +209,17 @@ namespace KufTheGame
             #endregion
 
             #region //* ------------- DRAWING CHARACTER ------------- *//
-            this.spriteBatch.Draw(pen, new Rectangle((int)this.player.Velocity.X, (int)this.player.Velocity.Y, 20, 20), Color.LightGreen);
+            //this.spriteBatch.Draw(pen, new Rectangle((int)this.player.Velocity.X, (int)this.player.Velocity.Y, 20, 20), Color.LightGreen);
             #endregion
 
             foreach (var enemy in this.enemies)
             {
                 this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 50, 50), Color.Red);
             }
+
+            Rectangle source = new Rectangle((int)((int)frameIndex * 54), 0, 57, 100);
+            Vector2 origin = new Vector2(29 , 50);
+            spriteBatch.Draw(player.Texture, this.player.Velocity, source, Color.White, 0.0f, origin, 1.0f, SpriteEffects.None, 1.0f);
 
             this.spriteBatch.End();
 

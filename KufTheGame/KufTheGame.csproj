@@ -85,7 +85,6 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Fonts\" />
     <Folder Include="Models\Game.Models\Obsticles\" />
     <Folder Include="UI\" />
   </ItemGroup>
