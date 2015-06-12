@@ -8,13 +8,10 @@ namespace KufTheGame.Models.Abstracts
     {
         protected GameObject(int x, int y)
         {
-            this.X = x;
-            this.Y = y;
+            this.Velocity = new Vector2(x, y);
         }
 
-        public int X { get; set; }
-
-        public int Y { get; set; }
+        public Vector2 Velocity { get; set; }
 
         public abstract int DrawOrder
         {
