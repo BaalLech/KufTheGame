@@ -1,4 +1,7 @@
-﻿using KufTheGame.Models.Game.Models.Characters;
+﻿using System;
+using System.Collections.Generic;
+using KufTheGame.Models.Abstracts;
+using KufTheGame.Models.Game.Models.Characters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,10 +17,11 @@ namespace KufTheGame
         private int timer;
         private int backroundPart;
         private Player player;
+        private List<Enemy> enemies;
         private SpriteFont gameFont;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
 
         public KufTheGame()
         {
@@ -26,10 +30,11 @@ namespace KufTheGame
             {
                 PreferredBackBufferWidth = 1000,
                 PreferredBackBufferHeight = 800,
-                IsFullScreen = true
+                //IsFullScreen = true
             };
 
             this.timer = 500;
+            this.enemies = new List<Enemy>();
             //this.background = new Texture2D(this.graphics.GraphicsDevice, 800, 800);
 
             this.Content.RootDirectory = "Content";
@@ -46,6 +51,14 @@ namespace KufTheGame
             timer = 500;
             backroundPart = 0;
             this.player = new Player(100, 750, "Pesho", 3, 2, 0, 50);
+            this.enemies.Add(new Mage(800, 500, 10, 10, 100));
+            this.enemies.Add(new Mage(880, 700, 10, 10, 100));
+            this.enemies.Add(new Mage(800, 640, 10, 10, 100));
+            this.enemies.Add(new Mage(880, 900, 10, 10, 100));
+            this.enemies.Add(new Mage(800, 550, 10, 10, 100));
+            this.enemies.Add(new Mage(880, 600, 10, 10, 100));
+            this.enemies.Add(new Mage(900, 800, 10, 10, 100));
+
             base.Initialize();
         }
 
@@ -105,31 +118,31 @@ namespace KufTheGame
 
             //TODO Validation for character location
             #region //* ------------- MOVING CHARACTER ------------- *//
-           
+
             var keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
             {
-               // Move Up
+                // Move Up
                 this.player.Y -= 1;
             }
             if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
             {
-               // Move Down
+                // Move Down
                 this.player.Y += 1;
             }
             if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
             {
-               // Move left
+                // Move left
                 this.player.X -= 1;
             }
             if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
             {
-               // Move right
+                // Move right
                 this.player.X += 1;
             }
 
             #endregion
-            
+
             base.Update(gameTime);
         }
 
@@ -154,29 +167,36 @@ namespace KufTheGame
 
             #region //* ------------- DRAWING CHARACTER INFO ------------- *//
 
-            /* ------------- Drawing Players' HUD Lives -------------*/  
-            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 5), Color.Black);
+            /* ------------- Drawing Players' HUD Lives -------------*/
+            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 5), Color.White);
 
             /* ------------- Drawing Players' HUD Background -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200, 20), Color.White);
 
             /* ------------- Drawing Players' HUD HealthBar -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200 - (int)(this.player.BaseHealthPoints - (int)this.player.HealthPoints) * 4, 20), Color.Red);
+            this.spriteBatch.Draw(pen, new Rectangle(5, 55, 200 - (int)(this.player.BaseHealthPoints - (int)this.player.HealthPoints) * 4, 20), Color.Red);
 
             /* ------------- Drawing Players' HUD Stash -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(7, 55, 35, 35), Color.Black);
-            this.spriteBatch.Draw(pen, new Rectangle(47, 55, 35, 35), Color.Black);
-            this.spriteBatch.Draw(pen, new Rectangle(87, 55, 35, 35), Color.Black);
-            this.spriteBatch.Draw(pen, new Rectangle(127, 55, 35, 35), Color.Black);
-            this.spriteBatch.Draw(pen, new Rectangle(167, 55, 35, 35), Color.Black);
+            this.spriteBatch.Draw(pen, new Rectangle(5, 53, 200, 40), Color.DarkGreen);
+
+            this.spriteBatch.Draw(pen, new Rectangle(7, 55, 35, 35), Color.DarkBlue);
+            this.spriteBatch.Draw(pen, new Rectangle(47, 55, 35, 35), Color.DarkBlue);
+            this.spriteBatch.Draw(pen, new Rectangle(87, 55, 35, 35), Color.DarkBlue);
+            this.spriteBatch.Draw(pen, new Rectangle(127, 55, 35, 35), Color.DarkBlue);
+            this.spriteBatch.Draw(pen, new Rectangle(167, 55, 35, 35), Color.DarkBlue);
 
             /* ------------- Drawing Players' HUD Items -------------*/
-            this.spriteBatch.Draw(this.weapon, new Rectangle(7, 55, 35,35), Color.White);
+            this.spriteBatch.Draw(this.weapon, new Rectangle(7, 55, 35, 35), Color.White);
             #endregion
 
             #region //* ------------- DRAWING CHARACTER ------------- *//
-            this.spriteBatch.Draw(pen, new Rectangle(this.player.X, this.player.Y, 20, 20), Color.Black);
+            this.spriteBatch.Draw(pen, new Rectangle(this.player.X, this.player.Y, 20, 20), Color.LightGreen);
             #endregion
+
+            foreach (var enemy in this.enemies)
+            {
+                this.spriteBatch.Draw(pen, new Rectangle(enemy.X, enemy.Y, 50, 50), Color.Red);
+            }
 
             this.spriteBatch.End();
 
