@@ -4,8 +4,26 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+<<<<<<< HEAD
     <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
     <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
     <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Items/Weapons/Sword.png</File>
+=======
+<<<<<<< HEAD
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Items/Weapons/Sword.png</File>
+=======
+<<<<<<< HEAD
+    <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
+    <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
+    <File>C:/Users/v.indzhev/Documents/GitHub/OOP_GAME/KufTheGame/KufTheGame/Content/Items/Weapons/Sword.png</File>
+=======
+    <File>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
+    <File>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
+    <File>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/Items/Weapons/Sword.png</File>
+>>>>>>> 3a15b2463c4c421aa4010b0779b1ed0154a1689a
+>>>>>>> c4c37e00cf824d15e350773b9527e0d06ad87eed
+>>>>>>> cb53965b3c332079c5aa8a1bd41c4bc087d05126
   </SourceFiles>
 </SourceFileCollection>
