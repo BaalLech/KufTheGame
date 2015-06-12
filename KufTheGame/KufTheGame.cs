@@ -119,27 +119,29 @@ namespace KufTheGame
             //TODO Validation for character location
             #region //* ------------- MOVING CHARACTER ------------- *//
 
-            var keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
-            {
-                // Move Up
-                this.player.Y -= 1;
-            }
-            if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
-            {
-                // Move Down
-                this.player.Y += 1;
-            }
-            if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
-            {
-                // Move left
-                this.player.X -= 1;
-            }
-            if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
-            {
-                // Move right
-                this.player.X += 1;
-            }
+            //var keyboardState = Keyboard.GetState();
+            //if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
+            //{
+            //    // Move Up
+            //    this.player.Y -= 1;
+            //}
+            //if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
+            //{
+            //    // Move Down
+            //    this.player.Y += 1;
+            //}
+            //if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
+            //{
+            //    // Move left
+            //    this.player.X -= 1;
+            //}
+            //if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
+            //{
+            //    // Move right
+            //    this.player.X += 1;
+            //}
+
+            player.Move();
 
             #endregion
 
@@ -168,7 +170,7 @@ namespace KufTheGame
             #region //* ------------- DRAWING CHARACTER INFO ------------- *//
 
             /* ------------- Drawing Players' HUD Lives -------------*/
-            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 5), Color.White);
+            this.spriteBatch.DrawString(this.gameFont, "KUF THE WARRIOR Lives:  " + this.player.Lives, new Vector2(5, 5), Color.White);
 
             /* ------------- Drawing Players' HUD Background -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(5, 30, 200, 20), Color.White);
@@ -190,12 +192,12 @@ namespace KufTheGame
             #endregion
 
             #region //* ------------- DRAWING CHARACTER ------------- *//
-            this.spriteBatch.Draw(pen, new Rectangle(this.player.X, this.player.Y, 20, 20), Color.LightGreen);
+            this.spriteBatch.Draw(pen, new Rectangle((int)this.player.Velocity.X, (int)this.player.Velocity.Y, 20, 20), Color.LightGreen);
             #endregion
 
             foreach (var enemy in this.enemies)
             {
-                this.spriteBatch.Draw(pen, new Rectangle(enemy.X, enemy.Y, 50, 50), Color.Red);
+                this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 50, 50), Color.Red);
             }
 
             this.spriteBatch.End();

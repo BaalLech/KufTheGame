@@ -1,4 +1,6 @@
-﻿using KufTheGame.Core;
+﻿using System.Collections.Generic;
+using System.Linq;
+using KufTheGame.Core;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Items;
@@ -46,7 +48,93 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void Move()
         {
-            KeyListener.GetKey();
+            IList<PressedKey> keys = KeyListener.GetKey();
+
+            switch (keys.Count())
+            {
+                case 1:
+                    switch (keys[0])
+                    {
+                        case PressedKey.MoveUp:
+                            this.Velocity=new Vector2(this.Velocity.X,this.Velocity.Y-1);
+                            
+                            break;
+
+                        case PressedKey.MoveDown:
+                            this.Velocity=new Vector2(this.Velocity.X,this.Velocity.Y+1);
+                            break;
+
+                        case PressedKey.MoveLeft:
+                            this.Velocity = new Vector2(this.Velocity.X-1, this.Velocity.Y);
+                            break;
+
+                        case PressedKey.MoveRight:
+                            this.Velocity=new Vector2(this.Velocity.X+1,this.Velocity.Y-1);
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (keys[0])
+                    {
+                        case PressedKey.MoveUp:
+                            switch (keys[1])
+                            {
+                                case PressedKey.MoveLeft:
+                                    this.Velocity = new Vector2(this.Velocity.X-1, this.Velocity.Y-1);
+                                    break;
+
+                                case PressedKey.MoveRight:
+                                    this.Velocity = new Vector2(this.Velocity.X+1, this.Velocity.Y-1);
+                                    break;
+                            }
+                            
+                            break;
+
+                        case PressedKey.MoveDown:
+                            switch (keys[1])
+                            {
+                                case PressedKey.MoveLeft:
+                                    this.Velocity = new Vector2(this.Velocity.X - 1, this.Velocity.Y + 1);
+                                    break;
+
+                                case PressedKey.MoveRight:
+                                    this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y + 1);
+                                    break;
+                            }
+                           
+                            break;
+
+                        case PressedKey.MoveLeft:
+                            switch (keys[1])
+                            {
+                                case PressedKey.MoveUp:
+                                    this.Velocity= new Vector2(this.Velocity.X - 1, this.Velocity.Y - 1);
+                                    break;
+
+                                case PressedKey.MoveDown:
+                                    this.Velocity = new Vector2(this.Velocity.X - 1, this.Velocity.Y + 1);
+                                    break;
+                            }
+                            
+                            break;
+
+                        case PressedKey.MoveRight:
+                            switch (keys[1])
+                            {
+                                case PressedKey.MoveUp:
+                                    this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y - 1);
+                                    break;
+
+                                case PressedKey.MoveDown:
+                                    this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y + 1);
+                                    break;
+                            }
+                            
+                            break;
+                    }
+                    break;
+                    
+            }
         }
 
         public override void Attack(Character target)
