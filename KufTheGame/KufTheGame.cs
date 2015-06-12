@@ -192,12 +192,12 @@ namespace KufTheGame
             #endregion
 
             #region //* ------------- DRAWING CHARACTER ------------- *//
-            this.spriteBatch.Draw(pen, new Rectangle(this.player.X, this.player.Y, 20, 20), Color.LightGreen);
+            this.spriteBatch.Draw(pen, new Rectangle((int)this.player.Velocity.X, (int)this.player.Velocity.Y, 20, 20), Color.LightGreen);
             #endregion
 
             foreach (var enemy in this.enemies)
             {
-                this.spriteBatch.Draw(pen, new Rectangle(enemy.X, enemy.Y, 50, 50), Color.Red);
+                this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 50, 50), Color.Red);
             }
 
             this.spriteBatch.End();

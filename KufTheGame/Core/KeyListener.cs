@@ -22,8 +22,6 @@ namespace KufTheGame.Core
                 {
                     return keys;
                 }
-
-                
             }
 
             if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))

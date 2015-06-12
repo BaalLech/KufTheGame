@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Abstracts
 {
-    public abstract class GameObject: IDrawable, ISoundable
+    public abstract class GameObject : IDrawable, ISoundable
     {
         protected GameObject(int x, int y)
         {
@@ -13,6 +13,8 @@ namespace KufTheGame.Models.Abstracts
         }
 
         public int X { get; set; }
+
+        public Vector2 Velocity { get; set; }
 
         public int Y { get; set; }
 

@@ -56,20 +56,20 @@ namespace KufTheGame.Models.Game.Models.Characters
                     switch (keys[0])
                     {
                         case PressedKey.MoveUp:
-                            this.Velocity.Y--;
+                            this.Velocity=new Vector2(this.Velocity.X,this.Velocity.Y-1);
                             
                             break;
 
                         case PressedKey.MoveDown:
-                            this.Velocity.Y++;
+                            this.Velocity=new Vector2(this.Velocity.X,this.Velocity.Y+1);
                             break;
 
                         case PressedKey.MoveLeft:
-                            this.Velocity.X--;
+                            this.Velocity = new Vector2(this.Velocity.X-1, this.Velocity.Y);
                             break;
 
                         case PressedKey.MoveRight:
-                            this.Velocity.X++;
+                            this.Velocity=new Vector2(this.Velocity.X+1,this.Velocity.Y-1);
                             break;
                     }
                     break;
@@ -80,56 +80,56 @@ namespace KufTheGame.Models.Game.Models.Characters
                             switch (keys[1])
                             {
                                 case PressedKey.MoveLeft:
-                                    this.Velocity.X--;
+                                    this.Velocity = new Vector2(this.Velocity.X-1, this.Velocity.Y-1);
                                     break;
 
                                 case PressedKey.MoveRight:
-                                    this.Velocity.X++;
+                                    this.Velocity = new Vector2(this.Velocity.X+1, this.Velocity.Y-1);
                                     break;
                             }
-                            this.Velocity.Y--;
+                            
                             break;
 
                         case PressedKey.MoveDown:
                             switch (keys[1])
                             {
                                 case PressedKey.MoveLeft:
-                                    this.Velocity.X--;
+                                    this.Velocity = new Vector2(this.Velocity.X - 1, this.Velocity.Y + 1);
                                     break;
 
                                 case PressedKey.MoveRight:
-                                    this.Velocity.X++;
+                                    this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y + 1);
                                     break;
                             }
-                            this.Velocity.Y++;
+                           
                             break;
 
                         case PressedKey.MoveLeft:
                             switch (keys[1])
                             {
                                 case PressedKey.MoveUp:
-                                    this.Velocity.Y--;
+                                    this.Velocity= new Vector2(this.Velocity.X - 1, this.Velocity.Y - 1);
                                     break;
 
                                 case PressedKey.MoveDown:
-                                    this.Velocity.Y++;
+                                    this.Velocity = new Vector2(this.Velocity.X - 1, this.Velocity.Y + 1);
                                     break;
                             }
-                            this.Velocity.X--;
+                            
                             break;
 
                         case PressedKey.MoveRight:
                             switch (keys[1])
                             {
                                 case PressedKey.MoveUp:
-                                    this.Velocity.Y--;
+                                    this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y - 1);
                                     break;
 
                                 case PressedKey.MoveDown:
-                                    this.Velocity.Y++;
+                                    this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y + 1);
                                     break;
                             }
-                            this.Velocity.X++;
+                            
                             break;
                     }
                     break;
