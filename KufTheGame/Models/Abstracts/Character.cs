@@ -25,7 +25,6 @@ namespace KufTheGame.Models.Abstracts
 
         public double BaseHealthPoints { get; private set; }
 
-        public IList<Specialty> Specialties { get; set; }
         public void RemoveHp(double hp)
         {
             this.HealthPoints -= hp;
@@ -37,23 +36,13 @@ namespace KufTheGame.Models.Abstracts
 
         public bool IsAlive()
         {
-            return this.HealthPoints != 0;
+            return this.HealthPoints >= 0;
         }
 
         public abstract void Move();
 
-        public abstract void Attack(Character target);
+        public abstract BasicAttack Attack();
 
-        public abstract void RespondToAttack();
-
-        public void AddSpecialty(Specialty specialty)
-        {
-            this.Specialties.Add(specialty);
-        }
-
-        public void RemoveSpecialty(Specialty specialty)
-        {
-            this.Specialties.Remove(specialty);
-        }
+        public abstract void RespondToAttack(BasicAttack attack);
     }
 }

@@ -9,6 +9,7 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public Mage(int x, int y, double attackPoints, double defencePoints, double healthPoints) : base(x, y, attackPoints, defencePoints, healthPoints)
         {
+ 
         }
 
         public override void Draw(GameTime gameTime)
@@ -36,14 +37,16 @@ namespace KufTheGame.Models.Game.Models.Characters
             throw new System.NotImplementedException();
         }
 
-        public override void Attack(Character target)
+        public override BasicAttack Attack()
         {
-            throw new System.NotImplementedException();
+            var attack = new BasicAttack(this.AttackPoints);
+
+            return attack;
         }
 
-        public override void RespondToAttack()
+        public override void RespondToAttack(BasicAttack attack)
         {
-            throw new System.NotImplementedException();
+            this.HealthPoints -= (this.DefencePoints - attack.Damage * 2);
         }
     }
 }

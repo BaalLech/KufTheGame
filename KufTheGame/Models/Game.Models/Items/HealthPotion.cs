@@ -35,7 +35,7 @@ namespace KufTheGame.Models.Game.Models.Items
             get { throw new System.NotImplementedException(); }
         }
 
-        public void Use(Character target)
+        public override void Use(Character target)
         {
             target.HealthPoints += this.Health;
             this.Health = 0;

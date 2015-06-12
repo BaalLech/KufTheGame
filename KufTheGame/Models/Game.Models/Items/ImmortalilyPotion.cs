@@ -36,5 +36,11 @@ namespace KufTheGame.Models.Game.Models.Items
         {
             get { throw new NotImplementedException(); }
         }
+
+        public override void Use(Character target)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

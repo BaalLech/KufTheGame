@@ -1,11 +1,12 @@
 ﻿using KufTheGame.Models.Abstracts;
+using KufTheGame.Models.Game.Models;
 
 namespace KufTheGame.Models.Interfaces
 {
     interface IAttackable
     {
-        void Attack(Character target);
+        BasicAttack Attack();
 
-        void RespondToAttack();
+        void RespondToAttack(BasicAttack attack);
     }
 }

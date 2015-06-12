@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using KufTheGame.Core;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
@@ -10,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace KufTheGame.Models.Game.Models.Characters
 {
-    public class Player: Character, IPlayer
+    public class Player : Character, IPlayer
     {
         private const int InitialLives = 3;
         private const double InitialAttackPoints = 2;
@@ -65,19 +66,19 @@ namespace KufTheGame.Models.Game.Models.Characters
                     switch (keys[0])
                     {
                         case PressedKey.MoveUp:
-                            this.Velocity=new Vector2(this.Velocity.X,this.Velocity.Y-1);
+                            this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y - 1);
                             break;
 
                         case PressedKey.MoveDown:
-                            this.Velocity=new Vector2(this.Velocity.X,this.Velocity.Y+1);
+                            this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y + 1);
                             break;
 
                         case PressedKey.MoveLeft:
-                            this.Velocity = new Vector2(this.Velocity.X-1, this.Velocity.Y);
+                            this.Velocity = new Vector2(this.Velocity.X - 1, this.Velocity.Y);
                             break;
 
                         case PressedKey.MoveRight:
-                            this.Velocity=new Vector2(this.Velocity.X+1,this.Velocity.Y);
+                            this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y);
                             break;
                     }
                     break;
@@ -88,14 +89,14 @@ namespace KufTheGame.Models.Game.Models.Characters
                             switch (keys[1])
                             {
                                 case PressedKey.MoveLeft:
-                                    this.Velocity = new Vector2(this.Velocity.X-1, this.Velocity.Y-1);
+                                    this.Velocity = new Vector2(this.Velocity.X - 1, this.Velocity.Y - 1);
                                     break;
 
                                 case PressedKey.MoveRight:
-                                    this.Velocity = new Vector2(this.Velocity.X+1, this.Velocity.Y-1);
+                                    this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y - 1);
                                     break;
                             }
-                            
+
                             break;
 
                         case PressedKey.MoveDown:
@@ -109,21 +110,21 @@ namespace KufTheGame.Models.Game.Models.Characters
                                     this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y + 1);
                                     break;
                             }
-                           
+
                             break;
 
                         case PressedKey.MoveLeft:
                             switch (keys[1])
                             {
                                 case PressedKey.MoveUp:
-                                    this.Velocity= new Vector2(this.Velocity.X - 1, this.Velocity.Y - 1);
+                                    this.Velocity = new Vector2(this.Velocity.X - 1, this.Velocity.Y - 1);
                                     break;
 
                                 case PressedKey.MoveDown:
                                     this.Velocity = new Vector2(this.Velocity.X - 1, this.Velocity.Y + 1);
                                     break;
                             }
-                            
+
                             break;
 
                         case PressedKey.MoveRight:
@@ -137,22 +138,30 @@ namespace KufTheGame.Models.Game.Models.Characters
                                     this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y + 1);
                                     break;
                             }
-                            
+
                             break;
                     }
                     break;
-                    
+
             }
         }
 
-        public override void Attack(Character target)
+        public override BasicAttack Attack()
         {
-            throw new System.NotImplementedException();
+            var attack = new BasicAttack(this.AttackPoints + this.Weapon.AttackPoints);
+
+            return attack;
         }
 
-        public override void RespondToAttack()
+        public override void RespondToAttack(BasicAttack attack)
         {
-            throw new System.NotImplementedException();
+            var totalDef = this.DefencePoints + this.Armor.DefencePoints;
+            var damage = (attack.Damage * 2 / totalDef);
+            this.HealthPoints -= damage;
+            if (this.HealthPoints < 0)
+            {
+                this.HealthPoints = 0;
+            }
         }
 
         public void SetWeapon(Weapon weapon)
@@ -173,6 +182,11 @@ namespace KufTheGame.Models.Game.Models.Characters
         public void RemoveArmor()
         {
             this.Armor = null;
+        }
+
+        public void UsePotion(Potion potion)
+        {
+            potion.Use(this);
         }
 
         public void AddLive()

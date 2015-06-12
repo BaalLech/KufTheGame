@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KufTheGame.Core;
 using KufTheGame.Models.Enums;
+using KufTheGame.Models.Game.Models;
 using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
 using KufTheGame.Models.Structures;
@@ -26,12 +27,12 @@ namespace KufTheGame.Models.Abstracts
             
         }
 
-        public override void Attack(Character target)
+        public override BasicAttack Attack()
         {
             throw new System.NotImplementedException();
         }
 
-        public override void RespondToAttack()
+        public override void RespondToAttack(BasicAttack attack)
         {
             throw new System.NotImplementedException();
         }

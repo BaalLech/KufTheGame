@@ -7,5 +7,7 @@ namespace KufTheGame.Models.Abstracts
         protected Consumable(int x, int y, Rarities rarity) : base(x, y, rarity)
         {
         }
+
+        public abstract void Use(Character target);
     }
 }

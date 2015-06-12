@@ -54,13 +54,13 @@
     <Compile Include="Models\Enums\PressedKey.cs" />
     <Compile Include="Models\Enums\Rarities.cs" />
     <Compile Include="Models\Enums\Weapons.cs" />
+    <Compile Include="Models\Game.Models\BasicAttack.cs" />
     <Compile Include="Models\Game.Models\Characters\Mage.cs" />
     <Compile Include="Models\Game.Models\Characters\Player.cs" />
     <Compile Include="Models\Game.Models\Items\Armor.cs" />
     <Compile Include="Models\Game.Models\Items\HealthPotion.cs" />
     <Compile Include="Models\Game.Models\Items\ImmortalilyPotion.cs" />
     <Compile Include="Models\Game.Models\Items\Weapon.cs" />
-    <Compile Include="Models\Game.Models\Specialty.cs" />
     <Compile Include="Models\Interfaces\IAttackable.cs" />
     <Compile Include="Models\Interfaces\ICharacter.cs" />
     <Compile Include="Models\Interfaces\IEnemy.cs" />
