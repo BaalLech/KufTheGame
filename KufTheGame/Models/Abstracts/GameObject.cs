@@ -4,14 +4,19 @@ using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Abstracts
 {
-    public abstract class GameObject: IDrawable, ISoundable
+    public abstract class GameObject : IDrawable, ISoundable
     {
+        private Vector2 velocity;
         protected GameObject(int x, int y)
         {
             this.Velocity = new Vector2(x, y);
         }
 
-        public Vector2 Velocity { get; set; }
+        public Vector2 Velocity
+        {
+            get { return velocity; }
+            set { velocity = value; }
+        }
 
         public abstract int DrawOrder
         {
@@ -21,7 +26,9 @@ namespace KufTheGame.Models.Abstracts
         public abstract bool Visible
         {
             get;
+
         }
+
 
         // Image
 
