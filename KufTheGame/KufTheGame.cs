@@ -22,6 +22,9 @@ namespace KufTheGame
         private SpriteFont gameFont;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private List<Item> drops;
+
+        public static List<Item> Drops { get; set; }
 
 
         public KufTheGame()
@@ -59,6 +62,7 @@ namespace KufTheGame
             this.enemies.Add(new Mage(800, 550, 10, 10, 100));
             this.enemies.Add(new Mage(880, 600, 10, 10, 100));
             this.enemies.Add(new Mage(900, 800, 10, 10, 100));
+            this.drops = new List<Item>();
 
             base.Initialize();
         }

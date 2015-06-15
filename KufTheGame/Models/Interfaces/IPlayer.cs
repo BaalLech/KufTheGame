@@ -1,4 +1,5 @@
-﻿using KufTheGame.Models.Enums;
+﻿using System.Collections.Generic;
+using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Items;
 
 namespace KufTheGame.Models.Interfaces
@@ -7,6 +8,6 @@ namespace KufTheGame.Models.Interfaces
     {
         Weapon Weapon { get; set; }
 
-        Armor Armor { get; set; }
+        List<Armor> ArmorSet { get; set; }
     }
 }

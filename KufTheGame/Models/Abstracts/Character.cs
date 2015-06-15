@@ -16,7 +16,6 @@ namespace KufTheGame.Models.Abstracts
             this.BaseHealthPoints = healthPoints;
         }
 
-        // TODO : Validate for negative values;
         public double AttackPoints { get; set; }
 
         public double DefencePoints { get; set; }

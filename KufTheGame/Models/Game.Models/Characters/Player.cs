@@ -4,6 +4,7 @@ using System.Net.Configuration;
 using KufTheGame.Core;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
+using KufTheGame.Models.Exceptions;
 using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
 using Microsoft.Xna.Framework;
@@ -23,6 +24,7 @@ namespace KufTheGame.Models.Game.Models.Characters
         {
             this.Name = name;
             this.Lives = InitialLives;
+            this.ArmorSet = new List<Armor>();
             this.Texture = playerTexture;
         }
 
@@ -30,7 +32,7 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public Weapon Weapon { get; set; }
 
-        public Armor Armor { get; set; }
+        public List<Armor> ArmorSet { get; set; }
 
         public int Lives { get; set; }
 
@@ -155,7 +157,7 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void RespondToAttack(BasicAttack attack)
         {
-            var totalDef = this.DefencePoints + this.Armor.DefencePoints;
+            var totalDef = this.DefencePoints + this.ArmorSet.Sum(a => a.DefencePoints);
             var damage = (attack.Damage * 2 / totalDef);
             this.HealthPoints -= damage;
             if (this.HealthPoints < 0)
@@ -176,12 +178,19 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public void SetArmor(Armor armor)
         {
-            this.Armor = armor;
+            if (ArmorSet.All(t => t.ArmorType != armor.ArmorType))
+            {
+                this.ArmorSet.Add(armor);
+            }
+            else
+            {
+                throw new ArmorException("You already have this armor type!");
+            }
         }
 
         public void RemoveArmor()
         {
-            this.Armor = null;
+            //this.Armor = null;
         }
 
         public void UsePotion(Potion potion)

@@ -14,7 +14,7 @@ namespace KufTheGame.Models.Abstracts
 
         public void Drop()
         {
-            throw new System.NotImplementedException();
+            KufTheGame.Drops.Add(this);
         }
     }
 }
