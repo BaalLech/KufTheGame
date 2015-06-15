@@ -8,6 +8,7 @@ namespace KufTheGame.Models.Interfaces
         double AttackPoints { get; set; }
         double DefencePoints { get; set; }
         double HealthPoints { get; set; }
+        double BaseHealthPoints { get; }
 
         void RemoveHp(double hp);
 

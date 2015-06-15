@@ -62,12 +62,12 @@ namespace KufTheGame
             this.Enemies = new List<Enemy>();
             this.player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, 100, 57, "Pesho");
             this.Enemies.Add(new Mage(800, 500, 150, 150, 10, 10, 100));
-            //this.enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
-            //this.enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
-            //this.enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
-            //this.enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
-            //this.enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
-            //this.enemies.Add(new Mage(900, 800, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(900, 800, 150, 150, 10, 10, 100));
 
 
             base.Initialize();
