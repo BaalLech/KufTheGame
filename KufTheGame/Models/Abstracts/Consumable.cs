@@ -8,7 +8,5 @@ namespace KufTheGame.Models.Abstracts
             : base(x, y, width, height, rarity)
         {
         }
-
-        public abstract void Use(Character target);
     }
 }

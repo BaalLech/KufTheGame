@@ -1,4 +1,5 @@
 ﻿using KufTheGame.Models.Enums;
+using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Interfaces;
 
 namespace KufTheGame.Models.Abstracts
@@ -17,5 +18,7 @@ namespace KufTheGame.Models.Abstracts
         {
             KufTheGame.Drops.Add(this);
         }
+
+        public abstract void Use(Player target);
     }
 }

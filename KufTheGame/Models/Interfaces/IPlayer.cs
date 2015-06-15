@@ -9,5 +9,13 @@ namespace KufTheGame.Models.Interfaces
         Weapon Weapon { get; set; }
 
         List<Armor> ArmorSet { get; set; }
+
+        void SetWeapon(Weapon wep);
+
+        void RemoveWeapon();
+
+        void SetArmor(Armor armor);
+
+        void RemoveArmor();
     }
 }

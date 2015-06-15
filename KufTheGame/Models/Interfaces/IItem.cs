@@ -1,4 +1,6 @@
-﻿using KufTheGame.Models.Enums;
+﻿using KufTheGame.Models.Abstracts;
+using KufTheGame.Models.Enums;
+using KufTheGame.Models.Game.Models.Characters;
 
 namespace KufTheGame.Models.Interfaces
 {
@@ -7,5 +9,7 @@ namespace KufTheGame.Models.Interfaces
         Rarities Rarity { get; set; }
 
         void Drop();
+
+        void Use(Player target);
     }
 }

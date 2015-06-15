@@ -1,5 +1,7 @@
 ﻿using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
+using KufTheGame.Models.Game.Models.Characters;
+using KufTheGame.Models.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
@@ -38,6 +40,11 @@ namespace KufTheGame.Models.Game.Models.Items
         public override bool Visible
         {
             get { throw new System.NotImplementedException(); }
+        }
+
+        public override void Use(Player target)
+        {
+            target.SetWeapon(this);
         }
     }
 }

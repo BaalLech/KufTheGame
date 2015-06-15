@@ -1,5 +1,7 @@
 ﻿using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
+using KufTheGame.Models.Game.Models.Characters;
+using KufTheGame.Models.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
@@ -36,12 +38,13 @@ namespace KufTheGame.Models.Game.Models.Items
             get { throw new System.NotImplementedException(); }
         }
 
-        public override void Use(Character target)
+        public override void Use(Player target)
         {
             target.HealthPoints += this.Health;
-            this.Health = 0;
+            if (target.HealthPoints > target.BaseHealthPoints)
+            {
+                target.HealthPoints = target.BaseHealthPoints;
+            }
         }
-
-        // TODO: Remember to remove if health is 0
     }
 }

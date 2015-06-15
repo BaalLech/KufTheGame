@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
+using KufTheGame.Models.Game.Models.Characters;
 using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
@@ -38,7 +39,7 @@ namespace KufTheGame.Models.Game.Models.Items
             get { throw new NotImplementedException(); }
         }
 
-        public override void Use(Character target)
+        public override void Use(Player target)
         {
             throw new NotImplementedException();
         }

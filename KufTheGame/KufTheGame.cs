@@ -247,22 +247,34 @@ namespace KufTheGame
 
                         if (!enemy.IsAlive())
                         {
-                            foreach (var drop in Drops)
+                            foreach (var drop in enemy.Drops)
                             {
                                 drop.Drop();
                             }
 
                             this.Enemies.Remove(enemy);
                         }
-
-                        using (var writer = new StreamWriter("../../../result.txt"))
-                        {
-                            writer.WriteLine(Drops.Count);
-                        }
                     }
                 }
             }
 
+            for (int i = 0; i < Drops.Count; i++)
+            {
+                if (Drops[i].Contains(this.player))
+                {
+                    var item = Drops[i];
+                    //using (var writer = new StreamWriter("../../../result.txt"))
+                    //{
+                    //    writer.WriteLine(item.ToString());
+                    //}
+
+                    item.Use(player);
+                    Drops.Remove(item);
+                }
+
+            }
+
+            //DRAWING ELEMENTS
             foreach (var enemy in this.Enemies)
             {
                 this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 150, 150),
