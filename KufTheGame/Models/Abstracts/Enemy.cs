@@ -27,15 +27,9 @@ namespace KufTheGame.Models.Abstracts
 
         }
 
-        public override BasicAttack Attack()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override abstract BasicAttack Attack();
 
-        public override void RespondToAttack(BasicAttack attack)
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract override void RespondToAttack(BasicAttack attack);
 
         public override int DrawOrder
         {
@@ -83,6 +77,8 @@ namespace KufTheGame.Models.Abstracts
             {
                 numOfDrop = 2;
             }
+
+            //return 1;
 
             return numOfDrop;
         }

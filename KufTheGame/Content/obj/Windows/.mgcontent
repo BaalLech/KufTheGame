@@ -4,9 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
-    <File>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/Items/Weapons/Sword.png</File>
-    <File>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
-    <File>D:/Marto/Google Drive/Team Projects/OOP C#/KufTheGame/KufTheGame/Content/Characters/Players/PlayerSprite.png</File>
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Items/Weapons/Sword.png</File>
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
+    <File>C:/Users/Spas/Desktop/KufTheGame/KufTheGame/Content/Characters/Players/PlayerSprite.png</File>
   </SourceFiles>
 </SourceFileCollection>

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Game.Models.Characters;
 using Microsoft.Xna.Framework;
@@ -20,13 +23,13 @@ namespace KufTheGame
         private int timer;
         private int backroundPart;
         private Player player;
-        private List<Enemy> enemies;
         private SpriteFont gameFont;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        private List<Item> drops;
 
-        public static List<Item> Drops { get; set; }
+        public static List<Item> Drops = new List<Item>();
+
+        public List<Enemy> Enemies { get; set; }
 
 
         public KufTheGame()
@@ -40,7 +43,7 @@ namespace KufTheGame
             };
 
             this.timer = 500;
-            this.enemies = new List<Enemy>();
+            //this.Enemies = new List<Enemy>();
             //this.background = new Texture2D(this.graphics.GraphicsDevice, 800, 800);
 
             this.Content.RootDirectory = "Content";
@@ -56,15 +59,16 @@ namespace KufTheGame
         {
             timer = 500;
             backroundPart = 0;
+            this.Enemies = new List<Enemy>();
             this.player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, 100, 57, "Pesho");
-            this.enemies.Add(new Mage(800, 500, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(800, 500, 150, 150, 10, 10, 100));
             //this.enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
             //this.enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
             //this.enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
             //this.enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
             //this.enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
             //this.enemies.Add(new Mage(900, 800, 150, 150, 10, 10, 100));
-            this.drops = new List<Item>();
+
 
             base.Initialize();
         }
@@ -148,7 +152,7 @@ namespace KufTheGame
             //    this.player.X += 1;
             //}
             player.Attack();
-            
+
             player.Move();
 
             #endregion
@@ -165,7 +169,7 @@ namespace KufTheGame
 
             frameIndex %= 9;
 
-            
+
 
 
 
@@ -182,7 +186,7 @@ namespace KufTheGame
 
             this.spriteBatch.Begin();
 
-            
+
 
             this.spriteBatch.Draw(this.background, new Rectangle((this.backroundPart * (-1000)), 0, 3072, 800), Color.White);
 
@@ -225,30 +229,57 @@ namespace KufTheGame
             #endregion
 
 
-            foreach (var enemy in this.enemies)
+            var attack = player.Attack();
+            if (attack != null)
             {
-                if (player.Intersects(enemy))
+                this.spriteBatch.Draw(pen, new Rectangle(500, 100, 150, 150), Color.Red);
+                for (int i = 0; i < this.Enemies.Count; i++)
                 {
-                    
-                    this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X - 500, (int)enemy.Velocity.Y, 150, 150), Color.Red);
+                    var enemy = this.Enemies[i];
+                    if (player.Intersects(enemy))
+                    {
+                        enemy.RespondToAttack(attack);
+                        this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X - 500, (int)enemy.Velocity.Y, 150, 150), Color.Red);
+                        //using (var writer = new StreamWriter("../../../result.txt"))
+                        //{
+                        //    writer.WriteLine(enemy.HealthPoints);
+                        //}
+
+                        if (!enemy.IsAlive())
+                        {
+                            foreach (var drop in Drops)
+                            {
+                                drop.Drop();
+                            }
+
+                            this.Enemies.Remove(enemy);
+                        }
+
+                        using (var writer = new StreamWriter("../../../result.txt"))
+                        {
+                            writer.WriteLine(Drops.Count);
+                        }
+                    }
                 }
             }
 
-            if (player.Attack() != null)
+            foreach (var enemy in this.Enemies)
             {
-                this.spriteBatch.Draw(pen, new Rectangle(500, 100, 150, 150), Color.Red);
+                this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 150, 150),
+                    Color.Red);
             }
 
-            
-
-
-            foreach (var enemy in this.enemies)
+            foreach (var drop in Drops)
             {
-                this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 150, 150), Color.Red);
+                this.spriteBatch.Draw(pen, new Rectangle((int)drop.Velocity.X, (int)drop.Velocity.Y, 50, 50),
+                    Color.Blue);
             }
+
+
+
 
             Rectangle source = new Rectangle((int)((int)frameIndex * 54), 0, 57, 100);
-            Vector2 origin = new Vector2(29 , 50);
+            Vector2 origin = new Vector2(29, 50);
             spriteBatch.Draw(player.Texture, this.player.Velocity, source, Color.White, 0.0f, origin, 1.0f, SpriteEffects.FlipHorizontally, 1.0f);
 
             this.spriteBatch.End();

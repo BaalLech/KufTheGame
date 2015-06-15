@@ -15,7 +15,7 @@ namespace KufTheGame.Models.Game.Models.Characters
     public class Player : Character, IPlayer
     {
         private const int InitialLives = 3;
-        private const double InitialAttackPoints = 2;
+        private const double InitialAttackPoints = 20;
         private const double InitialDefencePoints = 0;
         private const double InitialHealthPoints = 50;
 
@@ -153,14 +153,19 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override BasicAttack Attack()
         {
-            //var attack = new BasicAttack(this.AttackPoints + this.Weapon.AttackPoints);
-            var attack = new BasicAttack(50 + 50);
+            var wepDmg = 0d;
+            if (this.Weapon != null)
+            {
+                wepDmg = this.Weapon.AttackPoints;
+            }
+            var attack = new BasicAttack(this.AttackPoints + wepDmg);
 
             if (this.IsAttackKeyPressed())
             {
 
                 return attack;
             }
+
             return null;
         }
 

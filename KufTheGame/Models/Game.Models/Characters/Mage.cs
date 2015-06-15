@@ -47,7 +47,7 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void RespondToAttack(BasicAttack attack)
         {
-            this.HealthPoints -= (this.DefencePoints - attack.Damage * 2);
+            this.HealthPoints -= (attack.Damage * 2) / this.DefencePoints;
         }
     }
 }
