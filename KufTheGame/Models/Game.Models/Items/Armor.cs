@@ -4,10 +4,11 @@ using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
 {
-    public class Armor: Item
+    public class Armor : Item
     {
-        public Armor(int x, int y, Rarities rarity,
-            Armors armorType, double defencePoints) : base(x, y, rarity)
+        public Armor(int x, int y, int width, int height, Rarities rarity,
+            Armors armorType, double defencePoints)
+            : base(x, y, width, height, rarity)
         {
             this.ArmorType = armorType;
             this.DefencePoints = defencePoints;

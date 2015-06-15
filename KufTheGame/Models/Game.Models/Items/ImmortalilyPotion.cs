@@ -8,9 +8,10 @@ using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
 {
-    class ImmortalilyPotion: Potion
+    class ImmortalilyPotion : Potion
     {
-        public ImmortalilyPotion(int x, int y, Rarities rarity, int duration) : base(x, y, rarity)
+        public ImmortalilyPotion(int x, int y, int width, int height, Rarities rarity, int duration)
+            : base(x, y, width, height, rarity)
         {
             this.Duration = duration;
         }

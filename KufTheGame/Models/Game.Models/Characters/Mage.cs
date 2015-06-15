@@ -3,13 +3,14 @@ using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Characters
 {
-    public class Mage: Enemy
+    public class Mage : Enemy
     {
         private const string ImagePath = "";
 
-        public Mage(int x, int y, double attackPoints, double defencePoints, double healthPoints) : base(x, y, attackPoints, defencePoints, healthPoints)
+        public Mage(int x, int y, int width, int height, double attackPoints, double defencePoints, double healthPoints)
+            : base(x, y, width, height, attackPoints, defencePoints, healthPoints)
         {
- 
+
         }
 
         public override void Draw(GameTime gameTime)

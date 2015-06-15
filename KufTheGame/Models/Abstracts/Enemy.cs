@@ -13,18 +13,18 @@ namespace KufTheGame.Models.Abstracts
 {
     public abstract class Enemy : Character, IEnemy
     {
-        protected Enemy(int x, int y, double attackPoints, double defencePoints, double healthPoints)
-            : base(x, y, attackPoints, defencePoints, healthPoints)
+        protected Enemy(int x, int y, int width, int height, double attackPoints, double defencePoints, double healthPoints)
+            : base(x, y, width, height, attackPoints, defencePoints, healthPoints)
         {
             this.Drops = new List<IItem>();
             this.AddDrops();
         }
 
         public ICollection<IItem> Drops { get; private set; }
-        
+
         public override void Move()
         {
-            
+
         }
 
         public override BasicAttack Attack()
@@ -93,31 +93,31 @@ namespace KufTheGame.Models.Abstracts
             var rarity = Rarity.GetRandomRarity();
             var rarityType = rarity.Keys.First();
             var rarityCoef = rarity.Values.First();
-            
+
             switch (rngNum)
             {
                 case 1:
                     var weaponType = RandomGenerator.GetRandomItem<Weapons>();
-                    Weapon wep = new Weapon((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
+                    Weapon wep = new Weapon((int)this.Velocity.X, (int)this.Velocity.Y, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
                         weaponType, 10 * rarityCoef);
                     return wep;
                 case 2:
                     var armorType = RandomGenerator.GetRandomItem<Armors>();
-                    Armor armor = new Armor((int)this.Velocity.X, (int)this.Velocity.Y, rarityType,
+                    Armor armor = new Armor((int)this.Velocity.X, (int)this.Velocity.Y, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
                         armorType, 5 * rarityCoef);
                     return armor;
                 case 3:
                     var rngPotionNum = RandomGenerator.Randomize(1, 2);
                     if (rngPotionNum == 1)
                     {
-                        Potion potion = new HealthPotion((int) this.Velocity.X, (int) this.Velocity.Y, rarityType,
+                        Potion potion = new HealthPotion((int)this.Velocity.X, (int)this.Velocity.Y, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
                             25 * rarityCoef);
                         return potion;
                     }
                     else
                     {
-                        Potion potion = new ImmortalilyPotion((int) this.Velocity.X, (int) this.Velocity.Y, rarityType,
-                            2 * (int) rarityCoef + 1);
+                        Potion potion = new ImmortalilyPotion((int)this.Velocity.X, (int)this.Velocity.Y, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
+                            2 * (int)rarityCoef + 1);
                         return potion;
                     }
                 default:

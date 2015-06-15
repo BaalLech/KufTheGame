@@ -6,9 +6,9 @@ namespace KufTheGame.Models.Abstracts
 {
     public abstract class Character : GameObject, IMoveable, IAttackable, ICharacter
     {
-        protected Character(int x, int y, double attackPoints, double defencePoints,
+        protected Character(int x, int y, int width, int height, double attackPoints, double defencePoints,
             double healthPoints)
-            : base(x, y)
+            : base(x, y, width, height)
         {
             this.AttackPoints = attackPoints;
             this.DefencePoints = defencePoints;

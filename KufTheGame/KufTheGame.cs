@@ -13,6 +13,8 @@ namespace KufTheGame
     /// </summary>
     public class KufTheGame : Game
     {
+        public const int ItemSize = 35;
+
         private Texture2D background, weapon;
         private float time, frameTime = 0.1f, frameIndex;
         private int timer;
@@ -54,14 +56,14 @@ namespace KufTheGame
         {
             timer = 500;
             backroundPart = 0;
-            this.player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, "Pesho");
-            this.enemies.Add(new Mage(800, 500, 10, 10, 100));
-            this.enemies.Add(new Mage(880, 700, 10, 10, 100));
-            this.enemies.Add(new Mage(800, 640, 10, 10, 100));
-            this.enemies.Add(new Mage(880, 900, 10, 10, 100));
-            this.enemies.Add(new Mage(800, 550, 10, 10, 100));
-            this.enemies.Add(new Mage(880, 600, 10, 10, 100));
-            this.enemies.Add(new Mage(900, 800, 10, 10, 100));
+            this.player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, 150,150, "Pesho");
+            this.enemies.Add(new Mage(800, 500, 150,150, 10, 10, 100));
+            this.enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
+            this.enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
+            this.enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
+            this.enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
+            this.enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
+            this.enemies.Add(new Mage(900, 800, 150, 150, 10, 10, 100));
             this.drops = new List<Item>();
 
             base.Initialize();

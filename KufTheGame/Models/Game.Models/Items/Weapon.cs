@@ -8,8 +8,8 @@ namespace KufTheGame.Models.Game.Models.Items
     {
         public const string ImagePath = "";
 
-        public Weapon(int x, int y, Rarities rarity,
-            Weapons weaponType, double attackPoints) : base(x, y, rarity)
+        public Weapon(int x, int y, int width, int height, Rarities rarity,
+            Weapons weaponType, double attackPoints) : base(x, y,width,height, rarity)
         {
             this.WeaponType = weaponType;
             this.AttackPoints = attackPoints;
