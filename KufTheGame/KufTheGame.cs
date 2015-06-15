@@ -22,12 +22,13 @@ namespace KufTheGame
         private float time, frameTime = 0.1f, frameIndex;
         private int timer;
         private int backroundPart;
-        private Player player;
         private SpriteFont gameFont;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public static List<Item> Drops = new List<Item>();
+
+        public static Player Player { get; private set; }
 
         public List<Enemy> Enemies { get; set; }
 
@@ -60,10 +61,10 @@ namespace KufTheGame
             timer = 500;
             backroundPart = 0;
             this.Enemies = new List<Enemy>();
-            this.player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, 100, 57, "Pesho");
+            Player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, 100, 57, "Pesho");
             this.Enemies.Add(new Mage(800, 500, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
@@ -113,18 +114,18 @@ namespace KufTheGame
             }
 
             //I did this just to test how HP bar is going to look like /it's crap (puke)/
-            if (this.player.HealthPoints >= 1)
+            if (Player.HealthPoints >= 1)
             {
-                this.player.HealthPoints -= 1;
+                Player.HealthPoints -= 1;
             }
-            else if (this.player.Lives > 1)
+            else if (Player.Lives > 1)
             {
-                this.player.RemoveLive();
-                this.player.HealthPoints = 50;
+                Player.RemoveLive();
+                Player.HealthPoints = 50;
             }
             else
             {
-                this.player.Lives = 0;
+                Player.Lives = 0;
             }
 
             //TODO Validation for character location
@@ -151,9 +152,10 @@ namespace KufTheGame
             //    // Move right
             //    this.player.X += 1;
             //}
-            player.Attack();
+            Player.Attack();
 
-            player.Move();
+            Player.Move();
+            this.Enemies.ForEach(e => e.Move());
 
             #endregion
 
@@ -203,13 +205,13 @@ namespace KufTheGame
             this.spriteBatch.Draw(pen, new Rectangle(0, 0, 220, 120), new Color(Color.Black, 0.8F));
 
             this.spriteBatch.DrawString(this.gameFont, "KUF THE WARRIOR", new Vector2(5, 5), Color.Red);
-            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + this.player.Lives, new Vector2(5, 25), Color.White);
+            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + Player.Lives, new Vector2(5, 25), Color.White);
 
             /* ------------- Drawing Players' HUD Background -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(5, 50, 200, 20), Color.White);
 
             /* ------------- Drawing Players' HUD HealthBar -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 50, 200 - (int)(this.player.BaseHealthPoints - (int)this.player.HealthPoints) * 4, 20), Color.Red);
+            this.spriteBatch.Draw(pen, new Rectangle(5, 50, 200 - (int)(Player.BaseHealthPoints - (int)Player.HealthPoints) * 4, 20), Color.Red);
 
             /* ------------- Drawing Players' HUD Stash -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(5, 73, 200, 40), Color.DarkGreen);
@@ -229,14 +231,14 @@ namespace KufTheGame
             #endregion
 
 
-            var attack = player.Attack();
+            var attack = Player.Attack();
             if (attack != null)
             {
                 this.spriteBatch.Draw(pen, new Rectangle(500, 100, 150, 150), Color.Red);
                 for (int i = 0; i < this.Enemies.Count; i++)
                 {
                     var enemy = this.Enemies[i];
-                    if (player.Intersects(enemy))
+                    if (Player.Intersects(enemy))
                     {
                         enemy.RespondToAttack(attack);
                         this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X - 500, (int)enemy.Velocity.Y, 150, 150), Color.Red);
@@ -247,6 +249,7 @@ namespace KufTheGame
 
                         if (!enemy.IsAlive())
                         {
+                            enemy.AddDrops();
                             foreach (var drop in enemy.Drops)
                             {
                                 drop.Drop();
@@ -260,7 +263,7 @@ namespace KufTheGame
 
             for (int i = 0; i < Drops.Count; i++)
             {
-                if (Drops[i].Contains(this.player))
+                if (Drops[i].Contains(Player))
                 {
                     var item = Drops[i];
                     //using (var writer = new StreamWriter("../../../result.txt"))
@@ -268,7 +271,7 @@ namespace KufTheGame
                     //    writer.WriteLine(item.ToString());
                     //}
 
-                    item.Use(player);
+                    item.Use(Player);
                     Drops.Remove(item);
                 }
 
@@ -292,7 +295,7 @@ namespace KufTheGame
 
             Rectangle source = new Rectangle((int)((int)frameIndex * 54), 0, 57, 100);
             Vector2 origin = new Vector2(29, 50);
-            spriteBatch.Draw(player.Texture, this.player.Velocity, source, Color.White, 0.0f, origin, 1.0f, SpriteEffects.FlipHorizontally, 1.0f);
+            spriteBatch.Draw(Player.Texture, Player.Velocity, source, Color.White, 0.0f, origin, 1.0f, SpriteEffects.FlipHorizontally, 1.0f);
 
             this.spriteBatch.End();
 

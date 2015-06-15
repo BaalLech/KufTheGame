@@ -33,11 +33,6 @@ namespace KufTheGame.Models.Game.Models.Characters
             get { throw new System.NotImplementedException(); }
         }
 
-        public override void Move()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override BasicAttack Attack()
         {
             var attack = new BasicAttack(this.AttackPoints);

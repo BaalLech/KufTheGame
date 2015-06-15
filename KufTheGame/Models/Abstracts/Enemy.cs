@@ -7,6 +7,7 @@ using KufTheGame.Models.Game.Models;
 using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
 using KufTheGame.Models.Structures;
+using Microsoft.Xna.Framework;
 
 
 namespace KufTheGame.Models.Abstracts
@@ -17,14 +18,37 @@ namespace KufTheGame.Models.Abstracts
             : base(x, y, width, height, attackPoints, defencePoints, healthPoints)
         {
             this.Drops = new List<IItem>();
-            this.AddDrops();
         }
 
         public ICollection<IItem> Drops { get; private set; }
 
         public override void Move()
         {
+            var rngDirection = RandomGenerator.Randomize(0, 1);
+            if (rngDirection == 0)
+            {
+                if (this.Velocity.X > KufTheGame.Player.Velocity.X + KufTheGame.Player.Width / 3)
+                {
+                    this.Velocity = new Vector2(this.Velocity.X - 1, this.Velocity.Y);
+                }
 
+                if (this.Velocity.X < KufTheGame.Player.Velocity.X + KufTheGame.Player.Width / 3)
+                {
+                    this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y);
+                }
+            }
+            else
+            {
+                if (this.Velocity.Y > KufTheGame.Player.Velocity.Y - this.Height / 2)
+                {
+                    this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y - 1);
+                }
+
+                if (this.Velocity.Y < KufTheGame.Player.Velocity.Y - this.Height / 2)
+                {
+                    this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y + 1);
+                }
+            }
         }
 
         public override abstract BasicAttack Attack();
@@ -51,7 +75,7 @@ namespace KufTheGame.Models.Abstracts
             throw new System.NotImplementedException();
         }
 
-        private void AddDrops()
+        public void AddDrops()
         {
             var rngNum = GetNumOfDrops();
 
@@ -89,30 +113,32 @@ namespace KufTheGame.Models.Abstracts
             var rarity = Rarity.GetRandomRarity();
             var rarityType = rarity.Keys.First();
             var rarityCoef = rarity.Values.First();
+            var dropX = (int)this.Velocity.X + this.Width / 2 - KufTheGame.ItemSize / 2;
+            var dropY = (int)this.Velocity.Y + this.Height / 2 - KufTheGame.ItemSize / 2;
 
             switch (rngNum)
             {
                 case 1:
                     var weaponType = RandomGenerator.GetRandomItem<Weapons>();
-                    Weapon wep = new Weapon((int)this.Velocity.X, (int)this.Velocity.Y, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
+                    Weapon wep = new Weapon(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
                         weaponType, 10 * rarityCoef);
                     return wep;
                 case 2:
                     var armorType = RandomGenerator.GetRandomItem<Armors>();
-                    Armor armor = new Armor((int)this.Velocity.X, (int)this.Velocity.Y, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
+                    Armor armor = new Armor(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
                         armorType, 5 * rarityCoef);
                     return armor;
                 case 3:
                     var rngPotionNum = RandomGenerator.Randomize(1, 2);
                     if (rngPotionNum == 1)
                     {
-                        Potion potion = new HealthPotion((int)this.Velocity.X, (int)this.Velocity.Y, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
+                        Potion potion = new HealthPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
                             25 * rarityCoef);
                         return potion;
                     }
                     else
                     {
-                        Potion potion = new ImmortalilyPotion((int)this.Velocity.X, (int)this.Velocity.Y, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
+                        Potion potion = new ImmortalilyPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
                             2 * (int)rarityCoef + 1);
                         return potion;
                     }
