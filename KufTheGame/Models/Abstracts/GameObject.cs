@@ -34,6 +34,20 @@ namespace KufTheGame.Models.Abstracts
 
         public virtual bool Intersects(GameObject target)
         {
+            //this.Velocity.X
+            //target.Velocity.X
+
+            if(
+                ((this.Velocity.X+this.Width>=target.Velocity.X)&&(this.Velocity.X+this.Width<=target.Velocity.X+2*target.Width/3)) &&
+                ((this.Velocity.Y>=target.Velocity.Y)&&(this.Velocity.Y<=target.Velocity.Y+2*target.Height/3)))
+            {
+                return true;
+            }
+
+            return false;
+
+
+
             //if (this.contains(shape.x - offset, shape.y - offset) ||
             //this.contains(shape.x + shape.width - offset, shape.y - offset) ||
             //this.contains(shape.x - offset, shape.y + shape.height - offset) ||
@@ -55,7 +69,7 @@ namespace KufTheGame.Models.Abstracts
 
         public virtual bool Contains(GameObject target)
         {
-            if (target.Velocity.X >= this.Velocity.X && 
+            if (target.Velocity.X >= this.Velocity.X &&
                 target.Velocity.X <= this.Velocity.X + this.Width &&
                 target.Velocity.Y >= this.Velocity.Y &&
                 target.Velocity.Y <= this.Velocity.Y + this.Height)
