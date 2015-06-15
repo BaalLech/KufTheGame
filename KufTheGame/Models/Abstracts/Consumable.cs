@@ -2,9 +2,10 @@
 
 namespace KufTheGame.Models.Abstracts
 {
-    public abstract class Consumable: Item
+    public abstract class Consumable : Item
     {
-        protected Consumable(int x, int y, Rarities rarity) : base(x, y, rarity)
+        protected Consumable(int x, int y, int width, int height, Rarities rarity)
+            : base(x, y, width, height, rarity)
         {
         }
 

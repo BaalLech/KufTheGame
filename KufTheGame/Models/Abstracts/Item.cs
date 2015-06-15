@@ -5,7 +5,8 @@ namespace KufTheGame.Models.Abstracts
 {
     public abstract class Item: GameObject, IItem
     {
-        protected Item(int x, int y, Rarities rarity) : base(x, y)
+        protected Item(int x, int y, int width, int height, Rarities rarity)
+            : base(x, y, width, height)
         {
             this.Rarity = rarity;
         }

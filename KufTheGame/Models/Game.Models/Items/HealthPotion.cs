@@ -4,11 +4,12 @@ using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
 {
-    public class HealthPotion: Potion
+    public class HealthPotion : Potion
     {
         private const string ImagePath = "";
 
-        public HealthPotion(int x, int y, Rarities rarity, double health) : base(x, y, rarity)
+        public HealthPotion(int x, int y, int width, int height, Rarities rarity, double health)
+            : base(x, y, width, height, rarity)
         {
             this.Health = health;
         }
