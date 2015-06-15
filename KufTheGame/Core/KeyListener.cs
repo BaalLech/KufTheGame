@@ -12,8 +12,17 @@ namespace KufTheGame.Core
         public static IList<PressedKey> GetKey()   
         {
             var keyboardState = Keyboard.GetState();
-            
+
             var keys = new List<PressedKey>();
+
+            if (keyboardState.IsKeyDown(Keys.Enter))
+            {
+                var key1 = PressedKey.Attack;
+                keys.Add(key1);
+                return keys;
+            }
+            
+            
             if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
             {
                 var key1= PressedKey.MoveUp;
@@ -53,6 +62,8 @@ namespace KufTheGame.Core
                     return keys;
                 }
             }
+
+            
             if (keys.Count == 1)
             {
                 return keys;

@@ -82,6 +82,8 @@ namespace KufTheGame.Models.Game.Models.Characters
                         case PressedKey.MoveRight:
                             this.Velocity = new Vector2(this.Velocity.X + 1, this.Velocity.Y);
                             break;
+
+
                     }
                     break;
                 case 2:
@@ -148,11 +150,18 @@ namespace KufTheGame.Models.Game.Models.Characters
             }
         }
 
+
         public override BasicAttack Attack()
         {
-            var attack = new BasicAttack(this.AttackPoints + this.Weapon.AttackPoints);
+            //var attack = new BasicAttack(this.AttackPoints + this.Weapon.AttackPoints);
+            var attack = new BasicAttack(50 + 50);
 
-            return attack;
+            if (this.IsAttackKeyPressed())
+            {
+
+                return attack;
+            }
+            return null;
         }
 
         public override void RespondToAttack(BasicAttack attack)
@@ -207,5 +216,24 @@ namespace KufTheGame.Models.Game.Models.Characters
         {
             this.Lives--;
         }
+
+
+        private bool IsAttackKeyPressed()
+        {
+            IList<PressedKey> keys = KeyListener.GetKey();
+
+            switch (keys.Count())
+            {
+                case 1:
+                    switch (keys[0])
+                    {
+                        case PressedKey.Attack:
+                            return true;
+                    }
+                    break;
+            }
+            return false;
+        }
+
     }
 }

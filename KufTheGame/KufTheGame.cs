@@ -56,14 +56,14 @@ namespace KufTheGame
         {
             timer = 500;
             backroundPart = 0;
-            this.player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, 150,150, "Pesho");
-            this.enemies.Add(new Mage(800, 500, 150,150, 10, 10, 100));
-            this.enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
-            this.enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
-            this.enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
-            this.enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
-            this.enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
-            this.enemies.Add(new Mage(900, 800, 150, 150, 10, 10, 100));
+            this.player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, 100, 57, "Pesho");
+            this.enemies.Add(new Mage(800, 500, 150, 150, 10, 10, 100));
+            //this.enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
+            //this.enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
+            //this.enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
+            //this.enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
+            //this.enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
+            //this.enemies.Add(new Mage(900, 800, 150, 150, 10, 10, 100));
             this.drops = new List<Item>();
 
             base.Initialize();
@@ -147,7 +147,8 @@ namespace KufTheGame
             //    // Move right
             //    this.player.X += 1;
             //}
-
+            player.Attack();
+            
             player.Move();
 
             #endregion
@@ -163,7 +164,10 @@ namespace KufTheGame
             }
 
             frameIndex %= 9;
+
             
+
+
 
             base.Update(gameTime);
         }
@@ -177,6 +181,8 @@ namespace KufTheGame
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             this.spriteBatch.Begin();
+
+            
 
             this.spriteBatch.Draw(this.background, new Rectangle((this.backroundPart * (-1000)), 0, 3072, 800), Color.White);
 
@@ -218,14 +224,32 @@ namespace KufTheGame
             //this.spriteBatch.Draw(pen, new Rectangle((int)this.player.Velocity.X, (int)this.player.Velocity.Y, 20, 20), Color.LightGreen);
             #endregion
 
+
             foreach (var enemy in this.enemies)
             {
-                this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 50, 50), Color.Red);
+                if (player.Intersects(enemy))
+                {
+                    
+                    this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X - 500, (int)enemy.Velocity.Y, 150, 150), Color.Red);
+                }
+            }
+
+            if (player.Attack() != null)
+            {
+                this.spriteBatch.Draw(pen, new Rectangle(500, 100, 150, 150), Color.Red);
+            }
+
+            
+
+
+            foreach (var enemy in this.enemies)
+            {
+                this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 150, 150), Color.Red);
             }
 
             Rectangle source = new Rectangle((int)((int)frameIndex * 54), 0, 57, 100);
             Vector2 origin = new Vector2(29 , 50);
-            spriteBatch.Draw(player.Texture, this.player.Velocity, source, Color.White, 0.0f, origin, 1.0f, SpriteEffects.None, 1.0f);
+            spriteBatch.Draw(player.Texture, this.player.Velocity, source, Color.White, 0.0f, origin, 1.0f, SpriteEffects.FlipHorizontally, 1.0f);
 
             this.spriteBatch.End();
 

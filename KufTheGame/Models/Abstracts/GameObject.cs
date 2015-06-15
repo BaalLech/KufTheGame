@@ -37,9 +37,9 @@ namespace KufTheGame.Models.Abstracts
             //this.Velocity.X
             //target.Velocity.X
 
-            if(
-                ((this.Velocity.X+this.Width>=target.Velocity.X)&&(this.Velocity.X+this.Width<=target.Velocity.X+2*target.Width/3)) &&
-                ((this.Velocity.Y>=target.Velocity.Y)&&(this.Velocity.Y<=target.Velocity.Y+2*target.Height/3)))
+            if (
+                ((this.Velocity.X + this.Width >= target.Velocity.X) && (this.Velocity.X + this.Width <= target.Velocity.X + 2 * target.Width / 3)) &&
+                ((this.Velocity.Y >= target.Velocity.Y) && (this.Velocity.Y <= target.Velocity.Y + 2 * target.Height / 3)))
             {
                 return true;
             }
@@ -64,7 +64,7 @@ namespace KufTheGame.Models.Abstracts
             //}
             //return false;
 
-            return true;
+            //return true;
         }
 
         public virtual bool Contains(GameObject target)
