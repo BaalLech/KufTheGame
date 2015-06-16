@@ -19,7 +19,6 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public Weapons WeaponType { get; set; }
 
-        //TODO: ADD validation for negative
         public double AttackPoints { get; set; }
 
         public override void Draw(GameTime gameTime)

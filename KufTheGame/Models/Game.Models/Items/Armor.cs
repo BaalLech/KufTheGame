@@ -18,7 +18,6 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public Armors ArmorType { get; set; }
 
-        //TODO: ADD validation for negative
         public double DefencePoints { get; set; }
 
         public override void Draw(GameTime gameTime)

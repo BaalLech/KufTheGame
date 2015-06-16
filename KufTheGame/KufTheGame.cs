@@ -26,7 +26,7 @@ namespace KufTheGame
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public static List<Item> Drops = new List<Item>();
+        public static List<Item> Drops  { get; set; }
 
         public static Player Player { get; private set; }
 
@@ -61,14 +61,15 @@ namespace KufTheGame
             timer = 500;
             backroundPart = 0;
             this.Enemies = new List<Enemy>();
+            Drops = new List<Item>();
             Player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, 100, 57, "Pesho");
             this.Enemies.Add(new Mage(800, 500, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(900, 800, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(900, 800, 150, 150, 10, 10, 100));
 
 
             base.Initialize();
@@ -114,19 +115,19 @@ namespace KufTheGame
             }
 
             //I did this just to test how HP bar is going to look like /it's crap (puke)/
-            if (Player.HealthPoints >= 1)
-            {
-                Player.HealthPoints -= 1;
-            }
-            else if (Player.Lives > 1)
-            {
-                Player.RemoveLive();
-                Player.HealthPoints = 50;
-            }
-            else
-            {
-                Player.Lives = 0;
-            }
+            //if (Player.HealthPoints >= 1)
+            //{
+            //    Player.HealthPoints -= 1;
+            //}
+            //else if (Player.Lives > 1)
+            //{
+            //    Player.RemoveLive();
+            //    Player.HealthPoints = 50;
+            //}
+            //else
+            //{
+            //    Player.Lives = 0;
+            //}
 
             //TODO Validation for character location
             #region //* ------------- MOVING CHARACTER ------------- *//
@@ -155,7 +156,11 @@ namespace KufTheGame
             Player.Attack();
 
             Player.Move();
-            this.Enemies.ForEach(e => e.Move());
+            //this.Enemies.ForEach(e => e.Move());
+            if (this.Enemies.Count > 0)
+            {
+                this.Enemies[0].Move();
+            }
 
             #endregion
 

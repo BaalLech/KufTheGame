@@ -41,7 +41,7 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public override void Use(Player target)
         {
-            throw new NotImplementedException();
+            target.ImmortalDuration = this.Duration;
         }
 
     }

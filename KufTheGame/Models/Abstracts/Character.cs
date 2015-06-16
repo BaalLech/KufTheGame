@@ -6,6 +6,8 @@ namespace KufTheGame.Models.Abstracts
 {
     public abstract class Character : GameObject, IMoveable, IAttackable, ICharacter
     {
+        private const int InitialLives = 1;
+
         protected Character(int x, int y, int width, int height, double attackPoints, double defencePoints,
             double healthPoints)
             : base(x, y, width, height)
@@ -14,11 +16,14 @@ namespace KufTheGame.Models.Abstracts
             this.DefencePoints = defencePoints;
             this.HealthPoints = healthPoints;
             this.BaseHealthPoints = healthPoints;
+            this.Lives = InitialLives;
         }
 
         public double AttackPoints { get; set; }
 
         public double DefencePoints { get; set; }
+
+        public int Lives { get; protected set; }
 
         public double HealthPoints { get; set; }
 
@@ -35,8 +40,24 @@ namespace KufTheGame.Models.Abstracts
 
         public bool IsAlive()
         {
-            return this.HealthPoints >= 0;
+            if (this.Lives > 1)
+            {
+                return true;
+            }
+
+            return this.HealthPoints > 0;
         }
+
+        public void AddLive()
+        {
+            this.Lives++;
+        }
+
+        public void RemoveLive()
+        {
+            this.Lives--;
+        }
+
 
         public abstract void Move();
 

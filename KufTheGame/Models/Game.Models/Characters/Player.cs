@@ -34,9 +34,10 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public List<Armor> ArmorSet { get; set; }
 
-        public int Lives { get; set; }
 
         public string Name { get; set; }
+
+        public int ImmortalDuration { get; set; }
 
         public override void Draw(GameTime gameTime)
         {
@@ -150,7 +151,6 @@ namespace KufTheGame.Models.Game.Models.Characters
             }
         }
 
-
         public override BasicAttack Attack()
         {
             var wepDmg = 0d;
@@ -171,12 +171,19 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void RespondToAttack(BasicAttack attack)
         {
+            if (ImmortalDuration > 0)
+            {
+                ImmortalDuration--;
+                return;
+            }
+
             var totalDef = this.DefencePoints + this.ArmorSet.Sum(a => a.DefencePoints);
             var damage = (attack.Damage * 2 / totalDef);
             this.HealthPoints -= damage;
-            if (this.HealthPoints < 0)
+            if (this.HealthPoints <= 0)
             {
-                this.HealthPoints = 0;
+                this.RemoveLive();
+                this.HealthPoints = this.BaseHealthPoints;
             }
         }
 
@@ -206,22 +213,6 @@ namespace KufTheGame.Models.Game.Models.Characters
         {
             //this.Armor = null;
         }
-
-        public void UsePotion(Potion potion)
-        {
-            potion.Use(this);
-        }
-
-        public void AddLive()
-        {
-            this.Lives++;
-        }
-
-        public void RemoveLive()
-        {
-            this.Lives--;
-        }
-
 
         private bool IsAttackKeyPressed()
         {

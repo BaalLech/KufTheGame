@@ -102,8 +102,6 @@ namespace KufTheGame.Models.Abstracts
                 numOfDrop = 2;
             }
 
-            return 1;
-
             return numOfDrop;
         }
 
@@ -139,7 +137,7 @@ namespace KufTheGame.Models.Abstracts
                     else
                     {
                         Potion potion = new ImmortalilyPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
-                            2 * (int)rarityCoef + 1);
+                            5 * (int)rarityCoef + 1);
                         return potion;
                     }
                 default:

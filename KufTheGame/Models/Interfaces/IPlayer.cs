@@ -10,6 +10,8 @@ namespace KufTheGame.Models.Interfaces
 
         List<Armor> ArmorSet { get; set; }
 
+        int ImmortalDuration { get; set; }
+
         void SetWeapon(Weapon wep);
 
         void RemoveWeapon();
