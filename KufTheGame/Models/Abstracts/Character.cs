@@ -61,13 +61,15 @@ namespace KufTheGame.Models.Abstracts
         {
             if (this.SpriteRotation == 0)
             {
-                return ((this.Velocity.X + this.Width >= target.Velocity.X) &&
-                        (this.Velocity.X + this.Width <= target.Velocity.X + target.Width)) &&
-                       ((this.Velocity.Y >= target.Velocity.Y) && (this.Velocity.Y <= target.Velocity.Y + target.Height));
+                return ((this.Velocity.X + this.Width*1.1 >= target.Velocity.X) &&
+                        (this.Velocity.X + this.Width*0.9 <= target.Velocity.X)) &&
+                       ((this.Velocity.Y >= target.Velocity.Y-this.Height/2) && (this.Velocity.Y <= target.Velocity.Y + target.Height));
             }
             else
             {
-                return false;
+                return ((this.Velocity.X <= target.Velocity.X+target.Width*1.1) &&
+                        (this.Velocity.X >= target.Velocity.X + target.Width * 0.9)) &&
+                       ((this.Velocity.Y >= target.Velocity.Y - this.Height / 2) && (this.Velocity.Y <= target.Velocity.Y + target.Height));
             }
         }
 

@@ -155,11 +155,12 @@ namespace KufTheGame
             //}
             Player.Attack();
 
+
             foreach (var enemy in this.Enemies)
             {
                 Player.Intersect(enemy);
-
             }
+
             Player.Move();
             Player.ResetDirections();
 
@@ -169,11 +170,12 @@ namespace KufTheGame
             if (this.Enemies.Count > 0)
             {
                 var movingEnemy = this.Enemies[0];
-                 movingEnemy.Intersect(Player);
-                
+                movingEnemy.Intersect(Player);
+                this.Enemies[0].Move();
+                this.Enemies[0].ResetDirections();
             }
-            this.Enemies[0].Move();
-            this.Enemies[0].ResetDirections();
+
+
 
 
             #endregion
@@ -314,7 +316,7 @@ namespace KufTheGame
 
             Rectangle source = new Rectangle((int)((int)frameIndex * 54), 0, 57, 100);
             Vector2 origin = new Vector2(0, 0);
-            spriteBatch.Draw(Player.Texture, Player.Velocity, source, Color.White, 0.0f, origin, 1.0f, Player.SpriteRotation==1?SpriteEffects.FlipHorizontally:SpriteEffects.None, 1.0f);
+            spriteBatch.Draw(Player.Texture, Player.Velocity, source, Color.White, 0.0f, origin, 1.0f, Player.SpriteRotation == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1.0f);
 
             this.spriteBatch.End();
 
