@@ -51,6 +51,7 @@
     <Compile Include="Models\Abstracts\Obsticle.cs" />
     <Compile Include="Models\Abstracts\Potion.cs" />
     <Compile Include="Models\Enums\Armors.cs" />
+    <Compile Include="Models\Enums\BlockedDirections.cs" />
     <Compile Include="Models\Enums\PressedKey.cs" />
     <Compile Include="Models\Enums\Rarities.cs" />
     <Compile Include="Models\Enums\Weapons.cs" />

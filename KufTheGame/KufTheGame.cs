@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using KufTheGame.Models.Abstracts;
+using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,7 +27,7 @@ namespace KufTheGame
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public static List<Item> Drops  { get; set; }
+        public static List<Item> Drops { get; set; }
 
         public static Player Player { get; private set; }
 
@@ -62,14 +63,14 @@ namespace KufTheGame
             backroundPart = 0;
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
-            Player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 750, 100, 57, "Pesho");
-            this.Enemies.Add(new Mage(800, 500, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(880, 700, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(800, 640, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(880, 900, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(800, 550, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(880, 600, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(900, 800, 150, 150, 10, 10, 100));
+            Player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 50, 750, 57, 100, "Pesho");
+            this.Enemies.Add(new Mage(400, 300, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(200, 500, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(200, 640, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(200, 900, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(200, 550, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(200, 600, 150, 150, 10, 10, 100));
+            //this.Enemies.Add(new Mage(200, 800, 150, 150, 10, 10, 100));
 
 
             base.Initialize();
@@ -151,16 +152,26 @@ namespace KufTheGame
             //if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
             //{
             //    // Move right
-            //    this.player.X += 1;
             //}
             Player.Attack();
 
-            Player.Move();
+            var directions = new[] { BlockedDirections.None, BlockedDirections.None, BlockedDirections.None, BlockedDirections.None };
+            foreach (var enemy in this.Enemies)
+            {
+                directions = Player.Intersect(enemy, directions);
+
+            }
+            Player.Move(directions);
+
+            directions = new[] { BlockedDirections.None, BlockedDirections.None, BlockedDirections.None, BlockedDirections.None };
             //this.Enemies.ForEach(e => e.Move());
+
             if (this.Enemies.Count > 0)
             {
-                this.Enemies[0].Move();
+                directions=this.Enemies[0].Intersect(Player,directions);
+                
             }
+            this.Enemies[0].Move(directions);
 
             #endregion
 
@@ -243,7 +254,7 @@ namespace KufTheGame
                 for (int i = 0; i < this.Enemies.Count; i++)
                 {
                     var enemy = this.Enemies[i];
-                    if (Player.Intersects(enemy))
+                    if (Player.InAttackRange(enemy))
                     {
                         enemy.RespondToAttack(attack);
                         this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X - 500, (int)enemy.Velocity.Y, 150, 150), Color.Red);
@@ -299,7 +310,7 @@ namespace KufTheGame
 
 
             Rectangle source = new Rectangle((int)((int)frameIndex * 54), 0, 57, 100);
-            Vector2 origin = new Vector2(29, 50);
+            Vector2 origin = new Vector2(0, 0);
             spriteBatch.Draw(Player.Texture, Player.Velocity, source, Color.White, 0.0f, origin, 1.0f, SpriteEffects.FlipHorizontally, 1.0f);
 
             this.spriteBatch.End();

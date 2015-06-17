@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using KufTheGame.Models.Abstracts;
+using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models;
 
 namespace KufTheGame.Models.Interfaces
@@ -14,9 +17,9 @@ namespace KufTheGame.Models.Interfaces
         void RemoveHp(double hp);
 
         bool IsAlive();
-
+        BlockedDirections[] Intersect(GameObject target, BlockedDirections[] directions);
+        bool InAttackRange(GameObject target);
         void AddLive();
-
         void RemoveLive();
     }
 }

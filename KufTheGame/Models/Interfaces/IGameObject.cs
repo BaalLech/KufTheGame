@@ -12,9 +12,7 @@ namespace KufTheGame.Models.Interfaces
         Vector2 Velocity { get; set; }
         int Width { get; set; }
         int Height { get; set; }
-
-        bool Intersects(GameObject target);
-
         bool Contains(GameObject target);
+        
     }
 }

@@ -32,40 +32,7 @@ namespace KufTheGame.Models.Abstracts
 
         public abstract void ProduceSound();
 
-        public virtual bool Intersects(GameObject target)
-        {
-            //this.Velocity.X
-            //target.Velocity.X
-
-            if (
-                ((this.Velocity.X + this.Width >= target.Velocity.X) && (this.Velocity.X + this.Width <= target.Velocity.X + 2 * target.Width / 3)) &&
-                ((this.Velocity.Y >= target.Velocity.Y) && (this.Velocity.Y <= target.Velocity.Y + 2 * target.Height / 3)))
-            {
-                return true;
-            }
-
-            return false;
-
-
-
-            //if (this.contains(shape.x - offset, shape.y - offset) ||
-            //this.contains(shape.x + shape.width - offset, shape.y - offset) ||
-            //this.contains(shape.x - offset, shape.y + shape.height - offset) ||
-            //this.contains(shape.x + shape.width - offset, shape.y + shape.height - offset))
-            //{
-            //    return true;
-            //}
-            //else if (shape.contains(this.x - offset, this.y - offset) ||
-            //  shape.contains(this.x + this.width - offset, this.y - offset) ||
-            //  shape.contains(this.x - offset, this.y + this.height - offset) ||
-            //  shape.contains(this.x + this.width - offset, this.y + this.height - offset))
-            //{
-            //    return true;
-            //}
-            //return false;
-
-            //return true;
-        }
+        
 
         public virtual bool Contains(GameObject target)
         {
