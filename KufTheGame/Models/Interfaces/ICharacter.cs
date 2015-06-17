@@ -17,7 +17,9 @@ namespace KufTheGame.Models.Interfaces
         void RemoveHp(double hp);
 
         bool IsAlive();
-        BlockedDirections[] Intersect(GameObject target, BlockedDirections[] directions);
+        void Intersect(GameObject target);
+
+        void ResetDirections();
         bool InAttackRange(GameObject target);
         void AddLive();
         void RemoveLive();

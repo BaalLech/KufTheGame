@@ -65,8 +65,8 @@ namespace KufTheGame
             Drops = new List<Item>();
             Player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 50, 750, 57, 100, "Pesho");
             this.Enemies.Add(new Mage(400, 300, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(200, 500, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(200, 640, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(200, 500, 150, 150, 10, 10, 100));
+            this.Enemies.Add(new Mage(200, 640, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(200, 900, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(200, 550, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(200, 600, 150, 150, 10, 10, 100));
@@ -155,23 +155,26 @@ namespace KufTheGame
             //}
             Player.Attack();
 
-            var directions = new[] { BlockedDirections.None, BlockedDirections.None, BlockedDirections.None, BlockedDirections.None };
             foreach (var enemy in this.Enemies)
             {
-                directions = Player.Intersect(enemy, directions);
+                Player.Intersect(enemy);
 
             }
-            Player.Move(directions);
+            Player.Move();
+            Player.ResetDirections();
 
-            directions = new[] { BlockedDirections.None, BlockedDirections.None, BlockedDirections.None, BlockedDirections.None };
+
             //this.Enemies.ForEach(e => e.Move());
 
             if (this.Enemies.Count > 0)
             {
-                directions=this.Enemies[0].Intersect(Player,directions);
+                var movingEnemy = this.Enemies[0];
+                 movingEnemy.Intersect(Player);
                 
             }
-            this.Enemies[0].Move(directions);
+            this.Enemies[0].Move();
+            this.Enemies[0].ResetDirections();
+
 
             #endregion
 

@@ -18,6 +18,8 @@ namespace KufTheGame.Models.Game.Models.Characters
         private const double InitialAttackPoints = 20;
         private const double InitialDefencePoints = 0;
         private const double InitialHealthPoints = 50;
+        private const float PlayerSpeed = 5;
+
         
 
         public Player(Texture2D playerTexture, int x, int y, int width, int height, string name)
@@ -61,12 +63,9 @@ namespace KufTheGame.Models.Game.Models.Characters
             get { throw new System.NotImplementedException(); }
         }
 
-        public override void Move()
-        {
-            throw new System.NotImplementedException();
-        }
+        
 
-        public override void Move(BlockedDirections[] directions)
+        public override void Move()
         {
             
             IList<PressedKey> keys = KeyListener.GetKey();
@@ -77,29 +76,29 @@ namespace KufTheGame.Models.Game.Models.Characters
                     switch (keys[0])
                     {
                         case PressedKey.MoveUp:
-                            if (!directions.Contains(BlockedDirections.BlockedUp))
+                            if (!this.Directions.Contains(BlockedDirections.BlockedUp))
                             {
-                                this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y - Speed);
+                                this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y - PlayerSpeed);
                             }
                             break;
 
                         case PressedKey.MoveDown:
-                            if (!directions.Contains(BlockedDirections.BlockedDown))
-                            this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y + Speed);
+                            if (!this.Directions.Contains(BlockedDirections.BlockedDown))
+                            this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y + PlayerSpeed);
                             break;
 
                         case PressedKey.MoveLeft:
-                            if (!directions.Contains(BlockedDirections.BlockedLeft))
+                            if (!this.Directions.Contains(BlockedDirections.BlockedLeft))
                             {
-                                this.Velocity = new Vector2(this.Velocity.X - Speed, this.Velocity.Y);
+                                this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y);
                             }
                             break;
 
                         case PressedKey.MoveRight:
-                            if (!directions.Contains(BlockedDirections.BlockedRight))
+                            if (!this.Directions.Contains(BlockedDirections.BlockedRight))
 
                             {
-                                this.Velocity = new Vector2(this.Velocity.X + Speed, this.Velocity.Y);
+                                this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y);
                             }
                             break;
 
@@ -115,14 +114,14 @@ namespace KufTheGame.Models.Game.Models.Characters
                             {
 
                                 case PressedKey.MoveLeft:
-                                    if (!directions.Contains(BlockedDirections.BlockedUp)&&!directions.Contains(BlockedDirections.BlockedLeft))
-                                    this.Velocity = new Vector2(this.Velocity.X - Speed, this.Velocity.Y - Speed);
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedUp)&&!this.Directions.Contains(BlockedDirections.BlockedLeft))
+                                    this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y - PlayerSpeed);
                                     break;
 
                                 case PressedKey.MoveRight:
-                                    if (!directions.Contains(BlockedDirections.BlockedUp) && !directions.Contains(BlockedDirections.BlockedRight))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedUp) && !this.Directions.Contains(BlockedDirections.BlockedRight))
 
-                                    this.Velocity = new Vector2(this.Velocity.X + Speed, this.Velocity.Y - Speed);
+                                    this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y - PlayerSpeed);
                                     break;
                             }
 
@@ -133,15 +132,15 @@ namespace KufTheGame.Models.Game.Models.Characters
                             switch (keys[1])
                             {
                                 case PressedKey.MoveLeft:
-                                    if (!directions.Contains(BlockedDirections.BlockedDown) && !directions.Contains(BlockedDirections.BlockedLeft))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedDown) && !this.Directions.Contains(BlockedDirections.BlockedLeft))
 
-                                    this.Velocity = new Vector2(this.Velocity.X - Speed, this.Velocity.Y + Speed);
+                                        this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y + PlayerSpeed);
                                     break;
 
                                 case PressedKey.MoveRight:
-                                    if (!directions.Contains(BlockedDirections.BlockedDown) && !directions.Contains(BlockedDirections.BlockedRight))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedDown) && !this.Directions.Contains(BlockedDirections.BlockedRight))
 
-                                    this.Velocity = new Vector2(this.Velocity.X + Speed, this.Velocity.Y + Speed);
+                                        this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y + PlayerSpeed);
                                     break;
                             }
 
@@ -152,15 +151,15 @@ namespace KufTheGame.Models.Game.Models.Characters
                             switch (keys[1])
                             {
                                 case PressedKey.MoveUp:
-                                    if (!directions.Contains(BlockedDirections.BlockedLeft) && !directions.Contains(BlockedDirections.BlockedUp))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedLeft) && !this.Directions.Contains(BlockedDirections.BlockedUp))
 
-                                    this.Velocity = new Vector2(this.Velocity.X - Speed, this.Velocity.Y - Speed);
+                                        this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y - PlayerSpeed);
                                     break;
 
                                 case PressedKey.MoveDown:
-                                    if (!directions.Contains(BlockedDirections.BlockedLeft) && !directions.Contains(BlockedDirections.BlockedDown))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedLeft) && !this.Directions.Contains(BlockedDirections.BlockedDown))
 
-                                    this.Velocity = new Vector2(this.Velocity.X - Speed, this.Velocity.Y + Speed);
+                                        this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y + PlayerSpeed);
                                     break;
                             }
 
@@ -171,15 +170,15 @@ namespace KufTheGame.Models.Game.Models.Characters
                             switch (keys[1])
                             {
                                 case PressedKey.MoveUp:
-                                    if (!directions.Contains(BlockedDirections.BlockedRight) && !directions.Contains(BlockedDirections.BlockedUp))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedRight) && !this.Directions.Contains(BlockedDirections.BlockedUp))
 
-                                    this.Velocity = new Vector2(this.Velocity.X + Speed, this.Velocity.Y - Speed);
+                                        this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y - PlayerSpeed);
                                     break;
 
                                 case PressedKey.MoveDown:
-                                    if (!directions.Contains(BlockedDirections.BlockedRight) && !directions.Contains(BlockedDirections.BlockedDown))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedRight) && !this.Directions.Contains(BlockedDirections.BlockedDown))
 
-                                    this.Velocity = new Vector2(this.Velocity.X + Speed, this.Velocity.Y + Speed);
+                                        this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y + PlayerSpeed);
                                     break;
                             }
 

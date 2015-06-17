@@ -14,7 +14,7 @@ namespace KufTheGame.Models.Abstracts
 {
     public abstract class Enemy : Character, IEnemy
     {
-        protected new const int Speed = 2;
+        protected new const int EnemySpeed = 2;
         protected Enemy(int x, int y, int width, int height, double attackPoints, double defencePoints, double healthPoints)
             : base(x, y, width, height, attackPoints, defencePoints, healthPoints)
         {
@@ -23,26 +23,26 @@ namespace KufTheGame.Models.Abstracts
 
         public ICollection<IItem> Drops { get; private set; }
 
-        public override void Move(BlockedDirections[] directions)
+        public override void Move()
         {
             var rngDirection = RandomGenerator.Randomize(0, 1);
             if (rngDirection == 0)
             {
                 if (this.Velocity.X > KufTheGame.Player.Velocity.X + KufTheGame.Player.Width)
                 {
-                    if (!directions.Contains(BlockedDirections.BlockedLeft))
+                    if (!Directions.Contains(BlockedDirections.BlockedLeft))
                     {
 
-                        this.Velocity = new Vector2(this.Velocity.X - Speed, this.Velocity.Y);
+                        this.Velocity = new Vector2(this.Velocity.X - EnemySpeed, this.Velocity.Y);
                     }
                 }
 
                 if (this.Velocity.X < KufTheGame.Player.Velocity.X + KufTheGame.Player.Width)
                 {
-                    if (!directions.Contains(BlockedDirections.BlockedRight))
+                    if (!Directions.Contains(BlockedDirections.BlockedRight))
                     {
 
-                        this.Velocity = new Vector2(this.Velocity.X + Speed, this.Velocity.Y);
+                        this.Velocity = new Vector2(this.Velocity.X + EnemySpeed, this.Velocity.Y);
                     }
                 }
             }
@@ -50,19 +50,19 @@ namespace KufTheGame.Models.Abstracts
             {
                 if (this.Velocity.Y > KufTheGame.Player.Velocity.Y )
                 {
-                    if (!directions.Contains(BlockedDirections.BlockedUp))
+                    if (!this.Directions.Contains(BlockedDirections.BlockedUp))
                     {
 
-                        this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y - Speed);
+                        this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y - EnemySpeed);
                     }
                 }
 
                 if (this.Velocity.Y < KufTheGame.Player.Velocity.Y )
                 {
-                    if (!directions.Contains(BlockedDirections.BlockedDown))
+                    if (!this.Directions.Contains(BlockedDirections.BlockedDown))
                     {
 
-                        this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y + Speed);
+                        this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y + EnemySpeed);
                     }
                 }
             }
