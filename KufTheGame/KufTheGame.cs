@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
+using KufTheGame.Models.Game.Models.Obsticles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -18,6 +19,11 @@ namespace KufTheGame
     public class KufTheGame : Game
     {
         public const int ItemSize = 35;
+        public const int FieldWidth = 1000;
+        public const int FieldHeight = 450;
+        public const int ScreenWidth = 1000;
+        public const int ScreenHeight = 750;
+
 
         private Texture2D background, weapon;
         private float time, frameTime = 0.1f, frameIndex;
@@ -32,6 +38,9 @@ namespace KufTheGame
         public static Player Player { get; private set; }
 
         public List<Enemy> Enemies { get; set; }
+
+        public List<Obsticle> Objects { get; set; }
+
 
 
         public KufTheGame()
@@ -63,14 +72,24 @@ namespace KufTheGame
             backroundPart = 0;
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
-            Player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 50, 750, 57, 100, "Pesho");
-            this.Enemies.Add(new Mage(400, 300, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(200, 500, 150, 150, 10, 10, 100));
-            this.Enemies.Add(new Mage(200, 640, 150, 150, 10, 10, 100));
+            Player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 500, 57, 100, "Pesho");
+            this.Enemies.Add(new Mage(1000, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Mage(1000, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Mage(1000, 500, 57, 100, 10, 10, 100));
             //this.Enemies.Add(new Mage(200, 900, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(200, 550, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(200, 600, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(200, 800, 150, 150, 10, 10, 100));
+
+            this.Objects = new List<Obsticle>();
+            this.Objects.Add(new Boundary(0, ScreenHeight-FieldHeight, FieldWidth, 10));
+            this.Objects.Add(new Boundary(ScreenWidth, ScreenHeight-FieldHeight, 10, FieldHeight));
+            this.Objects.Add(new Boundary(0, ScreenHeight - FieldHeight, 10, FieldHeight));
+            this.Objects.Add(new Boundary(0, ScreenHeight, FieldWidth, 10));
+
+
+
+
 
 
             base.Initialize();
@@ -159,6 +178,11 @@ namespace KufTheGame
             foreach (var enemy in this.Enemies)
             {
                 Player.Intersect(enemy);
+            }
+
+            foreach (var obj in Objects)
+            {
+                Player.Intersect(obj);
             }
 
             Player.Move();
@@ -311,7 +335,7 @@ namespace KufTheGame
             //DRAWING ELEMENTS
             foreach (var enemy in this.Enemies)
             {
-                this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 150, 150),
+                this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 57, 100),
                     Color.Red);
             }
 

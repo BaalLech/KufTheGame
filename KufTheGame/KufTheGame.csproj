@@ -63,6 +63,7 @@
     <Compile Include="Models\Game.Models\Items\HealthPotion.cs" />
     <Compile Include="Models\Game.Models\Items\ImmortalilyPotion.cs" />
     <Compile Include="Models\Game.Models\Items\Weapon.cs" />
+    <Compile Include="Models\Game.Models\Obsticles\Boundary.cs" />
     <Compile Include="Models\Interfaces\IAttackable.cs" />
     <Compile Include="Models\Interfaces\ICharacter.cs" />
     <Compile Include="Models\Interfaces\IEnemy.cs" />
@@ -88,9 +89,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Game.Models\Obsticles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
