@@ -88,6 +88,7 @@ namespace KufTheGame.Models.Game.Models.Characters
                             break;
 
                         case PressedKey.MoveLeft:
+                            this.SpriteRotation = 1;
                             if (!this.Directions.Contains(BlockedDirections.BlockedLeft))
                             {
                                 this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y);
@@ -95,6 +96,7 @@ namespace KufTheGame.Models.Game.Models.Characters
                             break;
 
                         case PressedKey.MoveRight:
+                            this.SpriteRotation = 0;
                             if (!this.Directions.Contains(BlockedDirections.BlockedRight))
 
                             {
@@ -114,11 +116,13 @@ namespace KufTheGame.Models.Game.Models.Characters
                             {
 
                                 case PressedKey.MoveLeft:
+                                    this.SpriteRotation = 1;
                                     if (!this.Directions.Contains(BlockedDirections.BlockedUp)&&!this.Directions.Contains(BlockedDirections.BlockedLeft))
                                     this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y - PlayerSpeed);
                                     break;
 
                                 case PressedKey.MoveRight:
+                                    this.SpriteRotation = 0;
                                     if (!this.Directions.Contains(BlockedDirections.BlockedUp) && !this.Directions.Contains(BlockedDirections.BlockedRight))
 
                                     this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y - PlayerSpeed);
@@ -132,12 +136,14 @@ namespace KufTheGame.Models.Game.Models.Characters
                             switch (keys[1])
                             {
                                 case PressedKey.MoveLeft:
+                                    this.SpriteRotation = 1;
                                     if (!this.Directions.Contains(BlockedDirections.BlockedDown) && !this.Directions.Contains(BlockedDirections.BlockedLeft))
 
                                         this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y + PlayerSpeed);
                                     break;
 
                                 case PressedKey.MoveRight:
+                                    this.SpriteRotation = 0;
                                     if (!this.Directions.Contains(BlockedDirections.BlockedDown) && !this.Directions.Contains(BlockedDirections.BlockedRight))
 
                                         this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y + PlayerSpeed);
@@ -147,7 +153,7 @@ namespace KufTheGame.Models.Game.Models.Characters
                             break;
 
                         case PressedKey.MoveLeft:
-                            
+                            this.SpriteRotation = 1;
                             switch (keys[1])
                             {
                                 case PressedKey.MoveUp:
@@ -166,6 +172,7 @@ namespace KufTheGame.Models.Game.Models.Characters
                             break;
 
                         case PressedKey.MoveRight:
+                            this.SpriteRotation = 0;
                             
                             switch (keys[1])
                             {

@@ -9,18 +9,21 @@ namespace KufTheGame.Models.Abstracts
     {
         private const int InitialLives = 1;
         protected const int BasicCharacterSpeed = 5;
+        public int SpriteRotation { get; set; }
 
 
         protected Character(int x, int y, int width, int height, double attackPoints, double defencePoints,
             double healthPoints)
             : base(x, y, width, height)
         {
+
             this.AttackPoints = attackPoints;
             this.DefencePoints = defencePoints;
             this.HealthPoints = healthPoints;
             this.BaseHealthPoints = healthPoints;
             this.Lives = InitialLives;
             this.Directions = new[] { BlockedDirections.None, BlockedDirections.None, BlockedDirections.None, BlockedDirections.None };
+            this.SpriteRotation = 0;
         }
 
         public BlockedDirections[] Directions { get; set; }
@@ -56,8 +59,16 @@ namespace KufTheGame.Models.Abstracts
 
         public virtual bool InAttackRange(GameObject target)
         {
-            return ((this.Velocity.X + this.Width >= target.Velocity.X) && (this.Velocity.X + this.Width <= target.Velocity.X + 2 * target.Width / 3)) &&
-                   ((this.Velocity.Y >= target.Velocity.Y) && (this.Velocity.Y <= target.Velocity.Y + 2 * target.Height / 3));
+            if (this.SpriteRotation == 0)
+            {
+                return ((this.Velocity.X + this.Width >= target.Velocity.X) &&
+                        (this.Velocity.X + this.Width <= target.Velocity.X + target.Width)) &&
+                       ((this.Velocity.Y >= target.Velocity.Y) && (this.Velocity.Y <= target.Velocity.Y + target.Height));
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void Intersect(GameObject target)
