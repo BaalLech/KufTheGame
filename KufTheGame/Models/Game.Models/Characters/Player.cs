@@ -16,9 +16,9 @@ namespace KufTheGame.Models.Game.Models.Characters
     {
         private const int InitialLives = 3;
         private const double InitialAttackPoints = 20;
-        private const double InitialDefencePoints = 0;
+        private const double InitialDefencePoints = 100;
         private const double InitialHealthPoints = 50;
-        private const float PlayerSpeed = 5;
+        private const float PlayerSpeed = 3;
 
         
 
@@ -223,7 +223,7 @@ namespace KufTheGame.Models.Game.Models.Characters
             }
 
             var totalDef = this.DefencePoints + this.ArmorSet.Sum(a => a.DefencePoints);
-            var damage = (attack.Damage * 2 / totalDef);
+            double damage = (attack.Damage * 2 / totalDef);
             this.HealthPoints -= damage;
             if (this.HealthPoints <= 0)
             {

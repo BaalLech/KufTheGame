@@ -298,6 +298,16 @@ namespace KufTheGame
 
             }
 
+            foreach (var enemy in this.Enemies)
+            {
+                if (enemy.InAttackRange(Player))
+                {
+                    var attack1 = enemy.Attack();
+                    Player.RespondToAttack(attack1);
+                }
+            }
+
+
             //DRAWING ELEMENTS
             foreach (var enemy in this.Enemies)
             {

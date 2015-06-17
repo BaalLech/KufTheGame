@@ -59,18 +59,32 @@ namespace KufTheGame.Models.Abstracts
 
         public virtual bool InAttackRange(GameObject target)
         {
-            if (this.SpriteRotation == 0)
-            {
-                return ((this.Velocity.X + this.Width*1.1 >= target.Velocity.X) &&
-                        (this.Velocity.X + this.Width*0.9 <= target.Velocity.X)) &&
-                       ((this.Velocity.Y >= target.Velocity.Y-this.Height/2) && (this.Velocity.Y <= target.Velocity.Y + target.Height));
-            }
-            else
-            {
-                return ((this.Velocity.X <= target.Velocity.X+target.Width*1.1) &&
+            var attackRange1 = ((this.Velocity.X + this.Width * 1.1 >= target.Velocity.X) &&
+                            (this.Velocity.X + this.Width * 0.9 <= target.Velocity.X)) &&
+                           ((this.Velocity.Y >= target.Velocity.Y - this.Height / 2) &&
+                            (this.Velocity.Y <= target.Velocity.Y + target.Height));
+            var attackRange2 = ((this.Velocity.X <= target.Velocity.X + target.Width * 1.1) &&
                         (this.Velocity.X >= target.Velocity.X + target.Width * 0.9)) &&
-                       ((this.Velocity.Y >= target.Velocity.Y - this.Height / 2) && (this.Velocity.Y <= target.Velocity.Y + target.Height));
+                       ((this.Velocity.Y >= target.Velocity.Y - this.Height / 2) &&
+                        (this.Velocity.Y <= target.Velocity.Y + target.Height));
+
+            if (target is Enemy)
+            {
+
+                if (this.SpriteRotation == 0)
+                {
+                    return attackRange1;
+                }
+                else
+                {
+                    return attackRange2;
+                }
             }
+            if (target is IPlayer)
+            {
+                return attackRange1 || attackRange2;
+            }
+            return false;
         }
 
         public void Intersect(GameObject target)
@@ -123,7 +137,7 @@ namespace KufTheGame.Models.Abstracts
 
         public void ResetDirections()
         {
-            this.Directions = new []{BlockedDirections.None, BlockedDirections.None,BlockedDirections.None, BlockedDirections.None};
+            this.Directions = new[] { BlockedDirections.None, BlockedDirections.None, BlockedDirections.None, BlockedDirections.None };
         }
     }
 }

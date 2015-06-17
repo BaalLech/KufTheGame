@@ -68,9 +68,19 @@ namespace KufTheGame.Models.Abstracts
             }
         }
 
-        public override abstract BasicAttack Attack();
+        public override BasicAttack Attack()
+        {
+            
+            var attack = new BasicAttack(this.AttackPoints);
+            
+                return attack;
+            
+        }
 
-        public abstract override void RespondToAttack(BasicAttack attack);
+        public override void RespondToAttack(BasicAttack attack)
+        {
+            
+        }
 
         public override int DrawOrder
         {
