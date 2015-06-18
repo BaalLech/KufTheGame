@@ -23,8 +23,12 @@ namespace KufTheGame.Models.Abstracts
             this.BaseHealthPoints = healthPoints;
             this.Lives = InitialLives;
             this.Directions = new[] { BlockedDirections.None, BlockedDirections.None, BlockedDirections.None, BlockedDirections.None };
-            this.SpriteRotation = 0;
+            this.State = State.Idle;
         }
+
+        public Direction Direction { get; set; }
+
+        public State State { get; set; }
 
         public BlockedDirections[] Directions { get; set; }
 
@@ -133,11 +137,11 @@ namespace KufTheGame.Models.Abstracts
 
         public abstract void RespondToAttack(BasicAttack attack);
 
-
-
         public void ResetDirections()
         {
             this.Directions = new[] { BlockedDirections.None, BlockedDirections.None, BlockedDirections.None, BlockedDirections.None };
         }
+
+        public override abstract string GetTexturePath();
     }
 }

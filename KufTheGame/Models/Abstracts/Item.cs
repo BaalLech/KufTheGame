@@ -20,5 +20,7 @@ namespace KufTheGame.Models.Abstracts
         }
 
         public abstract void Use(Player target);
+
+        public override abstract string GetTexturePath();
     }
 }

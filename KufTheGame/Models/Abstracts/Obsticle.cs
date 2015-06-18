@@ -6,5 +6,7 @@
             : base(x, y, width, height)
         {
         }
+
+        public override abstract string GetTexturePath();
     }
 }

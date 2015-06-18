@@ -81,11 +81,13 @@ namespace KufTheGame
             //this.Enemies.Add(new Mage(200, 600, 150, 150, 10, 10, 100));
             //this.Enemies.Add(new Mage(200, 800, 150, 150, 10, 10, 100));
 
-            this.Objects = new List<Obsticle>();
-            this.Objects.Add(new Boundary(0, ScreenHeight-FieldHeight, FieldWidth, 10));
-            this.Objects.Add(new Boundary(ScreenWidth, ScreenHeight-FieldHeight, 10, FieldHeight));
-            this.Objects.Add(new Boundary(0, ScreenHeight - FieldHeight, 10, FieldHeight));
-            this.Objects.Add(new Boundary(0, ScreenHeight, FieldWidth, 10));
+            this.Objects = new List<Obsticle>
+            {
+                new Boundary(0, ScreenHeight - FieldHeight, FieldWidth, 10),
+                new Boundary(ScreenWidth, ScreenHeight - FieldHeight, 10, FieldHeight),
+                new Boundary(0, ScreenHeight - FieldHeight, 10, FieldHeight),
+                new Boundary(0, ScreenHeight, FieldWidth, 10)
+            };
 
 
 
@@ -105,7 +107,7 @@ namespace KufTheGame
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
             this.gameFont = this.Content.Load<SpriteFont>("Fonts/GameFont");
             this.background = this.Content.Load<Texture2D>("Backgrounds/background");
-            this.weapon = this.Content.Load<Texture2D>("Items/Weapons/Sword");
+            this.weapon = this.Content.Load<Texture2D>("Items/Weapons/WeaponSword");
         }
 
         /// <summary>
@@ -208,13 +210,16 @@ namespace KufTheGame
             while (time > FrameTime)
             {
                 // Play the next frame in the SpriteSheet
-                frameIndex += 1;
+                frameIndex += 1F;
 
                 // reset elapsed time
-                time = 0f;
+                time = 0F;
             }
 
-            frameIndex %= 9;
+            if (frameIndex == Int32.MaxValue)
+            {
+                frameIndex = 0;
+            }
 
 
 
@@ -341,16 +346,24 @@ namespace KufTheGame
 
             foreach (var drop in Drops)
             {
-                this.spriteBatch.Draw(pen, new Rectangle((int)drop.Velocity.X, (int)drop.Velocity.Y, 50, 50),
-                    Color.Blue);
+                this.spriteBatch.Draw(this.Content.Load<Texture2D>(drop.GetTexturePath()), new Rectangle((int)drop.Velocity.X, (int)drop.Velocity.Y, 50, 50), Color.White);
             }
 
 
 
 
-            Rectangle source = new Rectangle((int)((int)frameIndex * 54), 0, 57, 100);
-            Vector2 origin = new Vector2(0, 0);
-            spriteBatch.Draw(Player.Texture, Player.Velocity, source, Color.White, 0.0f, origin, 1.0f, Player.SpriteRotation == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1.0f);
+            Rectangle source = new Rectangle((int)frameIndex % ((Player.State == State.Idle) ? (int)Frames.Idle : (int)Frames.Moving) * 80, 140 * (int)Player.State, 80, 140);
+            Vector2 origin = new Vector2(40, 70);
+            spriteBatch.Draw(this.Content.Load<Texture2D>(Player.GetTexturePath()),
+                Player.Velocity,
+                source,
+                Color.White,
+                0.0f,
+                origin,
+                1.5f,
+                (Player.SpriteRotation == 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
+                1.0f
+            );
 
             this.spriteBatch.End();
 

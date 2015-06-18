@@ -8,5 +8,7 @@ namespace KufTheGame.Models.Abstracts
             : base(x, y, width, height, rarity)
         {
         }
+
+        public override abstract string GetTexturePath();
     }
 }

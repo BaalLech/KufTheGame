@@ -7,6 +7,7 @@ using KufTheGame.Models.Enums;
 using KufTheGame.Models.Exceptions;
 using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
+using KufTheGame.Properties;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -67,8 +68,9 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void Move()
         {
-            
             IList<PressedKey> keys = KeyListener.GetKey();
+
+            this.State = (keys[0] == PressedKey.Null) ? State.Idle : State.Moving;
 
             switch (keys.Count())
             {
@@ -276,5 +278,9 @@ namespace KufTheGame.Models.Game.Models.Characters
             return false;
         }
 
+        public override string GetTexturePath()
+        {
+            return Resources.Character_PlayerTexture;
+        }
     }
 }

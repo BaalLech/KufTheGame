@@ -1,4 +1,5 @@
 ﻿using KufTheGame.Models.Abstracts;
+using KufTheGame.Properties;
 using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Characters
@@ -43,6 +44,11 @@ namespace KufTheGame.Models.Game.Models.Characters
         public override void RespondToAttack(BasicAttack attack)
         {
             this.HealthPoints -= (attack.Damage * 2) / this.DefencePoints;
+        }
+
+        public override string GetTexturePath()
+        {
+            return Resources.Character_StickEnemyTexture;
         }
     }
 }

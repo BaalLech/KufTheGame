@@ -2,6 +2,7 @@
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Interfaces;
+using KufTheGame.Properties;
 using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
@@ -45,6 +46,11 @@ namespace KufTheGame.Models.Game.Models.Items
             {
                 target.HealthPoints = target.BaseHealthPoints;
             }
+        }
+
+        public override string GetTexturePath()
+        {
+            return Resources.Potion_HealthPotionTexture;
         }
     }
 }

@@ -129,7 +129,7 @@ namespace KufTheGame.Models.Abstracts
                 numOfDrop = 2;
             }
 
-            return numOfDrop;
+            return 1;//numOfDrop;
         }
 
         private Item GetItem()
@@ -171,5 +171,7 @@ namespace KufTheGame.Models.Abstracts
                     return null;
             }
         }
+
+        public override abstract string GetTexturePath();
     }
 }

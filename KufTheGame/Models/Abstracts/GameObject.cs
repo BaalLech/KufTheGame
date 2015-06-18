@@ -32,8 +32,6 @@ namespace KufTheGame.Models.Abstracts
 
         public abstract void ProduceSound();
 
-        
-
         public virtual bool Contains(GameObject target)
         {
             if (target.Velocity.X >= this.Velocity.X &&
@@ -46,5 +44,7 @@ namespace KufTheGame.Models.Abstracts
 
             return false;
         }
+
+        public abstract string GetTexturePath();
     }
 }

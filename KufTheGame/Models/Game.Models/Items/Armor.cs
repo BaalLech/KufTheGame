@@ -2,6 +2,7 @@
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Interfaces;
+using KufTheGame.Properties;
 using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
@@ -43,6 +44,19 @@ namespace KufTheGame.Models.Game.Models.Items
         public override void Use(Player target)
         {
             target.SetArmor(this);
+        }
+
+        public override string GetTexturePath()
+        {
+            switch (ArmorType)
+            {
+                case Armors.Boots: return Resources.Armor_BootsArmorTexture;
+                case Armors.Chest: return Resources.Armor_ChestArmorTexture;
+                case Armors.Gloves: return Resources.Armor_GlovesArmorTexture;
+                case Armors.Helmet: return Resources.Armor_HelmetArmorTexture;
+            }
+
+            return null;
         }
     }
 }

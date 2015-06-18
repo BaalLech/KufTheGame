@@ -31,5 +31,10 @@ namespace KufTheGame.Models.Game.Models.Obsticles
         {
             throw new NotImplementedException();
         }
+
+        public override string GetTexturePath()
+        {
+            return null;
+        }
     }
 }

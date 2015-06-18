@@ -5,6 +5,7 @@ using System.Text;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
+using KufTheGame.Properties;
 using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
@@ -44,5 +45,9 @@ namespace KufTheGame.Models.Game.Models.Items
             target.ImmortalDuration = this.Duration;
         }
 
+        public override string GetTexturePath()
+        {
+            return Resources.Potion_ImmortalityPotionTexture;
+        }
     }
 }
