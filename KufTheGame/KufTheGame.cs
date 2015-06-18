@@ -23,10 +23,10 @@ namespace KufTheGame
         public const int FieldHeight = 450;
         public const int ScreenWidth = 1000;
         public const int ScreenHeight = 750;
-
+        private const float FrameTime = 0.1f;
 
         private Texture2D background, weapon;
-        private float time, frameTime = 0.1f, frameIndex;
+        private float time, frameIndex;
         private int timer;
         private int backroundPart;
         private SpriteFont gameFont;
@@ -205,7 +205,7 @@ namespace KufTheGame
             #endregion
 
             time += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            while (time > frameTime)
+            while (time > FrameTime)
             {
                 // Play the next frame in the SpriteSheet
                 frameIndex += 1;

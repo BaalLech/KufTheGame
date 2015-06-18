@@ -4,9 +4,19 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Marto/Google Drive/Team Projects/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
-    <File>D:/Marto/Google Drive/Team Projects/KufTheGame/KufTheGame/Content/Items/Weapons/Sword.png</File>
-    <File>D:/Marto/Google Drive/Team Projects/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
-    <File>D:/Marto/Google Drive/Team Projects/KufTheGame/KufTheGame/Content/Characters/Players/PlayerSprite.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Armor/ArmorBoots.jpg</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Armor/ArmorChest.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Armor/ArmorGloves.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Armor/ArmorHelmet.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Potions/HealthPotion.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Potions/ImunePotion.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Weapons/WeaponAxe.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Weapons/WeaponDagger.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Weapons/WeaponMace.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Weapons/WeaponSword.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Backgrounds/background.jpg</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Characters/Enemies/StickEnemySprite.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Characters/Players/PlayerSprite.png</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>
