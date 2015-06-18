@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
@@ -26,8 +27,8 @@ namespace KufTheGame
         private const float FrameTime = 0.1f;
 
         private Texture2D background, weapon;
-        private float time, frameIndex;
-        private int timer;
+        private float time;
+        private int timer, frameIndex, attackFrames;
         private int backroundPart;
         private SpriteFont gameFont;
         readonly GraphicsDeviceManager graphics;
@@ -174,7 +175,7 @@ namespace KufTheGame
             //{
             //    // Move right
             //}
-            Player.Attack();
+            //Player.Attack();
 
 
             foreach (var enemy in this.Enemies)
@@ -210,18 +211,42 @@ namespace KufTheGame
             while (time > FrameTime)
             {
                 // Play the next frame in the SpriteSheet
-                frameIndex += 1F;
+                frameIndex += 1;
+                if (attackFrames > 0)
+                {
+                    attackFrames--;
 
+                    if (attackFrames == 0)
+                    {
+                        Player.State = State.Idle;
+                    }
+                }
                 // reset elapsed time
                 time = 0F;
             }
 
-            if (frameIndex == Int32.MaxValue)
+            if (frameIndex == int.MaxValue)
             {
                 frameIndex = 0;
             }
 
-
+            if ((Player.State == State.YodaStrikePunch) || (Player.State == State.WingedHorseKick) || (Player.State == State.TeethOfTigerThrow) || (attackFrames > 0))
+            {
+                if ((attackFrames == 0) && ((Player.State != State.Idle) || (Player.State != State.Moving)))
+                {
+                    switch (Player.State)
+                    {
+                        case State.YodaStrikePunch: attackFrames = (int)Frames.YodaStrikePunch; break;
+                        case State.WingedHorseKick: attackFrames = (int)Frames.WingedHorseKick; break;
+                        case State.TeethOfTigerThrow: attackFrames = (int)Frames.TeethOfTigerThrow; break;
+                        default : attackFrames = 0; break;
+                    }
+                }
+                else if (((attackFrames == 0) && ((Player.State == State.Idle) || (Player.State == State.Moving))))
+                {
+                    Player.State = State.Idle;
+                }
+            }
 
 
 
@@ -349,10 +374,25 @@ namespace KufTheGame
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(drop.GetTexturePath()), new Rectangle((int)drop.Velocity.X, (int)drop.Velocity.Y, 50, 50), Color.White);
             }
 
+            Rectangle source;
+            if ((attackFrames != 0) && ((Player.State == State.YodaStrikePunch) || (Player.State == State.WingedHorseKick) || (Player.State == State.TeethOfTigerThrow)))
+            {
+                int animationFrames;
+                switch (Player.State)
+                {
+                    case State.YodaStrikePunch: animationFrames = (int)Frames.YodaStrikePunch; break;
+                    case State.WingedHorseKick: animationFrames = (int)Frames.WingedHorseKick; break;
+                    case State.TeethOfTigerThrow: animationFrames = (int)Frames.TeethOfTigerThrow; break;
+                    default: animationFrames = 0; break;
+                }
 
+                source = new Rectangle((frameIndex % animationFrames) * 80, 140 * (int)Player.State, 80, 140);
+            }
+            else
+            {
+                source = new Rectangle(frameIndex % ((Player.State == State.Idle) ? (int)Frames.Idle : (int)Frames.Moving) * 80, 140 * (int)Player.State, 80, 140);
+            }
 
-
-            Rectangle source = new Rectangle((int)frameIndex % ((Player.State == State.Idle) ? (int)Frames.Idle : (int)Frames.Moving) * 80, 140 * (int)Player.State, 80, 140);
             Vector2 origin = new Vector2(40, 70);
             spriteBatch.Draw(this.Content.Load<Texture2D>(Player.GetTexturePath()),
                 Player.Velocity,
@@ -363,7 +403,8 @@ namespace KufTheGame
                 1.5f,
                 (Player.SpriteRotation == 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
                 1.0f
-            );
+                );
+
 
             this.spriteBatch.End();
 

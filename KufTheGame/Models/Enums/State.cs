@@ -4,7 +4,9 @@
     {
         Idle,
         Moving,
-        Attack,
+        YodaStrikePunch,
+        WingedHorseKick,
+        TeethOfTigerThrow,
         Dying
     }
 }

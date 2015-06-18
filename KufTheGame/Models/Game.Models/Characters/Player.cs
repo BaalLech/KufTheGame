@@ -39,7 +39,6 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public List<Armor> ArmorSet { get; set; }
 
-
         public string Name { get; set; }
 
         public int ImmortalDuration { get; set; }
@@ -64,13 +63,11 @@ namespace KufTheGame.Models.Game.Models.Characters
             get { throw new System.NotImplementedException(); }
         }
 
-        
-
         public override void Move()
         {
             IList<PressedKey> keys = KeyListener.GetKey();
 
-            this.State = (keys[0] == PressedKey.Null) ? State.Idle : State.Moving;
+            this.State = ((keys[0] != PressedKey.Null) && (keys[0] != PressedKey.Attack)) ? State.Moving : this.State;
 
             switch (keys.Count())
             {
@@ -207,13 +204,10 @@ namespace KufTheGame.Models.Game.Models.Characters
             }
             var attack = new BasicAttack(this.AttackPoints + wepDmg);
 
-            if (this.IsAttackKeyPressed())
-            {
+            if (!this.IsAttackKeyPressed()) return null;
 
-                return attack;
-            }
-
-            return null;
+            this.State = (State)(RandomGenerator.Randomize(2, 4));
+            return attack;
         }
 
         public override void RespondToAttack(BasicAttack attack)
@@ -263,7 +257,7 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         private bool IsAttackKeyPressed()
         {
-            IList<PressedKey> keys = KeyListener.GetKey();
+            var keys = KeyListener.GetKey();
 
             switch (keys.Count())
             {

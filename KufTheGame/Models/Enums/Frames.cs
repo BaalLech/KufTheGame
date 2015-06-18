@@ -4,7 +4,9 @@
     {
         Idle = 6,
         Moving = 10,
-        Attack = 5,
+        YodaStrikePunch = 5,
+        WingedHorseKick = 7,
+        TeethOfTigerThrow = 9,
         Dying = 6
     }
 }
