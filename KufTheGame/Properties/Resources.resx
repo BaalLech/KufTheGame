@@ -133,6 +133,10 @@
     <value>Items/Armor/ArmorHelmet</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
+  <data name="Background_BackgroundTexture" xml:space="preserve">
+    <value>Backgrounds/Background</value>
+    <comment>Path Where Sprite is Located</comment>
+  </data>
   <data name="Character_PlayerTexture" xml:space="preserve">
     <value>Characters/Players/PlayerSprite</value>
     <comment>Path Where Sprite is Located</comment>
@@ -140,6 +144,10 @@
   <data name="Character_StickEnemyTexture" xml:space="preserve">
     <value>Characters/Enemies/StickEnemySprite</value>
     <comment>Path Where Sprite is Located</comment>
+  </data>
+  <data name="Font_GameFont" xml:space="preserve">
+    <value>Fonts/GameFont</value>
+    <comment>Path Where Font is Located</comment>
   </data>
   <data name="Potion_HealthPotionTexture" xml:space="preserve">
     <value>Items/Potions/HealthPotion</value>

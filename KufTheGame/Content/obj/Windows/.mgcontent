@@ -4,7 +4,6 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Armor/ArmorBoots.jpg</File>
     <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Armor/ArmorChest.png</File>
     <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Armor/ArmorGloves.png</File>
     <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Armor/ArmorHelmet.png</File>
@@ -18,5 +17,6 @@
     <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Characters/Enemies/StickEnemySprite.png</File>
     <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Characters/Players/PlayerSprite.png</File>
     <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Fonts/GameFont.spritefont</File>
+    <File>C:/Users/Vasil/Documents/GitHub/MartoRelease/KufTheGame/KufTheGame/Content/Items/Armor/ArmorBoots.png</File>
   </SourceFiles>
 </SourceFileCollection>

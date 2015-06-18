@@ -97,6 +97,15 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backgrounds/Background.
+        /// </summary>
+        internal static string Background_BackgroundTexture {
+            get {
+                return ResourceManager.GetString("Background_BackgroundTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Characters/Players/PlayerSprite.
         /// </summary>
         internal static string Character_PlayerTexture {
@@ -111,6 +120,15 @@ namespace KufTheGame.Properties {
         internal static string Character_StickEnemyTexture {
             get {
                 return ResourceManager.GetString("Character_StickEnemyTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fonts/GameFont.
+        /// </summary>
+        internal static string Font_GameFont {
+            get {
+                return ResourceManager.GetString("Font_GameFont", resourceCulture);
             }
         }
         

@@ -4,7 +4,7 @@ using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Game.Models.Obsticles;
-
+using KufTheGame.Properties;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -22,11 +22,9 @@ namespace KufTheGame
         public const int ScreenHeight = 750;
         private const float FrameTime = 0.1f;
 
-        private Texture2D background, weapon;
         private float time;
-        private int timer, frameIndex, attackFrames;
+        private int frameIndex, attackFrames;
         private int backroundPart;
-        private SpriteFont gameFont;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Rectangle spriteFrame;
@@ -51,7 +49,6 @@ namespace KufTheGame
                 //IsFullScreen = true
             };
 
-            this.timer = 500;
             //this.Enemies = new List<Enemy>();
             //this.background = new Texture2D(this.graphics.GraphicsDevice, 800, 800);
 
@@ -66,7 +63,6 @@ namespace KufTheGame
         /// </summary>
         protected override void Initialize()
         {
-            timer = 500;
             backroundPart = 0;
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
@@ -94,9 +90,6 @@ namespace KufTheGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
-            this.gameFont = this.Content.Load<SpriteFont>("Fonts/GameFont");
-            this.background = this.Content.Load<Texture2D>("Backgrounds/background");
-            this.weapon = this.Content.Load<Texture2D>("Items/Weapons/WeaponSword");
         }
 
         /// <summary>
@@ -261,13 +254,13 @@ namespace KufTheGame
             this.spriteBatch.Begin();
 
             /* ------------- Drawing Background -------------*/
-            this.spriteBatch.Draw(this.background, new Rectangle((this.backroundPart * (-1000)), 0, 3072, 800), Color.White);
+            this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Background_BackgroundTexture), new Rectangle((this.backroundPart * (-1000)), 0, 3072, 800), Color.White);
 
             /* ------------- Drawing Players' HUD Lives -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(0, 0, 220, 120), new Color(Color.Black, 0.8F));
 
-            this.spriteBatch.DrawString(this.gameFont, "KUF THE WARRIOR", new Vector2(5, 5), Color.Red);
-            this.spriteBatch.DrawString(this.gameFont, "Lives:  " + Player.Lives, new Vector2(5, 25), Color.White);
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "KUF THE WARRIOR", new Vector2(5, 5), Color.Red);
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Lives:  " + Player.Lives, new Vector2(5, 25), Color.White);
 
             /* ------------- Drawing Players' HUD Background -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(5, 50, 200, 20), Color.White);
@@ -303,8 +296,8 @@ namespace KufTheGame
             /* ------------- Drawing Enemies -------------*/  
             foreach (var enemy in this.Enemies)
             {
-                this.spriteBatch.Draw(Content.Load<Texture2D>(enemy.GetTexturePath()), new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 57, 100),
-                    Color.White);
+                spriteBatch.Draw(Content.Load<Texture2D>(enemy.GetTexturePath()), enemy.Velocity, spriteFrame, Color.White,
+                0.0f, characterCenter, 1.5f, (enemy.SpriteRotation != 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1.0f);
             }
 
             /* ------------- Drawing Dropped Items -------------*/  
