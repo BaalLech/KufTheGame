@@ -27,7 +27,7 @@ namespace KufTheGame
         private int backroundPart;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Rectangle spriteFrame;
+        Rectangle playerSpriteFrame, enemySpriteFrame;
 
         public static List<Item> Drops { get; set; }
 
@@ -48,9 +48,6 @@ namespace KufTheGame
                 PreferredBackBufferHeight = 800,
                 //IsFullScreen = true
             };
-
-            //this.Enemies = new List<Enemy>();
-            //this.background = new Texture2D(this.graphics.GraphicsDevice, 800, 800);
 
             this.Content.RootDirectory = "Content";
         }
@@ -229,11 +226,11 @@ namespace KufTheGame
                     default: animationFrames = 0; break;
                 }
 
-                spriteFrame = new Rectangle((frameIndex % animationFrames) * 80, 140 * (int)Player.State, 80, 140);
+                playerSpriteFrame = new Rectangle((frameIndex % animationFrames) * 80, 140 * (int)Player.State, 80, 140);
             }
             else
             {
-                spriteFrame = new Rectangle(frameIndex % ((Player.State == State.Idle) ? (int)Frames.Idle : (int)Frames.Moving) * 80, 140 * (int)Player.State, 80, 140);
+                playerSpriteFrame = new Rectangle(frameIndex % ((Player.State == State.Idle) ? (int)Frames.Idle : (int)Frames.Moving) * 80, 140 * (int)Player.State, 80, 140);
             }
 
             base.Update(gameTime);
@@ -296,7 +293,7 @@ namespace KufTheGame
             /* ------------- Drawing Enemies -------------*/  
             foreach (var enemy in this.Enemies)
             {
-                spriteBatch.Draw(Content.Load<Texture2D>(enemy.GetTexturePath()), enemy.Velocity, spriteFrame, Color.White,
+                spriteBatch.Draw(Content.Load<Texture2D>(enemy.GetTexturePath()), enemy.Velocity, playerSpriteFrame, Color.White,
                 0.0f, characterCenter, 1.5f, (enemy.SpriteRotation != 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1.0f);
             }
 
@@ -307,9 +304,8 @@ namespace KufTheGame
             }
 
             /* ------------- Drawing Players -------------*/  
-            spriteBatch.Draw(this.Content.Load<Texture2D>(Player.GetTexturePath()), Player.Velocity, spriteFrame, Color.White,
+            spriteBatch.Draw(this.Content.Load<Texture2D>(Player.GetTexturePath()), Player.Velocity, playerSpriteFrame, Color.White,
                 0.0f, characterCenter, 1.5f, (Player.SpriteRotation == 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1.0f);
-
 
             this.spriteBatch.End();
 

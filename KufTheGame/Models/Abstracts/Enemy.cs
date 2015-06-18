@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using KufTheGame.Core;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models;
 using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
 using KufTheGame.Models.Structures;
+
 using Microsoft.Xna.Framework;
 
 
@@ -70,10 +72,9 @@ namespace KufTheGame.Models.Abstracts
 
         public override BasicAttack Attack()
         {
-            
-            var attack = new BasicAttack(this.AttackPoints);
-            
-                return attack;
+            this.State = (State) RandomGenerator.Randomize(2, 4);
+
+            return new BasicAttack(this.AttackPoints);
             
         }
 
