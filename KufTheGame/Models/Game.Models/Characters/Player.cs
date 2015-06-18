@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Configuration;
 using KufTheGame.Core;
@@ -9,6 +10,7 @@ using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
 using KufTheGame.Properties;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace KufTheGame.Models.Game.Models.Characters
@@ -23,17 +25,13 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         
 
-        public Player(Texture2D playerTexture, int x, int y, int width, int height, string name)
+        public Player(int x, int y, int width, int height, string name)
             : base(x, y, width, height, InitialAttackPoints, InitialDefencePoints, InitialHealthPoints)
         {
             this.Name = name;
             this.Lives = InitialLives;
             this.ArmorSet = new List<Armor>();
-            this.Texture = playerTexture;
-
         }
-
-        public Texture2D Texture { get; set; }
 
         public Weapon Weapon { get; set; }
 
@@ -45,22 +43,22 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void Draw(GameTime gameTime)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override void ProduceSound()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override int DrawOrder
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool Visible
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotImplementedException(); }
         }
 
         public override void Move()
@@ -204,7 +202,7 @@ namespace KufTheGame.Models.Game.Models.Characters
             }
             var attack = new BasicAttack(this.AttackPoints + wepDmg);
 
-            if (!this.IsAttackKeyPressed()) return null;
+            if (!IsAttackKeyPressed()) return null;
 
             this.State = (State)(RandomGenerator.Randomize(2, 4));
             return attack;
@@ -246,7 +244,7 @@ namespace KufTheGame.Models.Game.Models.Characters
             }
             else
             {
-                throw new ArmorException("You already have this armor type!");
+                //throw new ArmorException("You already have this armor type!");
             }
         }
 
@@ -255,21 +253,11 @@ namespace KufTheGame.Models.Game.Models.Characters
             //this.Armor = null;
         }
 
-        private bool IsAttackKeyPressed()
+        private static bool IsAttackKeyPressed()
         {
             var keys = KeyListener.GetKey();
 
-            switch (keys.Count())
-            {
-                case 1:
-                    switch (keys[0])
-                    {
-                        case PressedKey.Attack:
-                            return true;
-                    }
-                    break;
-            }
-            return false;
+            return (keys.Count() == 1) && (keys[0] == PressedKey.Attack);
         }
 
         public override string GetTexturePath()

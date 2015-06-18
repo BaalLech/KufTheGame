@@ -34,15 +34,10 @@ namespace KufTheGame.Models.Abstracts
 
         public virtual bool Contains(GameObject target)
         {
-            if (target.Velocity.X >= this.Velocity.X &&
-                target.Velocity.X <= this.Velocity.X + this.Width &&
-                target.Velocity.Y >= this.Velocity.Y &&
-                target.Velocity.Y <= this.Velocity.Y + this.Height)
-            {
-                return true;
-            }
-
-            return false;
+            return target.Velocity.X >= this.Velocity.X &&
+                   target.Velocity.X <= this.Velocity.X + this.Width &&
+                   target.Velocity.Y >= this.Velocity.Y &&
+                   target.Velocity.Y <= this.Velocity.Y + this.Height;
         }
 
         public abstract string GetTexturePath();

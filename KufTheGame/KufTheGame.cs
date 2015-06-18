@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Game.Models.Obsticles;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace KufTheGame
 {
@@ -33,6 +29,7 @@ namespace KufTheGame
         private SpriteFont gameFont;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Rectangle spriteFrame;
 
         public static List<Item> Drops { get; set; }
 
@@ -73,14 +70,10 @@ namespace KufTheGame
             backroundPart = 0;
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
-            Player = new Player(Content.Load<Texture2D>("Characters/Players/PlayerSprite"), 100, 500, 57, 100, "Pesho");
-            this.Enemies.Add(new Mage(1000, 500, 57, 100, 10, 10, 100));
-            this.Enemies.Add(new Mage(1000, 500, 57, 100, 10, 10, 100));
-            this.Enemies.Add(new Mage(1000, 500, 57, 100, 10, 10, 100));
-            //this.Enemies.Add(new Mage(200, 900, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(200, 550, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(200, 600, 150, 150, 10, 10, 100));
-            //this.Enemies.Add(new Mage(200, 800, 150, 150, 10, 10, 100));
+            Player = new Player(100, 500, 57, 100, "Pesho");
+            this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
 
             this.Objects = new List<Obsticle>
             {
@@ -89,11 +82,6 @@ namespace KufTheGame
                 new Boundary(0, ScreenHeight - FieldHeight, 10, FieldHeight),
                 new Boundary(0, ScreenHeight, FieldWidth, 10)
             };
-
-
-
-
-
 
             base.Initialize();
         }
@@ -127,62 +115,27 @@ namespace KufTheGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (this.timer != 0)
+            if (Enemies.Count == 0) //Background is changing only if all enemies are killed
             {
-                this.timer -= 1;
-            }
-            else
-            {
-                this.timer = 500;
                 this.backroundPart = (this.backroundPart + 1) % 3;
+                this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
+                this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
+                this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
             }
 
-            //I did this just to test how HP bar is going to look like /it's crap (puke)/
-            //if (Player.HealthPoints >= 1)
-            //{
-            //    Player.HealthPoints -= 1;
-            //}
-            //else if (Player.Lives > 1)
-            //{
-            //    Player.RemoveLive();
-            //    Player.HealthPoints = 50;
-            //}
-            //else
-            //{
-            //    Player.Lives = 0;
-            //}
-
-            //TODO Validation for character location
-            #region //* ------------- MOVING CHARACTER ------------- *//
-
-            //var keyboardState = Keyboard.GetState();
-            //if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
-            //{
-            //    // Move Up
-            //    this.player.Y -= 1;
-            //}
-            //if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
-            //{
-            //    // Move Down
-            //    this.player.Y += 1;
-            //}
-            //if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
-            //{
-            //    // Move left
-            //    this.player.X -= 1;
-            //}
-            //if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
-            //{
-            //    // Move right
-            //}
-            //Player.Attack();
-
-
-            foreach (var enemy in this.Enemies)
+            //Check for Intersection between Player and Enemies
+            foreach (var enemy in this.Enemies) 
             {
                 Player.Intersect(enemy);
             }
 
+            //Enemy attacks when Player is in range
+            foreach (var enemyAttack in from enemy in this.Enemies where enemy.InAttackRange(Player) select enemy.Attack())
+            {
+                Player.RespondToAttack(enemyAttack);
+            }
+
+            //Check for Intersection between Player and Objects
             foreach (var obj in Objects)
             {
                 Player.Intersect(obj);
@@ -190,9 +143,46 @@ namespace KufTheGame
 
             Player.Move();
             Player.ResetDirections();
+            var attack = Player.Attack();
 
+            if (attack != null)
+            {
+                for (var i = 0; i < this.Enemies.Count; i++)
+                {
+                    var enemy = this.Enemies[i];
+                    if (!Player.InAttackRange(enemy)) continue;
 
-            //this.Enemies.ForEach(e => e.Move());
+                    enemy.RespondToAttack(attack);
+                    //using (var writer = new StreamWriter("../../../result.txt"))
+                    //{
+                    //    writer.WriteLine(enemy.HealthPoints);
+                    //}
+
+                    if (enemy.IsAlive()) continue;
+
+                    enemy.AddDrops();
+                    foreach (var drop in enemy.Drops)
+                    {
+                        drop.Drop();
+                    }
+
+                    this.Enemies.Remove(enemy);
+                }
+            }
+
+            //Collecting dropped item
+            for (var i = 0; i < Drops.Count; i++)
+            {
+                if (!Drops[i].Contains(Player)) continue;
+                var item = Drops[i];
+                //using (var writer = new StreamWriter("../../../result.txt"))
+                //{
+                //    writer.WriteLine(item.ToString());
+                //}
+
+                item.Use(Player);
+                Drops.Remove(item);
+            }
 
             if (this.Enemies.Count > 0)
             {
@@ -202,33 +192,24 @@ namespace KufTheGame
                 this.Enemies[0].ResetDirections();
             }
 
-
-
-
-            #endregion
-
-            time += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            while (time > FrameTime)
+            time += (float)gameTime.ElapsedGameTime.TotalSeconds; //Adding Elapsed Time From Last Loop
+            while (time > FrameTime) //Checks is the Elapsed time higher than 0.1 seconds
             {
-                // Play the next frame in the SpriteSheet
                 frameIndex += 1;
-                if (attackFrames > 0)
+                if (attackFrames > 0) //Checks is the Attack Animation is Loaded
                 {
                     attackFrames--;
 
-                    if (attackFrames == 0)
+                    if (attackFrames == 0) //If the Attack Animaniton is over return Player to Idle State
                     {
                         Player.State = State.Idle;
                     }
                 }
-                // reset elapsed time
-                time = 0F;
+
+                time = 0F; // Reset Elapsed Time
             }
 
-            if (frameIndex == int.MaxValue)
-            {
-                frameIndex = 0;
-            }
+            frameIndex %= int.MaxValue; //Ensure That frameIndex will not overflow
 
             if ((Player.State == State.YodaStrikePunch) || (Player.State == State.WingedHorseKick) || (Player.State == State.TeethOfTigerThrow) || (attackFrames > 0))
             {
@@ -242,13 +223,25 @@ namespace KufTheGame
                         default : attackFrames = 0; break;
                     }
                 }
-                else if (((attackFrames == 0) && ((Player.State == State.Idle) || (Player.State == State.Moving))))
-                {
-                    Player.State = State.Idle;
-                }
             }
 
+            if ((attackFrames != 0) && ((Player.State == State.YodaStrikePunch) || (Player.State == State.WingedHorseKick) || (Player.State == State.TeethOfTigerThrow)))
+            {
+                int animationFrames;
+                switch (Player.State)
+                {
+                    case State.YodaStrikePunch: animationFrames = (int)Frames.YodaStrikePunch; break;
+                    case State.WingedHorseKick: animationFrames = (int)Frames.WingedHorseKick; break;
+                    case State.TeethOfTigerThrow: animationFrames = (int)Frames.TeethOfTigerThrow; break;
+                    default: animationFrames = 0; break;
+                }
 
+                spriteFrame = new Rectangle((frameIndex % animationFrames) * 80, 140 * (int)Player.State, 80, 140);
+            }
+            else
+            {
+                spriteFrame = new Rectangle(frameIndex % ((Player.State == State.Idle) ? (int)Frames.Idle : (int)Frames.Moving) * 80, 140 * (int)Player.State, 80, 140);
+            }
 
             base.Update(gameTime);
         }
@@ -259,22 +252,16 @@ namespace KufTheGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            this.spriteBatch.Begin();
-
-
-
-            this.spriteBatch.Draw(this.background, new Rectangle((this.backroundPart * (-1000)), 0, 3072, 800), Color.White);
-
-            #region //* ------------- CREATING DRAWING PEN ------------- *//
-
-            var pen = new Texture2D(this.graphics.GraphicsDevice, 1, 1);
+            const int stashItemSize = 35, stashSize = 5;
+            var characterCenter = new Vector2(40, 70); //Characters' sprite center coordinates
+            var pen = new Texture2D(this.graphics.GraphicsDevice, 1, 1); //Drawing pen for Game HUD
             pen.SetData(new[] { Color.White });
 
-            #endregion
+            this.GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.spriteBatch.Begin();
 
-            #region //* ------------- DRAWING CHARACTER INFO ------------- *//
+            /* ------------- Drawing Background -------------*/
+            this.spriteBatch.Draw(this.background, new Rectangle((this.backroundPart * (-1000)), 0, 3072, 800), Color.White);
 
             /* ------------- Drawing Players' HUD Lives -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(0, 0, 220, 120), new Color(Color.Black, 0.8F));
@@ -288,122 +275,47 @@ namespace KufTheGame
             /* ------------- Drawing Players' HUD HealthBar -------------*/
             this.spriteBatch.Draw(pen, new Rectangle(5, 50, 200 - (int)(Player.BaseHealthPoints - (int)Player.HealthPoints) * 4, 20), Color.Red);
 
-            /* ------------- Drawing Players' HUD Stash -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 73, 200, 40), Color.DarkGreen);
+            /* ------------- Drawing Players' HUD Stash Background -------------*/
+            this.spriteBatch.Draw(pen, new Rectangle(5, 73, 200, 40), Color.Yellow);
 
-            this.spriteBatch.Draw(pen, new Rectangle(7, 75, 35, 35), Color.DarkBlue);
-            this.spriteBatch.Draw(pen, new Rectangle(47, 75, 35, 35), Color.DarkBlue);
-            this.spriteBatch.Draw(pen, new Rectangle(87, 75, 35, 35), Color.DarkBlue);
-            this.spriteBatch.Draw(pen, new Rectangle(127, 75, 35, 35), Color.DarkBlue);
-            this.spriteBatch.Draw(pen, new Rectangle(167, 75, 35, 35), Color.DarkBlue);
-
-            /* ------------- Drawing Players' HUD Items -------------*/
-            this.spriteBatch.Draw(this.weapon, new Rectangle(7, 75, 35, 35), Color.White);
-            #endregion
-
-            #region //* ------------- DRAWING CHARACTER ------------- *//
-            //this.spriteBatch.Draw(pen, new Rectangle((int)this.player.Velocity.X, (int)this.player.Velocity.Y, 20, 20), Color.LightGreen);
-            #endregion
-
-
-            var attack = Player.Attack();
-            if (attack != null)
+            /* ------------- Drawing Players' HUD Stash Pockets -------------*/
+            for (var stashPocket = 0; stashPocket < stashSize; stashPocket++)
             {
-                this.spriteBatch.Draw(pen, new Rectangle(500, 100, 150, 150), Color.Red);
-                for (int i = 0; i < this.Enemies.Count; i++)
+                this.spriteBatch.Draw(pen, new Rectangle(7 + (stashPocket * stashItemSize) + (stashPocket * 5), 75, stashItemSize, stashItemSize), Color.Black);
+            }
+
+            /* ------------- Drawing Players' Weapon -------------*/          
+            if (Player.Weapon != null)
+            {
+                this.spriteBatch.Draw(Content.Load<Texture2D>(Player.Weapon.GetTexturePath()), new Rectangle(7, 75, stashItemSize, stashItemSize), Color.White);
+            }
+
+            /* ------------- Drawing Players' Armor Items -------------*/  
+            if (Player.ArmorSet.Count != 0)
+            {
+                for (var itemNumber = 0; itemNumber < Player.ArmorSet.Count; itemNumber++)
                 {
-                    var enemy = this.Enemies[i];
-                    if (Player.InAttackRange(enemy))
-                    {
-                        enemy.RespondToAttack(attack);
-                        this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X - 500, (int)enemy.Velocity.Y, 150, 150), Color.Red);
-                        //using (var writer = new StreamWriter("../../../result.txt"))
-                        //{
-                        //    writer.WriteLine(enemy.HealthPoints);
-                        //}
-
-                        if (!enemy.IsAlive())
-                        {
-                            enemy.AddDrops();
-                            foreach (var drop in enemy.Drops)
-                            {
-                                drop.Drop();
-                            }
-
-                            this.Enemies.Remove(enemy);
-                        }
-                    }
+                    this.spriteBatch.Draw(Content.Load<Texture2D>(Player.ArmorSet[itemNumber].GetTexturePath()),
+                        new Rectangle(47 + (itemNumber * stashItemSize) + (itemNumber * 5), 75, stashItemSize, stashItemSize), Color.White);
                 }
             }
 
-            for (int i = 0; i < Drops.Count; i++)
-            {
-                if (Drops[i].Contains(Player))
-                {
-                    var item = Drops[i];
-                    //using (var writer = new StreamWriter("../../../result.txt"))
-                    //{
-                    //    writer.WriteLine(item.ToString());
-                    //}
-
-                    item.Use(Player);
-                    Drops.Remove(item);
-                }
-
-            }
-
+            /* ------------- Drawing Enemies -------------*/  
             foreach (var enemy in this.Enemies)
             {
-                if (enemy.InAttackRange(Player))
-                {
-                    var attack1 = enemy.Attack();
-                    Player.RespondToAttack(attack1);
-                }
+                this.spriteBatch.Draw(Content.Load<Texture2D>(enemy.GetTexturePath()), new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 57, 100),
+                    Color.White);
             }
 
-
-            //DRAWING ELEMENTS
-            foreach (var enemy in this.Enemies)
-            {
-                this.spriteBatch.Draw(pen, new Rectangle((int)enemy.Velocity.X, (int)enemy.Velocity.Y, 57, 100),
-                    Color.Red);
-            }
-
+            /* ------------- Drawing Dropped Items -------------*/  
             foreach (var drop in Drops)
             {
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(drop.GetTexturePath()), new Rectangle((int)drop.Velocity.X, (int)drop.Velocity.Y, 50, 50), Color.White);
             }
 
-            Rectangle source;
-            if ((attackFrames != 0) && ((Player.State == State.YodaStrikePunch) || (Player.State == State.WingedHorseKick) || (Player.State == State.TeethOfTigerThrow)))
-            {
-                int animationFrames;
-                switch (Player.State)
-                {
-                    case State.YodaStrikePunch: animationFrames = (int)Frames.YodaStrikePunch; break;
-                    case State.WingedHorseKick: animationFrames = (int)Frames.WingedHorseKick; break;
-                    case State.TeethOfTigerThrow: animationFrames = (int)Frames.TeethOfTigerThrow; break;
-                    default: animationFrames = 0; break;
-                }
-
-                source = new Rectangle((frameIndex % animationFrames) * 80, 140 * (int)Player.State, 80, 140);
-            }
-            else
-            {
-                source = new Rectangle(frameIndex % ((Player.State == State.Idle) ? (int)Frames.Idle : (int)Frames.Moving) * 80, 140 * (int)Player.State, 80, 140);
-            }
-
-            Vector2 origin = new Vector2(40, 70);
-            spriteBatch.Draw(this.Content.Load<Texture2D>(Player.GetTexturePath()),
-                Player.Velocity,
-                source,
-                Color.White,
-                0.0f,
-                origin,
-                1.5f,
-                (Player.SpriteRotation == 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
-                1.0f
-                );
+            /* ------------- Drawing Players -------------*/  
+            spriteBatch.Draw(this.Content.Load<Texture2D>(Player.GetTexturePath()), Player.Velocity, spriteFrame, Color.White,
+                0.0f, characterCenter, 1.5f, (Player.SpriteRotation == 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1.0f);
 
 
             this.spriteBatch.End();
