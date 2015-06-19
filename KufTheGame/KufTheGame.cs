@@ -16,10 +16,10 @@ namespace KufTheGame
     public class KufTheGame : Game
     {
         public const int ItemSize = 35;
-        public const int FieldWidth = 1000;
-        public const int FieldHeight = 450;
-        public const int ScreenWidth = 1000;
-        public const int ScreenHeight = 750;
+        public const int FieldWidth = 1050;
+        public const int FieldHeight = 400;
+        public const int ScreenWidth = 1050;
+        public const int ScreenHeight = 800;
         private const float FrameTime = 0.1f;
 
         private float time;
