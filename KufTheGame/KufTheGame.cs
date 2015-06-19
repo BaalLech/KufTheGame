@@ -23,7 +23,7 @@ namespace KufTheGame
         private const float FrameTime = 0.1f;
 
         private float time;
-        private int frameIndex, attackFrames;
+        private int frameIndex, attackFrames, enemyAttackFrames;
         private int backroundPart;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -46,7 +46,7 @@ namespace KufTheGame
             {
                 PreferredBackBufferWidth = 1000,
                 PreferredBackBufferHeight = 800,
-                //IsFullScreen = true
+                IsFullScreen = true
             };
 
             this.Content.RootDirectory = "Content";
@@ -63,10 +63,10 @@ namespace KufTheGame
             backroundPart = 0;
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
-            Player = new Player(100, 500, 57, 100, "Pesho");
-            this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
-            this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
-            this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
+            Player = new Player(100, 500, 57, 100, "KUF THE HERO");
+            this.Enemies.Add(new StickmanNinja(1000, 500, 80, 140, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1000, 500, 80, 140, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1000, 500, 80, 140, 10, 10, 100));
 
             this.Objects = new List<Obsticle>
             {

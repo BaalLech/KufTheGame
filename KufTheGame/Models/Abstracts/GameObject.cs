@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Abstracts
 {
-    public abstract class GameObject : IGameObject, IDrawable, ISoundable
+    public abstract class GameObject : IGameObject, ISoundable
     {
         public event EventHandler<EventArgs> DrawOrderChanged;
         public event EventHandler<EventArgs> VisibleChanged;

@@ -106,6 +106,15 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backgrounds/SplashScreen.
+        /// </summary>
+        internal static string Background_SplashScreenCompany {
+            get {
+                return ResourceManager.GetString("Background_SplashScreenCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Characters/Players/PlayerSprite.
         /// </summary>
         internal static string Character_PlayerTexture {
