@@ -8,17 +8,17 @@ namespace KufTheGame.Core
 {
     public static class RandomGenerator
     {
+        private static  readonly Random rngJesus = new Random();
+
         public static int Randomize(int lower, int upper)
         {
-            var rngJesus = new Random();
             return rngJesus.Next(lower, upper + 1);
         }
 
         public static T GetRandomItem<T>()
         {
-            Random rng = new Random();
             Array values = Enum.GetValues(typeof(T));
-            T randomItem = (T)values.GetValue(rng.Next(values.Length));
+            var randomItem = (T)values.GetValue(Randomize(0, values.Length - 1));
 
             return randomItem;
         }

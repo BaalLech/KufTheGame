@@ -143,10 +143,6 @@ namespace KufTheGame
                     if (!Player.InAttackRange(enemy)) continue;
 
                     enemy.RespondToAttack(attack);
-                    //using (var writer = new StreamWriter("../../../result.txt"))
-                    //{
-                    //    writer.WriteLine(enemy.HealthPoints);
-                    //}
 
                     if (!enemy.IsAlive())
                     {

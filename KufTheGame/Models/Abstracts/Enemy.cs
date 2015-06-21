@@ -99,7 +99,6 @@ namespace KufTheGame.Models.Abstracts
                 var item = GetItem(i);
                 this.Drops.Add(item);
             }
-
         }
 
         private int GetNumOfDrops()
@@ -107,7 +106,7 @@ namespace KufTheGame.Models.Abstracts
             var rngNum = RandomGenerator.Randomize(0, 100);
 
             var numOfDrop = 0;
-            if (rngNum > 71 && rngNum <= 90)
+            if (rngNum > 20 && rngNum <= 90)
             {
                 numOfDrop = 1;
             }
@@ -117,7 +116,7 @@ namespace KufTheGame.Models.Abstracts
                 numOfDrop = 2;
             }
 
-            return 2;//numOfDrop;
+            return numOfDrop;
         }
 
         private Item GetItem(int numOfItems)
@@ -126,10 +125,10 @@ namespace KufTheGame.Models.Abstracts
             var rarity = Rarity.GetRandomRarity();
             var rarityType = rarity.Keys.First();
             var rarityCoef = rarity.Values.First();
-            var dropX = (int) this.Velocity.X + this.Width/(2 - numOfItems) - KufTheGame.ItemSize/2;
+            var dropX = (int)this.Velocity.X + this.Width / (2 - numOfItems) - KufTheGame.ItemSize / 2;
             var dropY = (int) this.Velocity.Y + this.Height/2 - KufTheGame.ItemSize/2;
 
-            if (rngNum <= 20)
+            if (rngNum <= 25)
             {
                 var weaponType = RandomGenerator.GetRandomItem<Weapons>();
                 var wep = new Weapon(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
@@ -137,7 +136,7 @@ namespace KufTheGame.Models.Abstracts
                 return wep;
             }
 
-            if (rngNum > 20 && rngNum <= 70)
+            if (rngNum > 25 && rngNum <= 65)
             {
                 var armorType = RandomGenerator.GetRandomItem<Armors>();
                 var armor = new Armor(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
@@ -145,17 +144,18 @@ namespace KufTheGame.Models.Abstracts
                 return armor;
             }
 
-            if (rngNum > 70)
+            if (rngNum > 65)
             {
-                var rngPotionNum = RandomGenerator.Randomize(1, 2);
-                if (rngPotionNum == 1)
+                var rngPotionNum = RandomGenerator.Randomize(1, 100);
+                if (rngPotionNum <= 40)
                 {
                     var potion = new ImmortalilyPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize,
                         rarityType,
-                        300*(int) rarityCoef);
+                        150*(int) rarityCoef);
                     return potion;
                 }
-                else
+
+                if (rngPotionNum > 40)
                 {
                     var potion = new HealthPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
                         10*rarityCoef);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using KufTheGame.Core;
@@ -253,7 +254,8 @@ namespace KufTheGame.Models.Game.Models.Characters
                 var currArmor = ArmorSet.Find(t => t.ArmorType == armor.ArmorType);
                 if (currArmor.DefencePoints < armor.DefencePoints)
                 {
-                    this.SetArmor(armor);
+                    this.ArmorSet.Remove(currArmor);
+                    this.ArmorSet.Add(armor);
                 }
             }
         }
