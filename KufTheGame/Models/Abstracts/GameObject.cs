@@ -6,9 +6,6 @@ namespace KufTheGame.Models.Abstracts
 {
     public abstract class GameObject : IGameObject, ISoundable
     {
-        public event EventHandler<EventArgs> DrawOrderChanged;
-        public event EventHandler<EventArgs> VisibleChanged;
-
         protected GameObject(int x, int y, int width, int height)
         {
             this.Velocity = new Vector2(x, y);
@@ -22,15 +19,9 @@ namespace KufTheGame.Models.Abstracts
 
         public int Height { get; set; }
 
-        public abstract int DrawOrder { get; }
-
-        public abstract bool Visible { get; }
-
-        // Image
-
-        public abstract void Draw(GameTime gameTime);
-
         public abstract void ProduceSound();
+
+        public abstract string GetTexturePath();
 
         public virtual bool Contains(GameObject target)
         {
@@ -39,7 +30,5 @@ namespace KufTheGame.Models.Abstracts
                    target.Velocity.Y >= this.Velocity.Y &&
                    target.Velocity.Y <= this.Velocity.Y + this.Height;
         }
-
-        public abstract string GetTexturePath();
     }
 }

@@ -82,7 +82,7 @@ namespace KufTheGame.Models.Abstracts
 
         public override void RespondToAttack(BasicAttack attack)
         {
-            
+            attack.Hit(this);
         }
 
         public override void ProduceSound()
@@ -96,7 +96,7 @@ namespace KufTheGame.Models.Abstracts
 
             for (var i = 0; i < rngNum; i++)
             {
-                var item = GetItem();
+                var item = GetItem(i);
                 this.Drops.Add(item);
             }
 
@@ -117,47 +117,53 @@ namespace KufTheGame.Models.Abstracts
                 numOfDrop = 2;
             }
 
-            return numOfDrop;
+            return 2;//numOfDrop;
         }
 
-        private Item GetItem()
+        private Item GetItem(int numOfItems)
         {
-            var rngNum = RandomGenerator.Randomize(1, 3);
+            var rngNum = RandomGenerator.Randomize(1, 100);
             var rarity = Rarity.GetRandomRarity();
             var rarityType = rarity.Keys.First();
             var rarityCoef = rarity.Values.First();
-            var dropX = (int)this.Velocity.X + this.Width / 2 - KufTheGame.ItemSize / 2;
-            var dropY = (int)this.Velocity.Y + this.Height / 2 - KufTheGame.ItemSize / 2;
+            var dropX = (int) this.Velocity.X + this.Width/(2 - numOfItems) - KufTheGame.ItemSize/2;
+            var dropY = (int) this.Velocity.Y + this.Height/2 - KufTheGame.ItemSize/2;
 
-            switch (rngNum)
+            if (rngNum <= 20)
             {
-                case 1:
-                    var weaponType = RandomGenerator.GetRandomItem<Weapons>();
-                    var wep = new Weapon(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
-                        weaponType, 10 * rarityCoef);
-                    return wep;
-                case 2:
-                    var armorType = RandomGenerator.GetRandomItem<Armors>();
-                    var armor = new Armor(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
-                        armorType, 5 * rarityCoef);
-                    return armor;
-                case 3:
-                    var rngPotionNum = RandomGenerator.Randomize(1, 2);
-                    if (rngPotionNum == 1)
-                    {
-                        var potion = new HealthPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
-                            25 * rarityCoef);
-                        return potion;
-                    }
-                    else
-                    {
-                        var potion = new ImmortalilyPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
-                            5 * (int)rarityCoef + 1);
-                        return potion;
-                    }
-                default:
-                    return null;
+                var weaponType = RandomGenerator.GetRandomItem<Weapons>();
+                var wep = new Weapon(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
+                    weaponType, 10*rarityCoef);
+                return wep;
             }
+
+            if (rngNum > 20 && rngNum <= 70)
+            {
+                var armorType = RandomGenerator.GetRandomItem<Armors>();
+                var armor = new Armor(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
+                    armorType, 5*rarityCoef);
+                return armor;
+            }
+
+            if (rngNum > 70)
+            {
+                var rngPotionNum = RandomGenerator.Randomize(1, 2);
+                if (rngPotionNum == 1)
+                {
+                    var potion = new ImmortalilyPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize,
+                        rarityType,
+                        300*(int) rarityCoef);
+                    return potion;
+                }
+                else
+                {
+                    var potion = new HealthPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
+                        10*rarityCoef);
+                    return potion;
+                }
+            }
+
+            return null;
         }
 
         public override abstract string GetTexturePath();

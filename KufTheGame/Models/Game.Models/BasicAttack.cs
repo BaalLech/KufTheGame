@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using KufTheGame.Models.Abstracts;
+using KufTheGame.Models.Game.Models.Characters;
+using KufTheGame.Models.Game.Models.Items;
 
 namespace KufTheGame.Models.Game.Models
 {
@@ -16,13 +18,22 @@ namespace KufTheGame.Models.Game.Models
 
         public void Hit(Character target)
         {
-            var damage = this.Damage * 2 - target.DefencePoints;
-            if (damage < this.Damage / 10d)
+            var player = target as Player;
+            var armor = player != null ? player.GetTotalArmor() : target.DefencePoints;
+
+            var damage = (this.Damage) / armor;
+            if (damage < this.Damage / 100d)
             {
-                damage = this.Damage / 10d;
+                damage = this.Damage / 100d;
             }
 
             target.HealthPoints -= damage;
+
+            if (target.HealthPoints <= 0)
+            {
+                target.RemoveLive();
+                target.HealthPoints = target.BaseHealthPoints;
+            }
         }
     }
 }

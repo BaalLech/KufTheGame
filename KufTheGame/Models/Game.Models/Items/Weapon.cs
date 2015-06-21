@@ -22,24 +22,9 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public double AttackPoints { get; set; }
 
-        public override void Draw(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override void ProduceSound()
         {
             throw new System.NotImplementedException();
-        }
-
-        public override int DrawOrder
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public override bool Visible
-        {
-            get { throw new System.NotImplementedException(); }
         }
 
         public override void Use(Player target)

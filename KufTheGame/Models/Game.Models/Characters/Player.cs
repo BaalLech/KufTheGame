@@ -5,6 +5,7 @@ using System.Linq;
 using KufTheGame.Core;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
+using KufTheGame.Models.Exceptions;
 using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
 using KufTheGame.Properties;
@@ -39,24 +40,9 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public int ImmortalDuration { get; set; }
 
-        public override void Draw(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void ProduceSound()
         {
             throw new NotImplementedException();
-        }
-
-        public override int DrawOrder
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override bool Visible
-        {
-            get { throw new NotImplementedException(); }
         }
 
         public override void Move()
@@ -198,11 +184,16 @@ namespace KufTheGame.Models.Game.Models.Characters
             {
                 wepDmg = this.Weapon.AttackPoints;
             }
+
             var attack = new BasicAttack(this.AttackPoints + wepDmg);
 
-            if (!IsAttackKeyPressed()) return null;
+            if (!IsAttackKeyPressed())
+            {
+                return null;
+            }
 
             this.State = (State)(RandomGenerator.Randomize(2, 4));
+
             return attack;
         }
 
@@ -214,19 +205,29 @@ namespace KufTheGame.Models.Game.Models.Characters
                 return;
             }
 
-            var totalDef = this.DefencePoints + this.ArmorSet.Sum(a => a.DefencePoints);
-            double damage = (attack.Damage * 2 / totalDef);
-            this.HealthPoints -= damage;
-            if (this.HealthPoints <= 0)
-            {
-                this.RemoveLive();
-                this.HealthPoints = this.BaseHealthPoints;
-            }
+            attack.Hit(this);
         }
 
         public void SetWeapon(Weapon weapon)
         {
-            this.Weapon = weapon;
+            try
+            {
+                if (this.Weapon == null)
+                {
+                    this.Weapon = weapon;
+                }
+                else
+                {
+                    throw new WeaponException("You already have weapon");
+                }
+            }
+            catch (WeaponException ex)
+            {
+                if (this.Weapon.AttackPoints < weapon.AttackPoints)
+                {
+                    this.Weapon = weapon;
+                }
+            }
         }
 
         public void RemoveWeapon()
@@ -236,14 +237,38 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public void SetArmor(Armor armor)
         {
-            if (ArmorSet.All(t => t.ArmorType != armor.ArmorType))
+            try
             {
-                this.ArmorSet.Add(armor);
+                if (ArmorSet.All(t => t.ArmorType != armor.ArmorType))
+                {
+                    this.ArmorSet.Add(armor);
+                }
+                else
+                {
+                    throw new ArmorException("You already have this armor type!");
+                }
             }
-            else
+            catch (ArmorException ex)
             {
-                //throw new ArmorException("You already have this armor type!");
+                var currArmor = ArmorSet.Find(t => t.ArmorType == armor.ArmorType);
+                if (currArmor.DefencePoints < armor.DefencePoints)
+                {
+                    this.SetArmor(armor);
+                }
             }
+        }
+
+        public double GetTotalArmor()
+        {
+            var armor = this.DefencePoints;
+            this.ArmorSet.ForEach(a => armor += a.DefencePoints);
+
+            return armor;
+        }
+
+        public override string GetTexturePath()
+        {
+            return Resources.Character_PlayerTexture;
         }
 
         public void RemoveArmor()
@@ -256,11 +281,6 @@ namespace KufTheGame.Models.Game.Models.Characters
             var keys = KeyListener.GetKey();
 
             return (keys.Count() == 1) && (keys[0] == PressedKey.Attack);
-        }
-
-        public override string GetTexturePath()
-        {
-            return Resources.Character_PlayerTexture;
         }
     }
 }

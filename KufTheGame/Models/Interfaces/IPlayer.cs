@@ -19,5 +19,7 @@ namespace KufTheGame.Models.Interfaces
         void SetArmor(Armor armor);
 
         void RemoveArmor();
+
+        double GetTotalArmor();
     }
 }

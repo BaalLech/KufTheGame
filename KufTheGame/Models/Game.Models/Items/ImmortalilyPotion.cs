@@ -20,24 +20,9 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public int Duration { get; set; }
 
-        public override void Draw(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void ProduceSound()
         {
             throw new NotImplementedException();
-        }
-
-        public override int DrawOrder
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override bool Visible
-        {
-            get { throw new NotImplementedException(); }
         }
 
         public override void Use(Player target)

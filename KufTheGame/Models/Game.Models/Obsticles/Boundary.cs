@@ -12,21 +12,7 @@ namespace KufTheGame.Models.Game.Models.Obsticles
         {
             
         }
-        public override int DrawOrder
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override bool Visible
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public override void ProduceSound()
         {
             throw new NotImplementedException();

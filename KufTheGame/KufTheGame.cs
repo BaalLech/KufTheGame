@@ -148,15 +148,16 @@ namespace KufTheGame
                     //    writer.WriteLine(enemy.HealthPoints);
                     //}
 
-                    if (enemy.IsAlive()) continue;
-
-                    enemy.AddDrops();
-                    foreach (var drop in enemy.Drops)
+                    if (!enemy.IsAlive())
                     {
-                        drop.Drop();
-                    }
+                        enemy.AddDrops();
+                        foreach (var drop in enemy.Drops)
+                        {
+                            drop.Drop();
+                        }
 
-                    this.Enemies.Remove(enemy);
+                        this.Enemies.Remove(enemy);
+                    }
                 }
             }
 

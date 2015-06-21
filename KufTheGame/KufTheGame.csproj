@@ -59,6 +59,7 @@
     <Compile Include="Models\Enums\State.cs" />
     <Compile Include="Models\Enums\Weapons.cs" />
     <Compile Include="Models\Exceptions\ArmorException.cs" />
+    <Compile Include="Models\Exceptions\WeaponException.cs" />
     <Compile Include="Models\Game.Models\BasicAttack.cs" />
     <Compile Include="Models\Game.Models\Characters\StickmanNinja.cs" />
     <Compile Include="Models\Game.Models\Characters\Player.cs" />

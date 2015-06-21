@@ -53,9 +53,9 @@ namespace KufTheGame.Models.Abstracts
 
         public bool IsAlive()
         {
-            if (this.Lives > 1)
+            if (this.Lives <= 0)
             {
-                return true;
+                return false;
             }
 
             return this.HealthPoints > 0;
@@ -84,10 +84,12 @@ namespace KufTheGame.Models.Abstracts
                     return attackRange2;
                 }
             }
+
             if (target is IPlayer)
             {
                 return attackRange1 || attackRange2;
             }
+
             return false;
         }
 
