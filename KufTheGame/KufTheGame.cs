@@ -9,7 +9,9 @@ using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Game.Models.Obsticles;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace KufTheGame
 {
@@ -26,6 +28,9 @@ namespace KufTheGame
 
         private bool lavelChanged;
         private int backroundPart, barSize, slider;
+        private SoundEffect kickSound;
+        private SoundEffect dropSound;
+        private int counter;
         private FrameHandler frameHandler;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -94,6 +99,14 @@ namespace KufTheGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+
+            //Load Sounds
+            kickSound = Content.Load<SoundEffect>("Sounds/kick");
+            dropSound = Content.Load<SoundEffect>("Sounds/drop");
+            // Load background music
+            Song song = Content.Load<Song>("Sounds/backgroundMusic");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -173,6 +186,19 @@ namespace KufTheGame
 
             if (attack != null)
             {
+                if (counter < (int)Frames.YodaStrikePunch)
+                {
+                    counter++;
+                }
+                if (counter == 1)
+                {
+                    kickSound.Play();
+                }
+                if (counter == (int)Frames.YodaStrikePunch)
+                {
+                    counter = 0;
+                }
+
                 for (var i = 0; i < this.Enemies.Count; i++)
                 {
                     var enemy = this.Enemies[i];
@@ -190,6 +216,7 @@ namespace KufTheGame
                     foreach (var drop in enemy.Drops)
                     {
                         drop.Drop();
+                        dropSound.Play();
                     }
 
                     this.Enemies.Remove(enemy);
