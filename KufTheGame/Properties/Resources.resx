@@ -153,6 +153,14 @@
     <value>Fonts/GameFont</value>
     <comment>Path Where Font is Located</comment>
   </data>
+  <data name="HUD_DragonTexture" xml:space="preserve">
+    <value>HUD/Dragon</value>
+    <comment>Path Where Image is Located</comment>
+  </data>
+  <data name="HUD_HeartTexture" xml:space="preserve">
+    <value>HUD/Heart</value>
+    <comment>Path Where Image is Located</comment>
+  </data>
   <data name="Potion_HealthPotionTexture" xml:space="preserve">
     <value>Items/Potions/HealthPotion</value>
     <comment>Path Where Sprite is Located</comment>

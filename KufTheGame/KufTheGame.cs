@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using KufTheGame.Core;
 using KufTheGame.Properties;
@@ -23,9 +24,8 @@ namespace KufTheGame
         public const int ScreenWidth = 1050;
         public const int ScreenHeight = 850;
 
+        private int backroundPart, barSize;
         private FrameHandler frameHandler;
-        //private int frameIndex, playerAttackFrames, enemyAttackFrames;
-        private int backroundPart;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -68,6 +68,7 @@ namespace KufTheGame
             this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
             this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
 
+            barSize = 167 / Enemies.Count - Enemies.Count * 2;
             this.Objects = new List<Obsticle>
             {
                 new Boundary(0, ScreenHeight - FieldHeight, FieldWidth, 10),
@@ -113,8 +114,9 @@ namespace KufTheGame
                 this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
                 this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
                 this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
-            }
 
+                barSize = 167 / Enemies.Count - Enemies.Count * 2;
+            }
             if (this.Enemies.Count > 0)
             {
                 var movingEnemy = this.Enemies[0];
@@ -217,44 +219,129 @@ namespace KufTheGame
 
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
             this.spriteBatch.Begin();
-
+            
             /* ------------- Drawing Background -------------*/
             this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Background_BackgroundTexture), new Rectangle((this.backroundPart * (-1000)), 0, 3072, 800), Color.White);
 
-            /* ------------- Drawing Players' HUD Lives -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(0, 0, 220, 120), new Color(Color.Black, 0.8F));
+            //Drawing HUD Background
+            this.spriteBatch.Draw(pen, new Rectangle(0, 0, ScreenWidth, 100), new Color(Color.Black, 0.7F));
 
-            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "KUF THE WARRIOR", new Vector2(5, 5), Color.Red);
-            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Lives:  " + Player.Lives, new Vector2(5, 25), Color.White);
+            //Drawing Dragon HUD
+            this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_DragonTexture), new Rectangle(50, 10, 100, 80), Color.White);
 
-            /* ------------- Drawing Players' HUD Background -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 50, 200, 20), Color.White);
+            //Drawing Score 
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Score: ", new Vector2(200, 10), Color.Coral);
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "00000000", new Vector2(390, 10), Color.Coral);
 
-            /* ------------- Drawing Players' HUD HealthBar -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 50, 200 - (int)(Player.BaseHealthPoints - (int)Player.HealthPoints) * 4, 20), Color.Red);
+            //Drawing HealthBar
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Health: ", new Vector2(200, 40), Color.Coral);
+            this.spriteBatch.Draw(pen, new Rectangle(300, 40, 167, 20), Color.Coral);
+            this.spriteBatch.Draw(pen, new Rectangle(305, 42, 157, 16), Color.Black);
 
-            /* ------------- Drawing Players' HUD Stash Background -------------*/
-            this.spriteBatch.Draw(pen, new Rectangle(5, 73, 200, 40), Color.Yellow);
-
-            /* ------------- Drawing Players' HUD Stash Pockets -------------*/
-            for (var stashPocket = 0; stashPocket < stashSize; stashPocket++)
+            for (int bars = 0; bars < Player.HealthPoints / 4; bars++)
             {
-                this.spriteBatch.Draw(pen, new Rectangle(7 + (stashPocket * stashItemSize) + (stashPocket * 5), 75, stashItemSize, stashItemSize), Color.Black);
+                var color = (Player.HealthPoints >= Player.BaseHealthPoints*0.7)
+                    ? Color.Green
+                    : ((Player.HealthPoints >= Player.BaseHealthPoints*0.3) ? Color.Yellow : Color.Red);
+                this.spriteBatch.Draw(pen, new Rectangle(307 + (bars * 10) + (bars * 2), 44, 10, 12), color);
             }
 
-            /* ------------- Drawing Players' Weapon -------------*/
+
+            //Drawing Enemies Count Bar
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Enemies: ", new Vector2(200, 70), Color.Coral);
+            this.spriteBatch.Draw(pen, new Rectangle(300, 70, 167, 20), Color.Coral);
+            this.spriteBatch.Draw(pen, new Rectangle(305, 72, 157, 16), Color.Black);
+
+            for (var enemy = 0; enemy < Enemies.Count; enemy++)
+            {
+                this.spriteBatch.Draw(pen, new Rectangle(307 + (enemy * barSize) + (enemy * 2), 74, barSize, 12), Color.Coral);
+            }
+
+            //Drawing Lives Left
+            this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_HeartTexture), new Rectangle(475, 73, 20, 20),  Color.White);
+            this.spriteBatch.Draw(pen, new Rectangle(475, 10, 20, 60), Color.Coral);
+            this.spriteBatch.Draw(pen, new Rectangle(477, 12, 16, 56), Color.Black);
+
+            var playerLives = (Player.Lives > 3) ? Player.Lives : 3;
+            var livesBarHeight = (60 / playerLives) - 4;
+            for (var lives = 0; lives < Player.Lives; lives++)
+            {
+                this.spriteBatch.Draw(pen, new Rectangle(479, (66 - livesBarHeight - (livesBarHeight * lives) - (lives * 2)), 12, livesBarHeight), Color.Red);
+            }
+
+
+            //Drawing Stash Pockets
+            for (int item = 0; item < 5; item++)
+            {
+                this.spriteBatch.Draw(pen, new Rectangle(500 + (item * 65), 10, 60, 60), Color.Coral);
+                this.spriteBatch.Draw(pen, new Rectangle(502 + (item * 65), 12, 56, 56), Color.Black);
+            }
+
+            //Drawing Players Weapon
             if (Player.Weapon != null)
             {
-                this.spriteBatch.Draw(this.Content.Load<Texture2D>(Player.Weapon.GetTexturePath()), new Rectangle(7, 75, stashItemSize, stashItemSize), Color.White);
+                var color = (Player.Weapon.Rarity == Rarities.Common)
+                       ? Color.White
+                       : ((Player.Weapon.Rarity == Rarities.Magic)
+                           ? Color.AliceBlue
+                           : ((Player.Weapon.Rarity == Rarities.Rare)
+                               ? Color.Yellow
+                               : ((Player.Weapon.Rarity == Rarities.Epic) ? Color.Green : Color.Pink)));
+
+                this.spriteBatch.Draw(this.Content.Load<Texture2D>(Player.Weapon.GetTexturePath()), new Rectangle(502, 12, 56, 56), Color.White);
+                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "   + " + Player.Weapon.AttackPoints, new Vector2(505, 70), color);
             }
 
-            /* ------------- Drawing Players' Armor Items -------------*/
-            if (Player.ArmorSet.Count != 0)
+            //Drawing Players Armor
+            foreach (var armor in Player.ArmorSet)
             {
-                for (var itemNumber = 0; itemNumber < Player.ArmorSet.Count; itemNumber++)
+                var color = new Color();
+                var position = new Vector2();
+                switch (armor.ArmorType)
                 {
-                    this.spriteBatch.Draw(this.Content.Load<Texture2D>(Player.ArmorSet[itemNumber].GetTexturePath()),
-                        new Rectangle(47 + (itemNumber * stashItemSize) + (itemNumber * 5), 75, stashItemSize, stashItemSize), Color.White);
+                    case Armors.Helmet: position = new Vector2(570, 70); break;
+                    case Armors.Chest: position = new Vector2(635, 70); break;
+                    case Armors.Gloves: position = new Vector2(700, 70); break;
+                    case Armors.Boots: position = new Vector2(765, 70); break;
+                }
+
+                color = (armor.Rarity == Rarities.Common)
+                    ? Color.White
+                    : ((armor.Rarity == Rarities.Magic)
+                        ? Color.AliceBlue
+                        : ((armor.Rarity == Rarities.Rare)
+                            ? Color.Yellow
+                            : ((armor.Rarity == Rarities.Epic) ? Color.Green : Color.Pink)));
+
+                this.spriteBatch.Draw(this.Content.Load<Texture2D>(armor.GetTexturePath()), new Rectangle((int)position.X - 2, 12, 54, 54), Color.White);
+                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format(" +{0:F1}", armor.DefencePoints), position, color);
+            }
+
+            //Drawing Plaeyer StatInfo
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont),
+                string.Format("Damage: {0}", (Player.Weapon != null) ? Player.Weapon.AttackPoints : 0),
+                new Vector2(830, 5),
+                Color.Coral
+            );
+
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont),
+                string.Format("Armor:    {0:F1}", Player.GetTotalArmor()),
+                new Vector2(830, 30),
+                Color.Coral
+            );
+
+            if (Player.ImmortalDuration > 0)
+            {
+                if (frameHandler.FrameIndex%2 == 0)
+                {
+                    this.spriteBatch.Draw(pen, new Rectangle(830, 55, 100, 25), Color.Green);
+                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune",
+                        new Vector2(840, 55), Color.White);
+                }
+                else
+                {
+                    this.spriteBatch.Draw(pen, new Rectangle(830, 55, 100, 25), Color.White);
+                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune", new Vector2(840, 55), Color.Green);
                 }
             }
 

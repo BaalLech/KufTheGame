@@ -17,7 +17,7 @@ namespace KufTheGame.Core
             this.PlayerAttackFrames = 0;
         }
 
-        private int FrameIndex { get; set; }
+        public int FrameIndex { get; private set; }
 
         public int PlayerAttackFrames { get; set; }
 

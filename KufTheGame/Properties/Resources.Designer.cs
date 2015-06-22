@@ -142,6 +142,24 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HUD/Dragon.
+        /// </summary>
+        internal static string HUD_DragonTexture {
+            get {
+                return ResourceManager.GetString("HUD_DragonTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HUD/Heart.
+        /// </summary>
+        internal static string HUD_HeartTexture {
+            get {
+                return ResourceManager.GetString("HUD_HeartTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Items/Potions/HealthPotion.
         /// </summary>
         internal static string Potion_HealthPotionTexture {

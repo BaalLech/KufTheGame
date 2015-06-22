@@ -40,6 +40,8 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public int ImmortalDuration { get; set; }
 
+        public int BaseImmortalDuration { get; set; }
+
         public override void ProduceSound()
         {
             throw new NotImplementedException();
@@ -222,7 +224,7 @@ namespace KufTheGame.Models.Game.Models.Characters
                     throw new WeaponException("You already have weapon");
                 }
             }
-            catch (WeaponException ex)
+            catch (WeaponException)
             {
                 if (this.Weapon.AttackPoints < weapon.AttackPoints)
                 {
@@ -249,7 +251,7 @@ namespace KufTheGame.Models.Game.Models.Characters
                     throw new ArmorException("You already have this armor type!");
                 }
             }
-            catch (ArmorException ex)
+            catch (ArmorException)
             {
                 var currArmor = ArmorSet.Find(t => t.ArmorType == armor.ArmorType);
                 if (currArmor.DefencePoints < armor.DefencePoints)
