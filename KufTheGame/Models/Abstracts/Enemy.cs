@@ -116,12 +116,12 @@ namespace KufTheGame.Models.Abstracts
                 numOfDrop = 2;
             }
 
-            return 1;//numOfDrop;
+            return numOfDrop;
         }
 
         private Item GetItem(int numOfItems)
         {
-            var rngNum = 70;//RandomGenerator.Randomize(1, 100);
+            var rngNum = RandomGenerator.Randomize(1, 100);
             var rarity = Rarity.GetRandomRarity();
             var rarityType = rarity.Keys.First();
             var rarityCoef = rarity.Values.First();
@@ -146,7 +146,7 @@ namespace KufTheGame.Models.Abstracts
 
             if (rngNum > 65)
             {
-                var rngPotionNum = 20;//RandomGenerator.Randomize(1, 100);
+                var rngPotionNum = RandomGenerator.Randomize(1, 100);
                 if (rngPotionNum <= 40)
                 {
                     var potion = new ImmortalilyPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize,
