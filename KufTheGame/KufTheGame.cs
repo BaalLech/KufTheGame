@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
+
 using KufTheGame.Core;
 using KufTheGame.Properties;
 using KufTheGame.Models.Enums;
@@ -130,8 +130,8 @@ namespace KufTheGame
                 }
                 else
                 {
-                    lavelChanged = false;
                     Drops.Clear();
+                    lavelChanged = false;
 
                     this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
                     this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
@@ -342,7 +342,7 @@ namespace KufTheGame
 
             //Drawing Plaeyer StatInfo
             this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont),
-                string.Format("Damage: {0}", (Player.Weapon != null) ? Player.Weapon.AttackPoints : 0),
+                string.Format("Damage: {0}", (Player.Weapon != null) ? Player.Weapon.AttackPoints + Player.AttackPoints : Player.AttackPoints),
                 new Vector2(830, 5),
                 Color.Coral
             );
