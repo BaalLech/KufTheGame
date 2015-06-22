@@ -24,7 +24,8 @@ namespace KufTheGame
         public const int ScreenWidth = 1050;
         public const int ScreenHeight = 850;
 
-        private int backroundPart, barSize;
+        private bool lavelChanged;
+        private int backroundPart, barSize, slider;
         private FrameHandler frameHandler;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -77,6 +78,9 @@ namespace KufTheGame
                 new Boundary(0, ScreenHeight, FieldWidth, 10)
             };
 
+            slider = 0;
+            lavelChanged = false;
+
             frameHandler = new FrameHandler();
 
             base.Initialize();
@@ -108,15 +112,35 @@ namespace KufTheGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            
             if (Enemies.Count == 0) //Background is changing only if all enemies are killed
             {
-                this.backroundPart = (this.backroundPart + 1) % 3;
-                this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
-                this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
-                this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
+                if (!lavelChanged)
+                {
+                    this.backroundPart = (this.backroundPart + 1) % 3;
+                    lavelChanged = true;
+                }
+                
 
-                barSize = 167 / Enemies.Count - Enemies.Count * 2;
+                if (slider < 1000 * backroundPart)
+                {
+                    slider = (int)(slider + 1.5F);
+                    Player.Velocity = (Player.Velocity.X > 100) ? new Vector2((Player.Velocity.X - 1), Player.Velocity.Y) : new Vector2((Player.Velocity.X + 1), Player.Velocity.Y);
+                    Player.Velocity = (Player.Velocity.Y > 500) ? new Vector2(Player.Velocity.X, (Player.Velocity.Y - 1)) : new Vector2(Player.Velocity.X, (Player.Velocity.Y + 1));
+                }
+                else
+                {
+                    lavelChanged = false;
+                    Drops.Clear();
+
+                    this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+                    this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+                    this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+
+                    barSize = 167 / Enemies.Count - Enemies.Count * 2;
+                }
             }
+
             if (this.Enemies.Count > 0)
             {
                 var movingEnemy = this.Enemies[0];
@@ -212,7 +236,6 @@ namespace KufTheGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            const int stashItemSize = 35, stashSize = 5;
             var characterCenter = new Vector2(40, 70); //Characters' sprite center coordinates
             var pen = new Texture2D(this.graphics.GraphicsDevice, 1, 1); //Drawing pen for Game HUD
             pen.SetData(new[] { Color.White });
@@ -221,7 +244,7 @@ namespace KufTheGame
             this.spriteBatch.Begin();
             
             /* ------------- Drawing Background -------------*/
-            this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Background_BackgroundTexture), new Rectangle((this.backroundPart * (-1000)), 0, 3072, 800), Color.White);
+            this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Background_BackgroundTexture), new Rectangle(((-1) * slider), 0, 3072, 800), Color.White);
 
             //Drawing HUD Background
             this.spriteBatch.Draw(pen, new Rectangle(0, 0, ScreenWidth, 100), new Color(Color.Black, 0.7F));
