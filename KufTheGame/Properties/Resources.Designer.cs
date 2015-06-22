@@ -151,6 +151,15 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HUD/Clock.
+        /// </summary>
+        internal static string HUD_ClockTexture {
+            get {
+                return ResourceManager.GetString("HUD_ClockTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HUD/Dragon.
         /// </summary>
         internal static string HUD_DragonTexture {

@@ -65,9 +65,9 @@ namespace KufTheGame
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
             Player = new Player(100, 500, 57, 100, "Pesho");
-            this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
-            this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
-            this.Enemies.Add(new StickmanNinja(1000, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
 
             barSize = 167 / Enemies.Count - Enemies.Count * 2;
             this.Objects = new List<Obsticle>
@@ -254,7 +254,11 @@ namespace KufTheGame
 
             //Drawing Score 
             this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Score: ", new Vector2(200, 10), Color.Coral);
-            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "00000000", new Vector2(390, 10), Color.Coral);
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "00000000", new Vector2(300, 10), Color.Coral);
+
+            //Drawing GameTime
+            this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_ClockTexture), new Rectangle(405, 15, 15, 15), Color.White);
+            this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format("{0:0000}", (int)gameTime.TotalGameTime.TotalSeconds), new Vector2(425, 10), Color.Coral);
 
             //Drawing HealthBar
             this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Health: ", new Vector2(200, 40), Color.Coral);
@@ -318,7 +322,6 @@ namespace KufTheGame
             //Drawing Players Armor
             foreach (var armor in Player.ArmorSet)
             {
-                var color = new Color();
                 var position = new Vector2();
                 switch (armor.ArmorType)
                 {
@@ -328,7 +331,7 @@ namespace KufTheGame
                     case Armors.Boots: position = new Vector2(765, 70); break;
                 }
 
-                color = (armor.Rarity == Rarities.Common)
+                var color = (armor.Rarity == Rarities.Common)
                     ? Color.White
                     : ((armor.Rarity == Rarities.Magic)
                         ? Color.AliceBlue

@@ -157,6 +157,10 @@
     <value>HUD/Frame</value>
     <comment>Path Where Image is Located</comment>
   </data>
+  <data name="HUD_ClockTexture" xml:space="preserve">
+    <value>HUD/Clock</value>
+    <comment>Path Where Image is Located</comment>
+  </data>
   <data name="HUD_DragonTexture" xml:space="preserve">
     <value>HUD/Dragon</value>
     <comment>Path Where Image is Located</comment>
