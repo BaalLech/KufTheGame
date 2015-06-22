@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 
 using KufTheGame.Core;
 using KufTheGame.Models.Abstracts;
@@ -50,7 +49,8 @@ namespace KufTheGame.Models.Game.Models.Characters
         {
             IList<PressedKey> keys = KeyListener.GetKey();
 
-            this.State = ((keys[0] != PressedKey.Null) && (keys[0] != PressedKey.Attack)) ? State.Moving : this.State;
+            this.State = ((keys[0] != PressedKey.Null) && (keys[0] != PressedKey.Attack)) ? State.Moving :
+                ((keys[0] == PressedKey.Null && this.State == State.Moving) ? State.Idle : this.State);
 
             switch (keys.Count())
             {
@@ -193,7 +193,7 @@ namespace KufTheGame.Models.Game.Models.Characters
                 return null;
             }
 
-            this.State = (State)(RandomGenerator.Randomize(2, 4));
+            this.State = (this.State == State.Idle || this.State == State.Moving) ? (State)(RandomGenerator.Randomize(2, 4)) :  this.State;
 
             return attack;
         }

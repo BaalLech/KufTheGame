@@ -74,7 +74,7 @@ namespace KufTheGame.Models.Abstracts
 
         public override BasicAttack Attack()
         {
-            this.State = (State) RandomGenerator.Randomize(2, 4);
+            this.State = (this.State != State.Moving) ? this.State : (State) RandomGenerator.Randomize(2, 4);
 
             return new BasicAttack(this.AttackPoints);
             
