@@ -334,16 +334,18 @@ namespace KufTheGame
             {
                 if (frameHandler.FrameIndex%2 == 0)
                 {
-                    this.spriteBatch.Draw(pen, new Rectangle(830, 55, 100, 25), Color.Green);
-                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune",
-                        new Vector2(840, 55), Color.White);
+                    this.spriteBatch.Draw(pen, new Rectangle(830, 60, 100, 25), Color.Green);
+                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune", new Vector2(840, 60), Color.White);
                 }
                 else
                 {
-                    this.spriteBatch.Draw(pen, new Rectangle(830, 55, 100, 25), Color.White);
-                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune", new Vector2(840, 55), Color.Green);
+                    this.spriteBatch.Draw(pen, new Rectangle(830, 60, 100, 25), Color.White);
+                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune", new Vector2(840, 60), Color.Green);
                 }
             }
+
+            //Drawing HUD Frame
+            this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_BorderTexture), new Rectangle(0, 5, 1000, 100), Color.White);
 
             /* ------------- Drawing Dropped Items -------------*/
             foreach (var drop in Drops)

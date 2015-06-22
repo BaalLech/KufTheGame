@@ -153,6 +153,10 @@
     <value>Fonts/GameFont</value>
     <comment>Path Where Font is Located</comment>
   </data>
+  <data name="HUD_BorderTexture" xml:space="preserve">
+    <value>HUD/Frame</value>
+    <comment>Path Where Image is Located</comment>
+  </data>
   <data name="HUD_DragonTexture" xml:space="preserve">
     <value>HUD/Dragon</value>
     <comment>Path Where Image is Located</comment>

@@ -142,6 +142,15 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HUD/Frame.
+        /// </summary>
+        internal static string HUD_BorderTexture {
+            get {
+                return ResourceManager.GetString("HUD_BorderTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HUD/Dragon.
         /// </summary>
         internal static string HUD_DragonTexture {
