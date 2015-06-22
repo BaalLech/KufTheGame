@@ -36,7 +36,6 @@ namespace KufTheGame.Models.Abstracts
                 {
                     if (!Directions.Contains(BlockedDirections.BlockedLeft))
                     {
-
                         this.Velocity = new Vector2(this.Velocity.X - EnemySpeed, this.Velocity.Y);
                     }
                 }
@@ -45,7 +44,6 @@ namespace KufTheGame.Models.Abstracts
                 {
                     if (!Directions.Contains(BlockedDirections.BlockedRight))
                     {
-
                         this.Velocity = new Vector2(this.Velocity.X + EnemySpeed, this.Velocity.Y);
                     }
                 }
@@ -56,7 +54,6 @@ namespace KufTheGame.Models.Abstracts
                 {
                     if (!this.Directions.Contains(BlockedDirections.BlockedUp))
                     {
-
                         this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y - EnemySpeed);
                     }
                 }
@@ -65,7 +62,6 @@ namespace KufTheGame.Models.Abstracts
                 {
                     if (!this.Directions.Contains(BlockedDirections.BlockedDown))
                     {
-
                         this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y + EnemySpeed);
                     }
                 }
@@ -151,7 +147,7 @@ namespace KufTheGame.Models.Abstracts
                 {
                     var potion = new ImmortalilyPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize,
                         rarityType,
-                        150*(int) rarityCoef);
+                        (int)(150 * rarityCoef));
                     return potion;
                 }
 
