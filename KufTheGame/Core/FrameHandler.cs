@@ -8,7 +8,7 @@ namespace KufTheGame.Core
 {
     public class FrameHandler
     {
-        private const float FrameTime = 0.1F;
+        private const float FrameTime = 0.06F;
 
         public FrameHandler()
         {
