@@ -452,29 +452,39 @@ namespace KufTheGame
             }
             else
             {
-                var newColor = ((fadeInCounter - 255 < 255) && (fadeInCounter < 600)) ? fadeInCounter - 255 : 
-                    ((fadeInCounter < 600) ? fadeInCounter - 255 : fadeOutCounter);
-
-                if (fadeInCounter < 255)
+                if (Player.IsAlive())
                 {
-                    this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_CompanySplashTexture),
-                        new Vector2(150, 335),
-                        frameHandler.GetSplashScreenFrame(),
-                        new Color(fadeOutCounter, fadeOutCounter, fadeOutCounter, fadeOutCounter));
+                    var newColor = ((fadeInCounter - 255 < 255) && (fadeInCounter < 600))
+                        ? fadeInCounter - 255
+                        : ((fadeInCounter < 600) ? fadeInCounter - 255 : fadeOutCounter);
+
+                    if (fadeInCounter < 255)
+                    {
+                        this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_CompanySplashTexture),
+                            new Vector2(150, 335),
+                            frameHandler.GetSplashScreenFrame(),
+                            new Color(fadeOutCounter, fadeOutCounter, fadeOutCounter, fadeOutCounter));
+                    }
+                    else
+                    {
+                        this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_PrePlayTexture),
+                            new Vector2(0, 0), new Color(newColor, newColor, newColor, newColor));
+
+                        if ((fadeInCounter >= 345) && (fadeInCounter < 600))
+                        {
+                            var innerNewColor = newColor - 90;
+
+                            this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_GameLogoSplashTexture),
+                                new Vector2(600, 200),
+                                new Color(innerNewColor, innerNewColor, innerNewColor, innerNewColor));
+                        }
+                    }
                 }
                 else
                 {
-                    this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_PrePlayTexture), new Vector2(0, 0), new Color(newColor, newColor, newColor, newColor));
-
-                    if ((fadeInCounter >= 345) && (fadeInCounter < 600))
-                    {
-                        var innerNewColor = newColor - 90;
-
-                        this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_GameLogoSplashTexture), 
-                            new Vector2(600, 200),
-                            new Color(innerNewColor, innerNewColor, innerNewColor, innerNewColor));
-                    }
+                    //TODO Score screen
                 }
+                
                 
             }
 
