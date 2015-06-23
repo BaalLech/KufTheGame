@@ -151,6 +151,15 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fonts/GameFontBold.
+        /// </summary>
+        internal static string Font_GameFontBold {
+            get {
+                return ResourceManager.GetString("Font_GameFontBold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Images/HUD/Frame.
         /// </summary>
         internal static string HUD_BorderTexture {
@@ -201,6 +210,15 @@ namespace KufTheGame.Properties {
         internal static string Potion_ImmortalityPotionTexture {
             get {
                 return ResourceManager.GetString("Potion_ImmortalityPotionTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Images/Screens/PrePlayScreenTexture.
+        /// </summary>
+        internal static string Screen_PrePlayTexture {
+            get {
+                return ResourceManager.GetString("Screen_PrePlayTexture", resourceCulture);
             }
         }
         

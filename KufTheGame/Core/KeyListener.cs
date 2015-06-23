@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+
 using KufTheGame.Models.Enums;
 using Microsoft.Xna.Framework.Input;
 
@@ -64,11 +62,7 @@ namespace KufTheGame.Core
             }
 
             
-            if (keys.Count == 1)
-            {
-                return keys;
-            }
-            return new List<PressedKey>(){PressedKey.Null};
+            return keys.Count == 1 ? keys : new List<PressedKey>(){PressedKey.Null};
         }
     }
 }

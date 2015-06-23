@@ -268,3 +268,9 @@
 /processorParam:Quality=Best
 /build:Sounds/PlayerKickSound.mp3
 
+#begin Fonts/GameFontBold.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/GameFontBold.spritefont
+

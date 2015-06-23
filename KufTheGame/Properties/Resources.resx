@@ -157,6 +157,10 @@
     <value>Fonts/GameFont</value>
     <comment>Path Where Font is Located</comment>
   </data>
+  <data name="Font_GameFontBold" xml:space="preserve">
+    <value>Fonts/GameFontBold</value>
+    <comment>Path Where Font is Located</comment>
+  </data>
   <data name="HUD_BorderTexture" xml:space="preserve">
     <value>Images/HUD/Frame</value>
     <comment>Path Where Image is Located</comment>
@@ -180,6 +184,9 @@
   <data name="Potion_ImmortalityPotionTexture" xml:space="preserve">
     <value>Images/Items/Potions/ImunePotion</value>
     <comment>Path Where Sprite is Located</comment>
+  </data>
+  <data name="Screen_PrePlayTexture" xml:space="preserve">
+    <value>Images/Screens/PrePlayScreenTexture</value>
   </data>
   <data name="Sound_DropSound" xml:space="preserve">
     <value>Sounds/DropSound</value>
