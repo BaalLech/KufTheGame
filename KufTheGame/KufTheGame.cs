@@ -27,8 +27,8 @@ namespace KufTheGame
         public const int ScreenWidth = 1050;
         public const int ScreenHeight = 850;
 
-        private bool lavelChanged, isPlaying, fadeIn;
-        private int backroundPart, barSize, slider, fadeCounter;
+        private bool lavelChanged, isPlaying;
+        private int backroundPart, barSize, slider, fadeInCounter, fadeOutCounter;
         private Song song;
         private SoundEffect kickSound;
         private SoundEffect dropSound;
@@ -71,7 +71,7 @@ namespace KufTheGame
             this.backroundPart = 0;
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
-            Player = new Player(100, 500, 57, 100, "Pesho");
+            Player = new Player(150, 500, 57, 100, "Pesho");
             this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
             this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
             this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
@@ -87,9 +87,9 @@ namespace KufTheGame
             };
 
             slider = 0;
-            fadeCounter = -100;
+            fadeInCounter = 0;
+            fadeOutCounter = 255;
 
-            fadeIn = true;
             lavelChanged = false;
 
             frameHandler = new FrameHandler();
@@ -136,14 +136,14 @@ namespace KufTheGame
                 {
                     if (!lavelChanged)
                     {
-                        this.backroundPart = (this.backroundPart + 1)%3;
+                        this.backroundPart = (this.backroundPart + 1) % 3;
                         lavelChanged = true;
                     }
 
 
-                    if (slider < 1000*backroundPart)
+                    if (slider < 1000 * backroundPart)
                     {
-                        slider = (int) (slider + 1.5F);
+                        slider = (int)(slider + 1.5F);
                         Player.Velocity = (Player.Velocity.X > 100)
                             ? new Vector2((Player.Velocity.X - 1), Player.Velocity.Y)
                             : new Vector2((Player.Velocity.X + 1), Player.Velocity.Y);
@@ -160,7 +160,7 @@ namespace KufTheGame
                         this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
                         this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
 
-                        barSize = 167/Enemies.Count - Enemies.Count*2;
+                        barSize = 167 / Enemies.Count - Enemies.Count * 2;
                     }
                 }
 
@@ -198,7 +198,7 @@ namespace KufTheGame
 
                 if (attack != null)
                 {
-                    if (counter < (int) Frames.YodaStrikePunch)
+                    if (counter < (int)Frames.YodaStrikePunch)
                     {
                         counter++;
                     }
@@ -206,7 +206,7 @@ namespace KufTheGame
                     {
                         //kickSound.Play();
                     }
-                    if (counter == (int) Frames.YodaStrikePunch)
+                    if (counter == (int)Frames.YodaStrikePunch)
                     {
                         counter = 0;
                     }
@@ -249,8 +249,6 @@ namespace KufTheGame
                     Drops.Remove(item);
                 }
 
-                frameHandler.Update(gameTime);
-
                 if ((frameHandler.PlayerAttackFrames == 1) &&
                     (Player.State == State.YodaStrikePunch || Player.State == State.TeethOfTigerThrow ||
                      Player.State == State.WingedHorseKick))
@@ -274,18 +272,19 @@ namespace KufTheGame
             {
                 if (frameHandler.FrameIndex % 2 == 0)
                 {
-                    fadeCounter++;
-                    if (fadeCounter == 500)
+                    fadeInCounter++;
+                    fadeOutCounter = (fadeInCounter != 600) ? fadeOutCounter - 1 : 255;
+
+                    if (fadeInCounter == 855)
                     {
                         isPlaying = true;
                         MediaPlayer.Play(song);
                         MediaPlayer.IsRepeating = true;
                     }
-                    
-                    
-                }   
+                }
             }
 
+            frameHandler.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -453,14 +452,32 @@ namespace KufTheGame
             }
             else
             {
-                this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_PrePlayTexture), new Vector2(0, 0), new Color(fadeCounter, fadeCounter, fadeCounter, fadeCounter));
-                if (fadeCounter > 150)
+                var newColor = ((fadeInCounter - 255 < 255) && (fadeInCounter < 600)) ? fadeInCounter - 255 : 
+                    ((fadeInCounter < 600) ? fadeInCounter - 255 : fadeOutCounter);
+
+                if (fadeInCounter < 255)
                 {
-                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFontBold), "BE    PREPARED!", new Vector2(350, 700), Color.White);
-                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFontBold), "THE    GAME    WILL    START    SOON!", new Vector2(250, 750), Color.White);
+                    this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_CompanySplashTexture),
+                        new Vector2(150, 335),
+                        frameHandler.GetSplashScreenFrame(),
+                        new Color(fadeOutCounter, fadeOutCounter, fadeOutCounter, fadeOutCounter));
                 }
+                else
+                {
+                    this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_PrePlayTexture), new Vector2(0, 0), new Color(newColor, newColor, newColor, newColor));
+
+                    if ((fadeInCounter >= 345) && (fadeInCounter < 600))
+                    {
+                        var innerNewColor = newColor - 90;
+
+                        this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_GameLogoSplashTexture), 
+                            new Vector2(600, 200),
+                            new Color(innerNewColor, innerNewColor, innerNewColor, innerNewColor));
+                    }
+                }
+                
             }
-            
+
 
             this.spriteBatch.End();
 

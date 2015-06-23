@@ -185,6 +185,12 @@
     <value>Images/Items/Potions/ImunePotion</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
+  <data name="Screen_CompanySplashTexture" xml:space="preserve">
+    <value>Images/Screens/CompanySplashTexture</value>
+  </data>
+  <data name="Screen_GameLogoSplashTexture" xml:space="preserve">
+    <value>Images/Screens/GameLogoSplashTexture</value>
+  </data>
   <data name="Screen_PrePlayTexture" xml:space="preserve">
     <value>Images/Screens/PrePlayScreenTexture</value>
   </data>

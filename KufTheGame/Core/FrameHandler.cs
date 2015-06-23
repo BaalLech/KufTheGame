@@ -94,6 +94,11 @@ namespace KufTheGame.Core
                 new Rectangle( FrameIndex%((character.State == State.Idle) ? (int) Frames.Idle : (int) Frames.Moving)*80, 140*(int) character.State, 80, 140);
         }
 
+        public Rectangle GetSplashScreenFrame()
+        {
+            return new Rectangle(0, (FrameIndex % 27) * 82, 701, 82);
+        }
+
         public void Update(GameTime gameTime)
         {
             ElapsedTime += (float) gameTime.ElapsedGameTime.TotalSeconds; //Adding Elapsed Time From Last Loop

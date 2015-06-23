@@ -214,6 +214,24 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Images/Screens/CompanySplashTexture.
+        /// </summary>
+        internal static string Screen_CompanySplashTexture {
+            get {
+                return ResourceManager.GetString("Screen_CompanySplashTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Images/Screens/GameLogoSplashTexture.
+        /// </summary>
+        internal static string Screen_GameLogoSplashTexture {
+            get {
+                return ResourceManager.GetString("Screen_GameLogoSplashTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Images/Screens/PrePlayScreenTexture.
         /// </summary>
         internal static string Screen_PrePlayTexture {
