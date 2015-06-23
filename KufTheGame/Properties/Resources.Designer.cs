@@ -115,6 +115,15 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Characters/Enemies/KarateEnemySprite.
+        /// </summary>
+        internal static string Character_KarateEnemyTexture {
+            get {
+                return ResourceManager.GetString("Character_KarateEnemyTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Characters/Players/PlayerSprite.
         /// </summary>
         internal static string Character_PlayerTexture {

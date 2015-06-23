@@ -141,6 +141,10 @@
     <value>Backgrounds/SplashScreen</value>
     <comment>Path Where Image is Located</comment>
   </data>
+  <data name="Character_KarateEnemyTexture" xml:space="preserve">
+    <value>Characters/Enemies/KarateEnemySprite</value>
+    <comment>Path Where Sprite is Located</comment>
+  </data>
   <data name="Character_PlayerTexture" xml:space="preserve">
     <value>Characters/Players/PlayerSprite</value>
     <comment>Path Where Sprite is Located</comment>

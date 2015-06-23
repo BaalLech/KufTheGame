@@ -70,7 +70,7 @@ namespace KufTheGame
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
             Player = new Player(100, 500, 57, 100, "Pesho");
-            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
             this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
             this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
 

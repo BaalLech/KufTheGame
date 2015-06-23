@@ -3,9 +3,9 @@ using KufTheGame.Models.Abstracts;
 
 namespace KufTheGame.Models.Game.Models.Characters
 {
-    public class StickmanNinja : Enemy
+    public class Karateman : Enemy
     {
-        public StickmanNinja(int x, int y, int width, int height, double attackPoints, double defencePoints, double healthPoints)
+        public Karateman(int x, int y, int width, int height, double attackPoints, double defencePoints, double healthPoints)
             : base(x, y, width, height, attackPoints, defencePoints, healthPoints)
         {
 
@@ -18,7 +18,7 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override string GetTexturePath()
         {
-            return Resources.Character_StickEnemyTexture;
+            return Resources.Character_KarateEnemyTexture;
         }
     }
 }
