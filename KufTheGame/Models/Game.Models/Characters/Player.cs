@@ -40,8 +40,6 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public int ImmortalDuration { get; set; }
 
-        public int BaseImmortalDuration { get; set; }
-
         public override void ProduceSound()
         {
             throw new NotImplementedException();

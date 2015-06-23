@@ -8,7 +8,7 @@ using KufTheGame.Models.Enums;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Game.Models.Obsticles;
-
+using KufTheGame.Models.Structures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,6 +26,11 @@ namespace KufTheGame
         public const int FieldHeight = 400;
         public const int ScreenWidth = 1050;
         public const int ScreenHeight = 850;
+        public const int EnemyKillScore = 10;
+        public const int EnemyStartX = 1100;
+        public const int EnemyStartY = 500;
+        public const int EnemyWidth = 57;
+        public const int EnemyHeight = 100;
 
         private bool lavelChanged, isPlaying;
         private int backroundPart, barSize, slider, fadeInCounter, fadeOutCounter;
@@ -45,7 +50,7 @@ namespace KufTheGame
 
         public List<Obsticle> Objects { get; set; }
 
-
+        public int Score { get; private set; }
 
         public KufTheGame()
         {
@@ -72,10 +77,8 @@ namespace KufTheGame
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
             Player = new Player(150, 500, 57, 100, "Pesho");
-            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
-            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
-            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
-            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
+
+            this.Enemies = GameLevel.InitializeEnemies();
 
             barSize = (int)Math.Floor(167F / Enemies.Count) - 2;
             this.Objects = new List<Obsticle>
@@ -156,9 +159,7 @@ namespace KufTheGame
                         Drops.Clear();
                         lavelChanged = false;
 
-                        this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
-                        this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
-                        this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+                        this.Enemies = GameLevel.InitializeEnemies();
 
                         barSize = 167 / Enemies.Count - Enemies.Count * 2;
                     }
@@ -225,6 +226,7 @@ namespace KufTheGame
                         if (enemy.IsAlive()) continue;
 
                         enemy.AddDrops();
+                        this.Score += EnemyKillScore * GameLevel.Level;
                         foreach (var drop in enemy.Drops)
                         {
                             drop.Drop();
@@ -484,8 +486,8 @@ namespace KufTheGame
                 {
                     //TODO Score screen
                 }
-                
-                
+
+
             }
 
 

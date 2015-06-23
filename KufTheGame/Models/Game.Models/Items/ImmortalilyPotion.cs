@@ -27,8 +27,7 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public override void Use(Player target)
         {
-            target.ImmortalDuration = this.Duration;
-            target.BaseImmortalDuration = target.ImmortalDuration;
+            target.ImmortalDuration += this.Duration;
         }
 
         public override string GetTexturePath()
