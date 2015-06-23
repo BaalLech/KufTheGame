@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using KufTheGame.Core;
@@ -73,8 +74,30 @@ namespace KufTheGame
             this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
             this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
             this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new Karateman(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
+            this.Enemies.Add(new StickmanNinja(1100, 500, 57, 100, 10, 10, 100));
 
-            barSize = 167 / Enemies.Count - Enemies.Count * 2;
+
+            barSize = (int)Math.Floor(167F / Enemies.Count) - 2;
             this.Objects = new List<Obsticle>
             {
                 new Boundary(0, ScreenHeight - FieldHeight, FieldWidth, 10),
