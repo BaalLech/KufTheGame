@@ -118,39 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Armor_BootsArmorTexture" xml:space="preserve">
-    <value>Items/Armor/ArmorBoots</value>
+    <value>Images/Items/Armor/ArmorBoots</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Armor_ChestArmorTexture" xml:space="preserve">
-    <value>Items/Armor/ArmorChest</value>
+    <value>Images/Items/Armor/ArmorChest</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Armor_GlovesArmorTexture" xml:space="preserve">
-    <value>Items/Armor/ArmorGloves</value>
+    <value>Images/Items/Armor/ArmorGloves</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Armor_HelmetArmorTexture" xml:space="preserve">
-    <value>Items/Armor/ArmorHelmet</value>
+    <value>Images/Items/Armor/ArmorHelmet</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Background_BackgroundTexture" xml:space="preserve">
-    <value>Backgrounds/Background</value>
+    <value>Images/Backgrounds/Background</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Background_SplashScreenCompany" xml:space="preserve">
-    <value>Backgrounds/SplashScreen</value>
+    <value>Images/Backgrounds/SplashScreen</value>
     <comment>Path Where Image is Located</comment>
   </data>
   <data name="Character_KarateEnemyTexture" xml:space="preserve">
-    <value>Characters/Enemies/KarateEnemySprite</value>
+    <value>Images/Characters/Enemies/KarateEnemySprite</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Character_PlayerTexture" xml:space="preserve">
-    <value>Characters/Players/PlayerSprite</value>
+    <value>Images/Characters/Players/PlayerSprite</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Character_StickEnemyTexture" xml:space="preserve">
-    <value>Characters/Enemies/StickEnemySprite</value>
+    <value>Images/Characters/Enemies/StickEnemySprite</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Font_GameFont" xml:space="preserve">
@@ -158,43 +158,55 @@
     <comment>Path Where Font is Located</comment>
   </data>
   <data name="HUD_BorderTexture" xml:space="preserve">
-    <value>HUD/Frame</value>
+    <value>Images/HUD/Frame</value>
     <comment>Path Where Image is Located</comment>
   </data>
   <data name="HUD_ClockTexture" xml:space="preserve">
-    <value>HUD/Clock</value>
+    <value>Images/HUD/Clock</value>
     <comment>Path Where Image is Located</comment>
   </data>
   <data name="HUD_DragonTexture" xml:space="preserve">
-    <value>HUD/Dragon</value>
+    <value>Images/HUD/Dragon</value>
     <comment>Path Where Image is Located</comment>
   </data>
   <data name="HUD_HeartTexture" xml:space="preserve">
-    <value>HUD/Heart</value>
+    <value>Images/HUD/Heart</value>
     <comment>Path Where Image is Located</comment>
   </data>
   <data name="Potion_HealthPotionTexture" xml:space="preserve">
-    <value>Items/Potions/HealthPotion</value>
+    <value>Images/Items/Potions/HealthPotion</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Potion_ImmortalityPotionTexture" xml:space="preserve">
-    <value>Items/Potions/ImunePotion</value>
+    <value>Images/Items/Potions/ImunePotion</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
+  <data name="Sound_DropSound" xml:space="preserve">
+    <value>Sounds/DropSound</value>
+    <comment>Path Where SFX is Located</comment>
+  </data>
+  <data name="Sound_GameLoopSound" xml:space="preserve">
+    <value>Sounds/GameLoopSound</value>
+    <comment>Path Where SFX is Located</comment>
+  </data>
+  <data name="Sound_PlayerKickSound" xml:space="preserve">
+    <value>Sounds/PlayerKickSound</value>
+    <comment>Path Where SFX is Located</comment>
+  </data>
   <data name="Weapon_AxeWeaponTexture" xml:space="preserve">
-    <value>Items/Weapons/WeaponAxe</value>
+    <value>Images/Items/Weapons/WeaponAxe</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Weapon_DaggerWeaponTexture" xml:space="preserve">
-    <value>Items/Weapons/WeaponDagger</value>
+    <value>Images/Items/Weapons/WeaponDagger</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Weapon_MaceWeaponTexture" xml:space="preserve">
-    <value>Items/Weapons/WeaponMace</value>
+    <value>Images/Items/Weapons/WeaponMace</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
   <data name="Weapon_SwordWeaponTexture" xml:space="preserve">
-    <value>Items/Weapons/WeaponSword</value>
+    <value>Images/Items/Weapons/WeaponSword</value>
     <comment>Path Where Sprite is Located</comment>
   </data>
 </root>

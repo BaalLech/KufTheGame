@@ -61,7 +61,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Armor/ArmorBoots.
+        ///   Looks up a localized string similar to Images/Items/Armor/ArmorBoots.
         /// </summary>
         internal static string Armor_BootsArmorTexture {
             get {
@@ -70,7 +70,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Armor/ArmorChest.
+        ///   Looks up a localized string similar to Images/Items/Armor/ArmorChest.
         /// </summary>
         internal static string Armor_ChestArmorTexture {
             get {
@@ -79,7 +79,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Armor/ArmorGloves.
+        ///   Looks up a localized string similar to Images/Items/Armor/ArmorGloves.
         /// </summary>
         internal static string Armor_GlovesArmorTexture {
             get {
@@ -88,7 +88,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Armor/ArmorHelmet.
+        ///   Looks up a localized string similar to Images/Items/Armor/ArmorHelmet.
         /// </summary>
         internal static string Armor_HelmetArmorTexture {
             get {
@@ -97,7 +97,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Backgrounds/Background.
+        ///   Looks up a localized string similar to Images/Backgrounds/Background.
         /// </summary>
         internal static string Background_BackgroundTexture {
             get {
@@ -106,7 +106,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Backgrounds/SplashScreen.
+        ///   Looks up a localized string similar to Images/Backgrounds/SplashScreen.
         /// </summary>
         internal static string Background_SplashScreenCompany {
             get {
@@ -115,7 +115,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Characters/Enemies/KarateEnemySprite.
+        ///   Looks up a localized string similar to Images/Characters/Enemies/KarateEnemySprite.
         /// </summary>
         internal static string Character_KarateEnemyTexture {
             get {
@@ -124,7 +124,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Characters/Players/PlayerSprite.
+        ///   Looks up a localized string similar to Images/Characters/Players/PlayerSprite.
         /// </summary>
         internal static string Character_PlayerTexture {
             get {
@@ -133,7 +133,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Characters/Enemies/StickEnemySprite.
+        ///   Looks up a localized string similar to Images/Characters/Enemies/StickEnemySprite.
         /// </summary>
         internal static string Character_StickEnemyTexture {
             get {
@@ -151,7 +151,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HUD/Frame.
+        ///   Looks up a localized string similar to Images/HUD/Frame.
         /// </summary>
         internal static string HUD_BorderTexture {
             get {
@@ -160,7 +160,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HUD/Clock.
+        ///   Looks up a localized string similar to Images/HUD/Clock.
         /// </summary>
         internal static string HUD_ClockTexture {
             get {
@@ -169,7 +169,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HUD/Dragon.
+        ///   Looks up a localized string similar to Images/HUD/Dragon.
         /// </summary>
         internal static string HUD_DragonTexture {
             get {
@@ -178,7 +178,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HUD/Heart.
+        ///   Looks up a localized string similar to Images/HUD/Heart.
         /// </summary>
         internal static string HUD_HeartTexture {
             get {
@@ -187,7 +187,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Potions/HealthPotion.
+        ///   Looks up a localized string similar to Images/Items/Potions/HealthPotion.
         /// </summary>
         internal static string Potion_HealthPotionTexture {
             get {
@@ -196,7 +196,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Potions/ImunePotion.
+        ///   Looks up a localized string similar to Images/Items/Potions/ImunePotion.
         /// </summary>
         internal static string Potion_ImmortalityPotionTexture {
             get {
@@ -205,7 +205,34 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Weapons/WeaponAxe.
+        ///   Looks up a localized string similar to Sounds/DropSound.
+        /// </summary>
+        internal static string Sound_DropSound {
+            get {
+                return ResourceManager.GetString("Sound_DropSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sounds/GameLoopSound.
+        /// </summary>
+        internal static string Sound_GameLoopSound {
+            get {
+                return ResourceManager.GetString("Sound_GameLoopSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sounds/PlayerKickSound.
+        /// </summary>
+        internal static string Sound_PlayerKickSound {
+            get {
+                return ResourceManager.GetString("Sound_PlayerKickSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Images/Items/Weapons/WeaponAxe.
         /// </summary>
         internal static string Weapon_AxeWeaponTexture {
             get {
@@ -214,7 +241,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Weapons/WeaponDagger.
+        ///   Looks up a localized string similar to Images/Items/Weapons/WeaponDagger.
         /// </summary>
         internal static string Weapon_DaggerWeaponTexture {
             get {
@@ -223,7 +250,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Weapons/WeaponMace.
+        ///   Looks up a localized string similar to Images/Items/Weapons/WeaponMace.
         /// </summary>
         internal static string Weapon_MaceWeaponTexture {
             get {
@@ -232,7 +259,7 @@ namespace KufTheGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Items/Weapons/WeaponSword.
+        ///   Looks up a localized string similar to Images/Items/Weapons/WeaponSword.
         /// </summary>
         internal static string Weapon_SwordWeaponTexture {
             get {

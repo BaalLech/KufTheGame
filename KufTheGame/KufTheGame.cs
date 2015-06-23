@@ -101,10 +101,11 @@ namespace KufTheGame
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
             //Load Sounds
-            kickSound = Content.Load<SoundEffect>("Sounds/kick");
-            dropSound = Content.Load<SoundEffect>("Sounds/drop");
+            //TODO Fix Exception
+            //kickSound = Content.Load<SoundEffect>(Resources.Sound_PlayerKickSound);
+            //dropSound = Content.Load<SoundEffect>("Sounds/DropSound");
             // Load background music
-            Song song = Content.Load<Song>("Sounds/backgroundMusic");
+            Song song = Content.Load<Song>(Resources.Sound_GameLoopSound);
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
         }
@@ -192,7 +193,7 @@ namespace KufTheGame
                 }
                 if (counter == 1)
                 {
-                    kickSound.Play();
+                    //kickSound.Play();
                 }
                 if (counter == (int)Frames.YodaStrikePunch)
                 {
@@ -216,7 +217,7 @@ namespace KufTheGame
                     foreach (var drop in enemy.Drops)
                     {
                         drop.Drop();
-                        dropSound.Play();
+                        //dropSound.Play();
                     }
 
                     this.Enemies.Remove(enemy);
@@ -325,7 +326,7 @@ namespace KufTheGame
 
 
             //Drawing Stash Pockets
-            for (int item = 0; item < 5; item++)
+            for (var item = 0; item < 5; item++)
             {
                 this.spriteBatch.Draw(pen, new Rectangle(500 + (item * 65), 10, 60, 60), Color.Coral);
                 this.spriteBatch.Draw(pen, new Rectangle(502 + (item * 65), 12, 56, 56), Color.Black);
@@ -387,13 +388,13 @@ namespace KufTheGame
             {
                 if (frameHandler.FrameIndex%2 == 0)
                 {
-                    this.spriteBatch.Draw(pen, new Rectangle(830, 60, 100, 25), Color.Green);
-                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune", new Vector2(840, 60), Color.White);
+                    this.spriteBatch.Draw(pen, new Rectangle(830, 60, 150, 25), Color.Green);
+                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune", new Vector2(865, 60), Color.White);
                 }
                 else
                 {
-                    this.spriteBatch.Draw(pen, new Rectangle(830, 60, 100, 25), Color.White);
-                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune", new Vector2(840, 60), Color.Green);
+                    this.spriteBatch.Draw(pen, new Rectangle(830, 60, 150, 25), Color.White);
+                    this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Immune", new Vector2(865, 60), Color.Green);
                 }
             }
 
