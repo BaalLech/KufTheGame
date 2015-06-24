@@ -29,8 +29,11 @@ namespace KufTheGame
         public const int EnemyKillScore = 10;
         public const int EnemyStartX = 1100;
         public const int EnemyStartY = 500;
-        public const int EnemyWidth = 57;
-        public const int EnemyHeight = 100;
+        public const int PlayerStartX = 150;
+        public const int PlayerStartY = 500;
+        public const int StandartWidth = 57;
+        public const int StandartHeight = 100;
+        public const int ScorePerKill = 10;
 
         private bool lavelChanged, isPlaying;
         private int backroundPart, barSize, slider, fadeInCounter, fadeOutCounter;
@@ -49,8 +52,6 @@ namespace KufTheGame
         public List<Enemy> Enemies { get; set; }
 
         public List<Obsticle> Objects { get; set; }
-
-        public int Score { get; private set; }
 
         public KufTheGame()
         {
@@ -76,7 +77,7 @@ namespace KufTheGame
             this.backroundPart = 0;
             this.Enemies = new List<Enemy>();
             Drops = new List<Item>();
-            Player = new Player(150, 500, 57, 100, "Pesho");
+            Player = new Player(PlayerStartX, PlayerStartY, StandartWidth, StandartHeight, "Pesho");
 
             this.Enemies = GameLevel.InitializeEnemies();
 
@@ -218,15 +219,12 @@ namespace KufTheGame
                         if (!Player.InAttackRange(enemy)) continue;
 
                         enemy.RespondToAttack(attack);
-                        //using (var writer = new StreamWriter("../../../result.txt"))
-                        //{
-                        //    writer.WriteLine(enemy.HealthPoints);
-                        //}
 
                         if (enemy.IsAlive()) continue;
 
                         enemy.AddDrops();
-                        this.Score += EnemyKillScore * GameLevel.Level;
+                        Scoreboard.AddScore(ScorePerKill);
+
                         foreach (var drop in enemy.Drops)
                         {
                             drop.Drop();
@@ -242,10 +240,6 @@ namespace KufTheGame
                 {
                     if (!Drops[i].Contains(Player)) continue;
                     var item = Drops[i];
-                    //using (var writer = new StreamWriter("../../../result.txt"))
-                    //{
-                    //    writer.WriteLine(item.ToString());
-                    //}
 
                     item.Use(Player);
                     Drops.Remove(item);

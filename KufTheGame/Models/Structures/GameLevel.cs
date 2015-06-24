@@ -9,7 +9,7 @@ namespace KufTheGame.Models.Structures
     public struct GameLevel
     {
         public const int StartingEnemies = 3;
-        private static int level = 1;
+        private static int level;
 
         public static int Level
         {
@@ -21,6 +21,8 @@ namespace KufTheGame.Models.Structures
 
         public static List<Enemy> InitializeEnemies()
         {
+            level++;
+
             var enemies = new List<Enemy>();
             int enemyCoef = (Level - 1) * RandomGenerator.Randomize(1, 3);
 
@@ -35,18 +37,16 @@ namespace KufTheGame.Models.Structures
                 {
                     case 0:
                         enemies.Add(new StickmanNinja(
-                            KufTheGame.EnemyStartX, KufTheGame.EnemyStartY, KufTheGame.EnemyWidth, KufTheGame.EnemyHeight,
+                            KufTheGame.EnemyStartX, KufTheGame.EnemyStartY, KufTheGame.StandartWidth, KufTheGame.StandartHeight,
                             attackPoints, defPoints, healthPoints));
                         break;
                     case 1:
                         enemies.Add(new Karateman(
-                            KufTheGame.EnemyStartX, KufTheGame.EnemyStartY, KufTheGame.EnemyWidth, KufTheGame.EnemyHeight,
+                            KufTheGame.EnemyStartX, KufTheGame.EnemyStartY, KufTheGame.StandartWidth, KufTheGame.StandartHeight,
                             attackPoints, defPoints, healthPoints));
                         break;
                 }
             }
-
-            level++;
 
             return enemies;
         }
