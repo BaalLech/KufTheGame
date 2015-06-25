@@ -58,14 +58,14 @@ namespace KufTheGame.Core
                 GetScoreboard();
             }
 
-            return scores;
+            return (scores.Count > 10) ? scores.GetRange(0, 10) : scores;
         }
 
         private static void WriteScoreboard(IEnumerable<int> scores)
         {
             using (var writer = new StreamWriter(ScoreboardPath))
             {
-                foreach (var score in scores)
+                foreach (var score in scores.Reverse())
                 {
                     writer.WriteLine(score.ToString());
                 }
