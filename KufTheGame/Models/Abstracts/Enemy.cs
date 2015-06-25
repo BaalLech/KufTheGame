@@ -34,6 +34,7 @@ namespace KufTheGame.Models.Abstracts
             {
                 if (this.Velocity.X > KufTheGame.Player.Velocity.X + KufTheGame.Player.Width)
                 {
+                    this.SpriteRotation = 0;
                     if (!Directions.Contains(BlockedDirections.BlockedLeft))
                     {
                         this.Velocity = new Vector2(this.Velocity.X - EnemySpeed, this.Velocity.Y);
@@ -42,6 +43,7 @@ namespace KufTheGame.Models.Abstracts
 
                 if (this.Velocity.X < KufTheGame.Player.Velocity.X + KufTheGame.Player.Width)
                 {
+                    this.SpriteRotation = 1;
                     if (!Directions.Contains(BlockedDirections.BlockedRight))
                     {
                         this.Velocity = new Vector2(this.Velocity.X + EnemySpeed, this.Velocity.Y);
