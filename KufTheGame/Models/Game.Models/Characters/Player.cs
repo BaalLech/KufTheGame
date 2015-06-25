@@ -11,6 +11,8 @@ using KufTheGame.Models.Interfaces;
 using KufTheGame.Properties;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 
 namespace KufTheGame.Models.Game.Models.Characters
 {
@@ -42,7 +44,7 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void ProduceSound()
         {
-            throw new NotImplementedException();
+            //var kickSound = 
         }
 
         public override void Move()
