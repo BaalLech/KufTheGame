@@ -191,6 +191,10 @@
   <data name="Screen_GameLogoSplashTexture" xml:space="preserve">
     <value>Images/Screens/GameLogoSplashTexture</value>
   </data>
+  <data name="Screen_GameOverScreenTexture" xml:space="preserve">
+    <value>Images/Screens/GameOverScreenTexture</value>
+    <comment>Path Where Image is Located</comment>
+  </data>
   <data name="Screen_PrePlayTexture" xml:space="preserve">
     <value>Images/Screens/PrePlayScreenTexture</value>
   </data>

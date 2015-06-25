@@ -9,6 +9,7 @@ using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Game.Models.Obsticles;
 using KufTheGame.Models.Structures;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -41,6 +42,7 @@ namespace KufTheGame
         private SoundEffect kickSound;
         private SoundEffect dropSound;
         private int counter;
+        private List<int> topScores;
         private FrameHandler frameHandler;
         readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -94,6 +96,7 @@ namespace KufTheGame
             fadeInCounter = 0;
             fadeOutCounter = 255;
 
+            //isPlaying = true;
             lavelChanged = false;
 
             frameHandler = new FrameHandler();
@@ -112,7 +115,7 @@ namespace KufTheGame
 
             //Load Sounds
             //TODO Fix Exception
-            //kickSound = Content.Load<SoundEffect>(Resources.Sound_PlayerKickSound);
+            //kickSound = Content.Load<SoundEffect>("Sounds");
             //dropSound = Content.Load<SoundEffect>("Sounds/DropSound");
             // Load background music
             song = Content.Load<Song>(Resources.Sound_GameLoopSound);
@@ -271,13 +274,21 @@ namespace KufTheGame
                     fadeInCounter++;
                     fadeOutCounter = (fadeInCounter != 600) ? fadeOutCounter - 1 : 255;
 
-                    if (fadeInCounter == 855)
+                    if ((fadeInCounter == 855) && (Player.IsAlive()))
                     {
                         isPlaying = true;
                         MediaPlayer.Play(song);
                         MediaPlayer.IsRepeating = true;
                     }
                 }
+            }
+
+            if (this.isPlaying && ((Player.Lives == 0) || (this.Enemies.Count == 0 && this.backroundPart == 3)))
+            {
+                isPlaying = false;
+                Scoreboard.AddNewToScoreboard(Scoreboard.Score);
+
+                topScores = Scoreboard.GetScoreboard();
             }
 
             frameHandler.Update(gameTime);
@@ -310,7 +321,7 @@ namespace KufTheGame
 
                 //Drawing Score 
                 this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Score: ", new Vector2(200, 10), Color.Coral);
-                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "00000000", new Vector2(300, 10), Color.Coral);
+                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format("{0:00000000}", Scoreboard.Score), new Vector2(300, 10), Color.Coral);
 
                 //Drawing GameTime
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_ClockTexture), new Rectangle(405, 15, 15, 15), Color.White);
@@ -412,6 +423,7 @@ namespace KufTheGame
                     Color.Coral
                 );
 
+                //Flashing Light When Player is Immortal
                 if (Player.ImmortalDuration > 0)
                 {
                     if (frameHandler.FrameIndex % 2 == 0)
@@ -478,10 +490,23 @@ namespace KufTheGame
                 }
                 else
                 {
-                    //TODO Score screen
+                    this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_GameOverScreenTexture), new Vector2(50, 0), Color.White);
+
+                    for (var currScore = this.topScores.Count - 1; currScore >= 0; currScore--)
+                    {
+                        this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFontBold),
+                            string.Format("{0}.", currScore + 1), 
+                            new Vector2((currScore < this.topScores.Count / 2) ? 250 : 550, 500 + (30 * (currScore % (this.topScores.Count / 2)))), 
+                            Color.White
+                        );
+
+                        this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFontBold),
+                            string.Format("{0}", this.topScores[currScore]),
+                            new Vector2((currScore < this.topScores.Count / 2) ? 300 : 600, 500 + (30 * (currScore % (this.topScores.Count / 2)))),
+                            (this.topScores[currScore] == Scoreboard.Score) ? Color.Yellow : Color.White
+                        );
+                    }
                 }
-
-
             }
 
 
