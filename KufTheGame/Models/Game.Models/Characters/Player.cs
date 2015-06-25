@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 
 using KufTheGame.Core;
@@ -11,8 +10,6 @@ using KufTheGame.Models.Interfaces;
 using KufTheGame.Properties;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
 
 namespace KufTheGame.Models.Game.Models.Characters
 {
@@ -202,9 +199,9 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public override void RespondToAttack(BasicAttack attack)
         {
-            if (ImmortalDuration > 0)
+            if (this.ImmortalDuration > 0)
             {
-                ImmortalDuration--;
+                this.ImmortalDuration--;
                 return;
             }
 
@@ -253,7 +250,7 @@ namespace KufTheGame.Models.Game.Models.Characters
             }
             catch (ArmorException)
             {
-                var currArmor = ArmorSet.Find(t => t.ArmorType == armor.ArmorType);
+                var currArmor = this.ArmorSet.Find(t => t.ArmorType == armor.ArmorType);
                 if (currArmor.DefencePoints < armor.DefencePoints)
                 {
                     this.ArmorSet.Remove(currArmor);
