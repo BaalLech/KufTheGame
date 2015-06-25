@@ -9,6 +9,7 @@ using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Game.Models.Obsticles;
 using KufTheGame.Models.Structures;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -95,7 +96,7 @@ namespace KufTheGame
             fadeInCounter = 0;
             fadeOutCounter = 255;
 
-            isPlaying = true;
+            //isPlaying = true;
             lavelChanged = false;
 
             frameHandler = new FrameHandler();
@@ -114,7 +115,7 @@ namespace KufTheGame
 
             //Load Sounds
             //TODO Fix Exception
-            //kickSound = Content.Load<SoundEffect>(Resources.Sound_PlayerKickSound);
+            //kickSound = Content.Load<SoundEffect>("Sounds");
             //dropSound = Content.Load<SoundEffect>("Sounds/DropSound");
             // Load background music
             song = Content.Load<Song>(Resources.Sound_GameLoopSound);
@@ -501,7 +502,7 @@ namespace KufTheGame
 
                         this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFontBold),
                             string.Format("{0}", this.topScores[currScore]),
-                            new Vector2((currScore < this.topScores.Count / 2) ? 290 : 590, 500 + (30 * (currScore % (this.topScores.Count / 2)))),
+                            new Vector2((currScore < this.topScores.Count / 2) ? 300 : 600, 500 + (30 * (currScore % (this.topScores.Count / 2)))),
                             (this.topScores[currScore] == Scoreboard.Score) ? Color.Yellow : Color.White
                         );
                     }
