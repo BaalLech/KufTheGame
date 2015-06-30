@@ -1,9 +1,7 @@
 ﻿using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
-using KufTheGame.Models.Interfaces;
 using KufTheGame.Properties;
-using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
 {

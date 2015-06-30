@@ -1,5 +1,4 @@
-﻿using KufTheGame.Models.Abstracts;
-using KufTheGame.Models.Enums;
+﻿using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
 
 namespace KufTheGame.Models.Interfaces

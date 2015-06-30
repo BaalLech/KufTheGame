@@ -46,7 +46,7 @@ namespace KufTheGame
             {
                 PreferredBackBufferWidth = 1000,
                 PreferredBackBufferHeight = 800,
-                //IsFullScreen = true
+                IsFullScreen = true
             };
 
             this.Content.RootDirectory = "Content";
@@ -102,7 +102,7 @@ namespace KufTheGame
             this.FadeInCounter = 0;
             this.FadeOutCounter = 255;
 
-            this.IsPlaying = true;
+            this.IsPlaying = false;
             this.LevelChanged = false;
 
             this.FrameHandlerVariable = new FrameHandler();

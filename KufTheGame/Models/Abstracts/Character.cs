@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using KufTheGame.Models.Game.Models;
+﻿using KufTheGame.Models.Game.Models;
 using KufTheGame.Models.Interfaces;
 using KufTheGame.Models.Enums;
 
@@ -7,10 +6,8 @@ namespace KufTheGame.Models.Abstracts
 {
     public abstract class Character : GameObject, IMoveable, IAttackable, ICharacter
     {
-        private const int InitialLives = 1;
         protected const int BasicCharacterSpeed = 5;
-        public int SpriteRotation { get; set; }
-
+        private const int InitialLives = 1;
 
         protected Character(int x, int y, int width, int height, double attackPoints, double defencePoints,
             double healthPoints)
@@ -25,6 +22,7 @@ namespace KufTheGame.Models.Abstracts
             this.Directions = new[] { BlockedDirections.None, BlockedDirections.None, BlockedDirections.None, BlockedDirections.None };
             this.State = State.Idle;
         }
+        public int SpriteRotation { get; set; }
 
         public Direction Direction { get; set; }
 
@@ -79,10 +77,8 @@ namespace KufTheGame.Models.Abstracts
                 {
                     return attackRange1;
                 }
-                else
-                {
-                    return attackRange2;
-                }
+
+                return attackRange2;
             }
 
             if (target is IPlayer)
@@ -100,25 +96,24 @@ namespace KufTheGame.Models.Abstracts
             {
                 if (this.Velocity.Y < target.Velocity.Y + target.Height && this.Velocity.Y > target.Velocity.Y - this.Height)
                     this.Directions[0] = BlockedDirections.BlockedRight;
-
             }
+
             if (this.Velocity.X <= target.Velocity.X + target.Width + BasicCharacterSpeed && this.Velocity.X >= target.Velocity.X)
             {
                 if (this.Velocity.Y < target.Velocity.Y + target.Height && this.Velocity.Y > target.Velocity.Y - this.Height)
                     this.Directions[1] = BlockedDirections.BlockedLeft;
-
             }
+
             if (this.Velocity.Y <= (target.Velocity.Y + target.Height + BasicCharacterSpeed) && this.Velocity.Y >= (target.Velocity.Y))
             {
                 if (this.Velocity.X > (target.Velocity.X - this.Width) && this.Velocity.X < (target.Velocity.X + target.Width))
                     this.Directions[2] = BlockedDirections.BlockedUp;
-
             }
+
             if (this.Velocity.Y >= (target.Velocity.Y - this.Height - BasicCharacterSpeed) && this.Velocity.Y <= (target.Velocity.Y))
             {
                 if (this.Velocity.X > (target.Velocity.X - this.Width) && this.Velocity.X < (target.Velocity.X + target.Width))
                     this.Directions[3] = BlockedDirections.BlockedDown;
-
             }
         }
 
@@ -131,7 +126,6 @@ namespace KufTheGame.Models.Abstracts
         {
             this.Lives--;
         }
-
 
         public virtual void Move() { }
 

@@ -6,6 +6,9 @@ using KufTheGame.Models.Game.Models.Characters;
 
 namespace KufTheGame.Core
 {
+    /// <summary>
+    /// Keeps the proper animation frame.
+    /// </summary>
     public class FrameHandler
     {
         private const float FrameTime = 0.06F;

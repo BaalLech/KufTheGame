@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using KufTheGame.Models.Abstracts;
+﻿using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Game.Models.Characters;
-using KufTheGame.Models.Game.Models.Items;
 
 namespace KufTheGame.Models.Game.Models
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using KufTheGame.Core;
@@ -75,15 +74,12 @@ namespace KufTheGame.Models.Abstracts
             this.State = (this.State != State.Moving) ? this.State : (State) RandomGenerator.Randomize(2, 4);
 
             return new BasicAttack(this.AttackPoints);
-            
         }
 
         public override void RespondToAttack(BasicAttack attack)
         {
             attack.Hit(this);
         }
-
-       
 
         public void AddDrops()
         {

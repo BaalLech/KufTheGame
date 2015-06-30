@@ -1,5 +1,4 @@
-﻿using System;
-using KufTheGame.Models.Interfaces;
+﻿using KufTheGame.Models.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Abstracts
