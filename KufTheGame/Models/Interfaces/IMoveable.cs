@@ -1,6 +1,4 @@
-﻿using KufTheGame.Models.Enums;
-
-namespace KufTheGame.Models.Interfaces
+﻿namespace KufTheGame.Models.Interfaces
 {
     interface IMoveable
     {
