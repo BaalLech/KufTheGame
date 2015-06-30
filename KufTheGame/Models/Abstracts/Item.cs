@@ -4,7 +4,7 @@ using KufTheGame.Models.Interfaces;
 
 namespace KufTheGame.Models.Abstracts
 {
-    public abstract class Item: GameObject, IItem
+    public abstract class Item : GameObject, IItem
     {
         protected Item(int x, int y, int width, int height, Rarities rarity)
             : base(x, y, width, height)

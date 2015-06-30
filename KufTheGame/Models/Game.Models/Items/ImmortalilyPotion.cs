@@ -5,7 +5,7 @@ using KufTheGame.Properties;
 
 namespace KufTheGame.Models.Game.Models.Items
 {
-    class ImmortalilyPotion : Potion
+    public class ImmortalilyPotion : Potion
     {
         public ImmortalilyPotion(int x, int y, int width, int height, Rarities rarity, int duration)
             : base(x, y, width, height, rarity)

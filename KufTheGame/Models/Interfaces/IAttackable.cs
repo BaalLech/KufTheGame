@@ -3,7 +3,7 @@ using KufTheGame.Models.Game.Models;
 
 namespace KufTheGame.Models.Interfaces
 {
-    interface IAttackable
+    public interface IAttackable
     {
         BasicAttack Attack();
 

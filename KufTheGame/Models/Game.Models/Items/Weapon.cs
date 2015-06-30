@@ -5,12 +5,12 @@ using KufTheGame.Properties;
 
 namespace KufTheGame.Models.Game.Models.Items
 {
-    public class Weapon: Item
+    public class Weapon : Item
     {
         public const string ImagePath = "";
 
-        public Weapon(int x, int y, int width, int height, Rarities rarity,
-            Weapons weaponType, double attackPoints) : base(x, y,width,height, rarity)
+        public Weapon(int x, int y, int width, int height, Rarities rarity, Weapons weaponType, double attackPoints)
+            : base(x, y, width, height, rarity)
         {
             this.WeaponType = weaponType;
             this.AttackPoints = attackPoints;
@@ -27,7 +27,7 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public override string GetTexturePath()
         {
-            switch (WeaponType)
+            switch (this.WeaponType)
             {
                 case Weapons.Axe: return Resources.Weapon_AxeWeaponTexture;
                 case Weapons.Dagger: return Resources.Weapon_DaggerWeaponTexture;

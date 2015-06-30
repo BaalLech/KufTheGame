@@ -2,7 +2,7 @@
 
 namespace KufTheGame.Models.Interfaces
 {
-    interface ICharacter
+    public interface ICharacter
     {
         double AttackPoints { get; set; }
 

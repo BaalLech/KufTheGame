@@ -7,8 +7,7 @@ namespace KufTheGame.Models.Game.Models.Items
 {
     public class Armor : Item
     {
-        public Armor(int x, int y, int width, int height, Rarities rarity,
-            Armors armorType, double defencePoints)
+        public Armor(int x, int y, int width, int height, Rarities rarity, Armors armorType, double defencePoints)
             : base(x, y, width, height, rarity)
         {
             this.ArmorType = armorType;
@@ -26,7 +25,7 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public override string GetTexturePath()
         {
-            switch (ArmorType)
+            switch (this.ArmorType)
             {
                 case Armors.Boots: return Resources.Armor_BootsArmorTexture;
                 case Armors.Chest: return Resources.Armor_ChestArmorTexture;

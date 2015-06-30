@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using KufTheGame.Models.Enums;
 using Microsoft.Xna.Framework.Input;
 
@@ -19,7 +18,6 @@ namespace KufTheGame.Core
                 keys.Add(key);
                 return keys;
             }
-            
             
             if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
             {
@@ -61,7 +59,6 @@ namespace KufTheGame.Core
                 }
             }
 
-            
             return keys.Count == 1 ? keys : new List<PressedKey>()
             {
                 PressedKey.Null

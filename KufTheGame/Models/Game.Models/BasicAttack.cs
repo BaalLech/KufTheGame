@@ -9,6 +9,7 @@ namespace KufTheGame.Models.Game.Models
         {
             this.Damage = damage;
         }
+
         public double Damage { get; set; }
 
         public void Hit(Character target)
@@ -16,7 +17,7 @@ namespace KufTheGame.Models.Game.Models
             var player = target as Player;
             var armor = player != null ? player.GetTotalArmor() : target.DefencePoints;
 
-            var damage = (this.Damage) / armor;
+            var damage = this.Damage / armor;
             if (damage < this.Damage / 100d)
             {
                 damage = this.Damage / 100d;

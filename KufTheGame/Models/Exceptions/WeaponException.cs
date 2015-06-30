@@ -2,7 +2,7 @@
 
 namespace KufTheGame.Models.Exceptions
 {
-    class WeaponException : Exception
+    public class WeaponException : Exception
     {
         public WeaponException(string message)
             : base(message)

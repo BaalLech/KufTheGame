@@ -1,8 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-
+﻿using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
-using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Game.Models.Characters;
+using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Core
 {
@@ -28,9 +27,73 @@ namespace KufTheGame.Core
 
         private float ElapsedTime { get; set; }
 
+        public Rectangle GetSpriteFrame(Character character)
+        {
+            var attackFrames = this.GetAnimationFrames(character);
+
+            if ((attackFrames != 0) && ((character.State == State.YodaStrikePunch) || (character.State == State.WingedHorseKick) || (character.State == State.TeethOfTigerThrow)))
+            {
+                int animationFrames;
+                switch (character.State)
+                {
+                    case State.YodaStrikePunch:
+                        animationFrames = (int)Frames.YodaStrikePunch;
+                        break;
+                    case State.WingedHorseKick:
+                        animationFrames = (int)Frames.WingedHorseKick;
+                        break;
+                    case State.TeethOfTigerThrow:
+                        animationFrames = (int)Frames.TeethOfTigerThrow;
+                        break;
+                    default:
+                        animationFrames = 0;
+                        break;
+                }
+
+                return new Rectangle((this.FrameIndex % animationFrames) * 80, 140 * (int)character.State, 80, 140);
+            }
+
+            return
+                new Rectangle(this.FrameIndex % ((character.State == State.Idle) ? (int)Frames.Idle : (int)Frames.Moving) * 80, 140 * (int)character.State, 80, 140);
+        }
+
+        public Rectangle GetSplashScreenFrame()
+        {
+            return new Rectangle(0, (this.FrameIndex % 27) * 82, 701, 82);
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            // Adding Elapsed Time From Last Loop
+            this.ElapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // Checks is the Elapsed time higher than 0.1 seconds
+            while (this.ElapsedTime > FrameTime) 
+            {
+                this.FrameIndex += 1;
+
+                // Checks is the Attack Animation is Loaded
+                if (this.PlayerAttackFrames > 0) 
+                {
+                    this.PlayerAttackFrames = ((this.PlayerAttackFrames - 1) > 0) ? this.PlayerAttackFrames - 1 : 0;
+                }
+
+                // Checks is the Attack Animation is Loaded
+                if (this.EnemyAttackFrames > 0) 
+                {
+                    this.EnemyAttackFrames = ((this.EnemyAttackFrames - 1) > 1) ? this.EnemyAttackFrames - 1 : 1;
+                }
+
+                // Reset Elapsed Time
+                this.ElapsedTime = 0F; 
+            }
+
+            this.FrameIndex %= int.MaxValue;
+        }
+
         private int GetAnimationFrames(Character character)
         {
-            var attackFrames = (character is Player) ? PlayerAttackFrames : EnemyAttackFrames;
+            var attackFrames = (character is Player) ? this.PlayerAttackFrames : this.EnemyAttackFrames;
 
             if ((character.State == State.YodaStrikePunch) || (character.State == State.WingedHorseKick) ||
                 (character.State == State.TeethOfTigerThrow) || (attackFrames > 0))
@@ -40,13 +103,13 @@ namespace KufTheGame.Core
                     switch (character.State)
                     {
                         case State.YodaStrikePunch:
-                            attackFrames = (int) Frames.YodaStrikePunch;
+                            attackFrames = (int)Frames.YodaStrikePunch;
                             break;
                         case State.WingedHorseKick:
-                            attackFrames = (int) Frames.WingedHorseKick;
+                            attackFrames = (int)Frames.WingedHorseKick;
                             break;
                         case State.TeethOfTigerThrow:
-                            attackFrames = (int) Frames.TeethOfTigerThrow;
+                            attackFrames = (int)Frames.TeethOfTigerThrow;
                             break;
                         default:
                             attackFrames = 0;
@@ -57,71 +120,14 @@ namespace KufTheGame.Core
 
             if (character is Player)
             {
-                PlayerAttackFrames = attackFrames;
+                this.PlayerAttackFrames = attackFrames;
             }
             else
             {
-                EnemyAttackFrames = attackFrames;
+                this.EnemyAttackFrames = attackFrames;
             }
 
             return attackFrames;
-        }
-
-        public Rectangle GetSpriteFrame(Character character)
-        {
-            var attackFrames = GetAnimationFrames(character);
-
-            if ((attackFrames != 0) && ((character.State == State.YodaStrikePunch) || (character.State == State.WingedHorseKick) || (character.State == State.TeethOfTigerThrow)))
-            {
-                int animationFrames;
-                switch (character.State)
-                {
-                    case State.YodaStrikePunch:
-                        animationFrames = (int) Frames.YodaStrikePunch;
-                        break;
-                    case State.WingedHorseKick:
-                        animationFrames = (int) Frames.WingedHorseKick;
-                        break;
-                    case State.TeethOfTigerThrow:
-                        animationFrames = (int) Frames.TeethOfTigerThrow;
-                        break;
-                    default:
-                        animationFrames = 0;
-                        break;
-                }
-
-                return new Rectangle((FrameIndex % animationFrames) * 80, 140*(int) character.State, 80, 140);
-            }
-
-            return
-                new Rectangle( FrameIndex%((character.State == State.Idle) ? (int) Frames.Idle : (int) Frames.Moving)*80, 140*(int) character.State, 80, 140);
-        }
-
-        public Rectangle GetSplashScreenFrame()
-        {
-            return new Rectangle(0, (FrameIndex % 27) * 82, 701, 82);
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            ElapsedTime += (float) gameTime.ElapsedGameTime.TotalSeconds; //Adding Elapsed Time From Last Loop
-            while (ElapsedTime > FrameTime) //Checks is the Elapsed time higher than 0.1 seconds
-            {
-                FrameIndex += 1;
-                if (PlayerAttackFrames > 0) //Checks is the Attack Animation is Loaded
-                {
-                    PlayerAttackFrames = ((PlayerAttackFrames - 1) > 0) ? PlayerAttackFrames - 1 : 0;
-                }
-
-                if (EnemyAttackFrames > 0) //Checks is the Attack Animation is Loaded
-                {
-                    EnemyAttackFrames = ((EnemyAttackFrames - 1) > 1) ? EnemyAttackFrames - 1 : 1;
-                }
-
-                ElapsedTime = 0F; // Reset Elapsed Time
-            }
-
-            FrameIndex %= int.MaxValue;
         }
     }
 }

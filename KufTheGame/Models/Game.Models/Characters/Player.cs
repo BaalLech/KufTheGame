@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using KufTheGame.Core;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
@@ -8,7 +7,6 @@ using KufTheGame.Models.Exceptions;
 using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
 using KufTheGame.Properties;
-
 using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Characters
@@ -59,7 +57,10 @@ namespace KufTheGame.Models.Game.Models.Characters
 
                         case PressedKey.MoveDown:
                             if (!this.Directions.Contains(BlockedDirections.BlockedDown))
+                            {
                                 this.Velocity = new Vector2(this.Velocity.X, this.Velocity.Y + PlayerSpeed);
+                            }
+
                             break;
 
                         case PressedKey.MoveLeft:
@@ -90,13 +91,21 @@ namespace KufTheGame.Models.Game.Models.Characters
                             {
                                 case PressedKey.MoveLeft:
                                     this.SpriteRotation = 1;
-                                    if (!this.Directions.Contains(BlockedDirections.BlockedUp) && !this.Directions.Contains(BlockedDirections.BlockedLeft))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedUp) &&
+                                        !this.Directions.Contains(BlockedDirections.BlockedLeft))
+                                    {
                                         this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y - PlayerSpeed);
+                                    }
+
                                     break;
                                 case PressedKey.MoveRight:
                                     this.SpriteRotation = 0;
-                                    if (!this.Directions.Contains(BlockedDirections.BlockedUp) && !this.Directions.Contains(BlockedDirections.BlockedRight))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedUp) &&
+                                        !this.Directions.Contains(BlockedDirections.BlockedRight))
+                                    {
                                         this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y - PlayerSpeed);
+                                    }
+
                                     break;
                             }
 
@@ -106,13 +115,21 @@ namespace KufTheGame.Models.Game.Models.Characters
                             {
                                 case PressedKey.MoveLeft:
                                     this.SpriteRotation = 1;
-                                    if (!this.Directions.Contains(BlockedDirections.BlockedDown) && !this.Directions.Contains(BlockedDirections.BlockedLeft))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedDown) &&
+                                        !this.Directions.Contains(BlockedDirections.BlockedLeft))
+                                    {
                                         this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y + PlayerSpeed);
+                                    }
+
                                     break;
                                 case PressedKey.MoveRight:
                                     this.SpriteRotation = 0;
-                                    if (!this.Directions.Contains(BlockedDirections.BlockedDown) && !this.Directions.Contains(BlockedDirections.BlockedRight))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedDown) &&
+                                        !this.Directions.Contains(BlockedDirections.BlockedRight))
+                                    {
                                         this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y + PlayerSpeed);
+                                    }
+
                                     break;
                             }
 
@@ -122,12 +139,20 @@ namespace KufTheGame.Models.Game.Models.Characters
                             switch (keys[1])
                             {
                                 case PressedKey.MoveUp:
-                                    if (!this.Directions.Contains(BlockedDirections.BlockedLeft) && !this.Directions.Contains(BlockedDirections.BlockedUp))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedLeft) &&
+                                        !this.Directions.Contains(BlockedDirections.BlockedUp))
+                                    {
                                         this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y - PlayerSpeed);
+                                    }
+
                                     break;
                                 case PressedKey.MoveDown:
-                                    if (!this.Directions.Contains(BlockedDirections.BlockedLeft) && !this.Directions.Contains(BlockedDirections.BlockedDown))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedLeft) &&
+                                        !this.Directions.Contains(BlockedDirections.BlockedDown))
+                                    {
                                         this.Velocity = new Vector2(this.Velocity.X - PlayerSpeed, this.Velocity.Y + PlayerSpeed);
+                                    }
+
                                     break;
                             }
 
@@ -137,12 +162,20 @@ namespace KufTheGame.Models.Game.Models.Characters
                             switch (keys[1])
                             {
                                 case PressedKey.MoveUp:
-                                    if (!this.Directions.Contains(BlockedDirections.BlockedRight) && !this.Directions.Contains(BlockedDirections.BlockedUp))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedRight) &&
+                                        !this.Directions.Contains(BlockedDirections.BlockedUp))
+                                    {
                                         this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y - PlayerSpeed);
+                                    }
+
                                     break;
                                 case PressedKey.MoveDown:
-                                    if (!this.Directions.Contains(BlockedDirections.BlockedRight) && !this.Directions.Contains(BlockedDirections.BlockedDown))
+                                    if (!this.Directions.Contains(BlockedDirections.BlockedRight) &&
+                                        !this.Directions.Contains(BlockedDirections.BlockedDown))
+                                    {
                                         this.Velocity = new Vector2(this.Velocity.X + PlayerSpeed, this.Velocity.Y + PlayerSpeed);
+                                    }
+
                                     break;
                             }
 
@@ -168,7 +201,7 @@ namespace KufTheGame.Models.Game.Models.Characters
                 return null;
             }
 
-            this.State = (this.State == State.Idle || this.State == State.Moving) ? (State)(RandomGenerator.Randomize(2, 4)) : this.State;
+            this.State = (this.State == State.Idle || this.State == State.Moving) ? (State)RandomGenerator.Randomize(2, 4) : this.State;
 
             return attack;
         }
@@ -215,7 +248,7 @@ namespace KufTheGame.Models.Game.Models.Characters
         {
             try
             {
-                if (ArmorSet.All(t => t.ArmorType != armor.ArmorType))
+                if (this.ArmorSet.All(t => t.ArmorType != armor.ArmorType))
                 {
                     this.ArmorSet.Add(armor);
                 }
