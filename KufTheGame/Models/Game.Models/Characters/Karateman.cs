@@ -10,12 +10,6 @@ namespace KufTheGame.Models.Game.Models.Characters
         {
 
         }
-
-        public override void ProduceSound()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override string GetTexturePath()
         {
             return Resources.Character_KarateEnemyTexture;

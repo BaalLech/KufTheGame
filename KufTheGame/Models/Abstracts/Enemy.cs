@@ -83,10 +83,7 @@ namespace KufTheGame.Models.Abstracts
             attack.Hit(this);
         }
 
-        public override void ProduceSound()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public void AddDrops()
         {

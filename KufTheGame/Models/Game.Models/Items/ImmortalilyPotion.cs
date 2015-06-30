@@ -20,11 +20,6 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public int Duration { get; set; }
 
-        public override void ProduceSound()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Use(Player target)
         {
             target.ImmortalDuration += this.Duration;

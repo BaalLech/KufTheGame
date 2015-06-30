@@ -19,11 +19,6 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public double Health { get; set; }
 
-        public override void ProduceSound()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override void Use(Player target)
         {
             target.HealthPoints += this.Health;

@@ -12,11 +12,6 @@ namespace KufTheGame.Models.Game.Models.Obsticles
         {
             
         }
-       
-        public override void ProduceSound()
-        {
-            throw new NotImplementedException();
-        }
 
         public override string GetTexturePath()
         {

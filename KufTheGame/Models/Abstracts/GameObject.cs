@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Abstracts
 {
-    public abstract class GameObject : IGameObject, ISoundable
+    public abstract class GameObject : IGameObject
     {
         protected GameObject(int x, int y, int width, int height)
         {
@@ -18,8 +18,6 @@ namespace KufTheGame.Models.Abstracts
         public int Width { get; set; }
 
         public int Height { get; set; }
-
-        public abstract void ProduceSound();
 
         public abstract string GetTexturePath();
 

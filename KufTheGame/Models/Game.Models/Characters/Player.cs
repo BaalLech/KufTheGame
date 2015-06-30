@@ -39,11 +39,6 @@ namespace KufTheGame.Models.Game.Models.Characters
 
         public int ImmortalDuration { get; set; }
 
-        public override void ProduceSound()
-        {
-            //var kickSound = 
-        }
-
         public override void Move()
         {
             IList<PressedKey> keys = KeyListener.GetKey();
