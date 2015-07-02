@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-
 using KufTheGame.Core;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models;
 using KufTheGame.Models.Game.Models.Items;
 using KufTheGame.Models.Interfaces;
 using KufTheGame.Models.Structures;
-
 using Microsoft.Xna.Framework;
-
 
 namespace KufTheGame.Models.Abstracts
 {
@@ -52,7 +48,7 @@ namespace KufTheGame.Models.Abstracts
             }
             else
             {
-                if (this.Velocity.Y > KufTheGame.Player.Velocity.Y )
+                if (this.Velocity.Y > KufTheGame.Player.Velocity.Y)
                 {
                     if (!this.Directions.Contains(BlockedDirections.BlockedUp))
                     {
@@ -60,7 +56,7 @@ namespace KufTheGame.Models.Abstracts
                     }
                 }
 
-                if (this.Velocity.Y < KufTheGame.Player.Velocity.Y )
+                if (this.Velocity.Y < KufTheGame.Player.Velocity.Y)
                 {
                     if (!this.Directions.Contains(BlockedDirections.BlockedDown))
                     {
@@ -72,10 +68,9 @@ namespace KufTheGame.Models.Abstracts
 
         public override BasicAttack Attack()
         {
-            this.State = (this.State != State.Moving) ? this.State : (State) RandomGenerator.Randomize(2, 4);
+            this.State = (this.State != State.Moving) ? this.State : (State)RandomGenerator.Randomize(2, 4);
 
             return new BasicAttack(this.AttackPoints);
-            
         }
 
         public override void RespondToAttack(BasicAttack attack)
@@ -83,18 +78,13 @@ namespace KufTheGame.Models.Abstracts
             attack.Hit(this);
         }
 
-        public override void ProduceSound()
-        {
-            throw new NotImplementedException();
-        }
-
         public void AddDrops()
         {
-            var rngNum = GetNumOfDrops();
+            var rngNum = this.GetNumOfDrops();
 
             for (var i = 0; i < rngNum; i++)
             {
-                var item = GetItem(i);
+                var item = this.GetItem(i);
                 this.Drops.Add(item);
             }
         }
@@ -124,21 +114,20 @@ namespace KufTheGame.Models.Abstracts
             var rarityType = rarity.Keys.First();
             var rarityCoef = rarity.Values.First();
             var dropX = (int)this.Velocity.X + this.Width / (2 - numOfItems) - KufTheGame.ItemSize / 2;
-            var dropY = (int) this.Velocity.Y + this.Height/2 - KufTheGame.ItemSize/2;
+            var dropY = (int)this.Velocity.Y + this.Height / 2 - KufTheGame.ItemSize / 2;
 
             if (rngNum <= 25)
             {
                 var weaponType = RandomGenerator.GetRandomItem<Weapons>();
-                var wep = new Weapon(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
-                    weaponType, 10*rarityCoef);
+                var wep = new Weapon(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType, weaponType, 10 * rarityCoef);
                 return wep;
             }
 
             if (rngNum > 25 && rngNum <= 65)
             {
                 var armorType = RandomGenerator.GetRandomItem<Armors>();
-                var armor = new Armor(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
-                    armorType, 5*rarityCoef);
+                var armor =
+                    new Armor(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType, armorType, 5 * rarityCoef);
                 return armor;
             }
 
@@ -147,16 +136,15 @@ namespace KufTheGame.Models.Abstracts
                 var rngPotionNum = RandomGenerator.Randomize(1, 100);
                 if (rngPotionNum <= 40)
                 {
-                    var potion = new ImmortalilyPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize,
-                        rarityType,
-                        (int)(150 * rarityCoef));
+                    var potion =
+                        new ImmortalilyPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType, (int)(150 * rarityCoef));
                     return potion;
                 }
 
                 if (rngPotionNum > 40)
                 {
-                    var potion = new HealthPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType,
-                        10*rarityCoef);
+                    var potion =
+                        new HealthPotion(dropX, dropY, KufTheGame.ItemSize, KufTheGame.ItemSize, rarityType, 10 * rarityCoef);
                     return potion;
                 }
             }

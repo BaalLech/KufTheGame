@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using KufTheGame.Models.Enums;
 using Microsoft.Xna.Framework.Input;
 
@@ -15,16 +14,15 @@ namespace KufTheGame.Core
 
             if (keyboardState.IsKeyDown(Keys.Enter))
             {
-                var key1 = PressedKey.Attack;
-                keys.Add(key1);
+                var key = PressedKey.Attack;
+                keys.Add(key);
                 return keys;
             }
             
-            
             if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
             {
-                var key1= PressedKey.MoveUp;
-                keys.Add(key1);
+                var key = PressedKey.MoveUp;
+                keys.Add(key);
                 if (keys.Count == 2)
                 {
                     return keys;
@@ -33,8 +31,8 @@ namespace KufTheGame.Core
 
             if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
             {
-                var key1 = PressedKey.MoveDown;
-                keys.Add(key1);
+                var key = PressedKey.MoveDown;
+                keys.Add(key);
                 if (keys.Count == 2)
                 {
                     return keys;
@@ -43,8 +41,8 @@ namespace KufTheGame.Core
 
             if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
             {
-                var key1 = PressedKey.MoveLeft;
-                keys.Add(key1);
+                var key = PressedKey.MoveLeft;
+                keys.Add(key);
                 if (keys.Count == 2)
                 {
                     return keys;
@@ -53,16 +51,18 @@ namespace KufTheGame.Core
 
             if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
             {
-                var key1 = PressedKey.MoveRight;
-                keys.Add(key1);
+                var key = PressedKey.MoveRight;
+                keys.Add(key);
                 if (keys.Count == 2)
                 {
                     return keys;
                 }
             }
 
-            
-            return keys.Count == 1 ? keys : new List<PressedKey>(){PressedKey.Null};
+            return keys.Count == 1 ? keys : new List<PressedKey>()
+            {
+                PressedKey.Null
+            };
         }
     }
 }

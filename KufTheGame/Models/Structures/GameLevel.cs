@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using KufTheGame.Core;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Game.Models.Characters;
@@ -28,7 +27,7 @@ namespace KufTheGame.Models.Structures
 
             for (int i = 0; i < StartingEnemies + enemyCoef; i++)
             {
-                double levelCoef = Level * (RandomGenerator.Randomize(25, 120) / 100) + 1;
+                double levelCoef = (Level * (RandomGenerator.Randomize(25, 120) / 100)) + 1;
                 var enemyType = RandomGenerator.Randomize(0, 1);
                 var attackPoints = RandomGenerator.Randomize(5, 10) * levelCoef;
                 var defPoints = RandomGenerator.Randomize(5, 10) * levelCoef;
@@ -37,13 +36,11 @@ namespace KufTheGame.Models.Structures
                 {
                     case 0:
                         enemies.Add(new StickmanNinja(
-                            KufTheGame.EnemyStartX, KufTheGame.EnemyStartY, KufTheGame.StandartWidth, KufTheGame.StandartHeight,
-                            attackPoints, defPoints, healthPoints));
+                            KufTheGame.EnemyStartX, KufTheGame.EnemyStartY, KufTheGame.StandartWidth, KufTheGame.StandartHeight, attackPoints, defPoints, healthPoints));
                         break;
                     case 1:
                         enemies.Add(new Karateman(
-                            KufTheGame.EnemyStartX, KufTheGame.EnemyStartY, KufTheGame.StandartWidth, KufTheGame.StandartHeight,
-                            attackPoints, defPoints, healthPoints));
+                            KufTheGame.EnemyStartX, KufTheGame.EnemyStartY, KufTheGame.StandartWidth, KufTheGame.StandartHeight, attackPoints, defPoints, healthPoints));
                         break;
                 }
             }

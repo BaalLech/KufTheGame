@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace KufTheGame.Models.Interfaces
 {
-    interface IEnemy
+    public interface IEnemy
     {
         ICollection<IItem> Drops { get; }
     }

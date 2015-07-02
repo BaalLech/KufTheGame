@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Items;
 
 namespace KufTheGame.Models.Interfaces
@@ -17,8 +16,6 @@ namespace KufTheGame.Models.Interfaces
         void RemoveWeapon();
 
         void SetArmor(Armor armor);
-
-        void RemoveArmor();
 
         double GetTotalArmor();
     }

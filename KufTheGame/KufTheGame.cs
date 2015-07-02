@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-
+using System.Linq;
 using KufTheGame.Core;
-using KufTheGame.Properties;
-using KufTheGame.Models.Enums;
 using KufTheGame.Models.Abstracts;
+using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Game.Models.Obsticles;
 using KufTheGame.Models.Structures;
-
+using KufTheGame.Properties;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -36,12 +34,12 @@ namespace KufTheGame
         public const int StandartHeight = 100;
         public const int ScorePerKill = 10;
 
-        private SpriteBatch spriteBatch;
         private readonly GraphicsDeviceManager graphics;
-        
+        private SpriteBatch spriteBatch;
+
         public KufTheGame()
         {
-            //Creating Game Screen And Setting Initial Size
+            // Creating Game Screen And Setting Initial Size
             this.graphics = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferWidth = 1000,
@@ -53,25 +51,35 @@ namespace KufTheGame
         }
 
         public static List<Item> Drops { get; set; }
+
         public static Player Player { get; set; }
 
         private List<int> TopScores { get; set; }
+
         private List<Enemy> Enemies { get; set; }
+
         private List<Obsticle> Objects { get; set; }
 
         private FrameHandler FrameHandlerVariable { get; set; }
 
         private bool LevelChanged { get; set; }
+
         private bool IsPlaying { get; set; }
 
         private int BackgroundSection { get; set; }
+
         private int BarSize { get; set; }
+
         private int Slider { get; set; }
+
         private int FadeInCounter { get; set; }
+
         private int FadeOutCounter { get; set; }
 
         private Song BackgroundSong { get; set; }
+
         private SoundEffect KickSound { get; set; }
+
         private SoundEffect DropSound { get; set; }
 
         /// <summary>
@@ -103,6 +111,9 @@ namespace KufTheGame
             this.FadeOutCounter = 255;
 
             //this.IsPlaying = true;
+
+            this.IsPlaying = false;
+
             this.LevelChanged = false;
 
             this.FrameHandlerVariable = new FrameHandler();
@@ -119,7 +130,7 @@ namespace KufTheGame
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
-            //Load Sounds
+            // Load Sounds
             this.KickSound = this.Content.Load<SoundEffect>(Resources.Sound_PlayerKickSound);
             this.DropSound = this.Content.Load<SoundEffect>(Resources.Sound_DropSound);
 
@@ -145,7 +156,8 @@ namespace KufTheGame
         {
             if (this.IsPlaying)
             {
-                if (this.Enemies.Count == 0) //Background is changing only if all enemies are killed
+                // Background is changing only if all enemies are killed
+                if (this.Enemies.Count == 0)
                 {
                     if (!this.LevelChanged)
                     {
@@ -153,16 +165,15 @@ namespace KufTheGame
                         this.LevelChanged = true;
                     }
 
-
                     if (this.Slider < 1000 * this.BackgroundSection)
                     {
                         this.Slider = (int)(this.Slider + 1.5F);
                         Player.Velocity = (Player.Velocity.X > 100)
-                            ? new Vector2((Player.Velocity.X - 1), Player.Velocity.Y)
-                            : new Vector2((Player.Velocity.X + 1), Player.Velocity.Y);
+                            ? new Vector2(Player.Velocity.X - 1, Player.Velocity.Y)
+                            : new Vector2(Player.Velocity.X + 1, Player.Velocity.Y);
                         Player.Velocity = (Player.Velocity.Y > 500)
-                            ? new Vector2(Player.Velocity.X, (Player.Velocity.Y - 1))
-                            : new Vector2(Player.Velocity.X, (Player.Velocity.Y + 1));
+                            ? new Vector2(Player.Velocity.X, Player.Velocity.Y - 1)
+                            : new Vector2(Player.Velocity.X, Player.Velocity.Y + 1);
                     }
                     else
                     {
@@ -171,7 +182,7 @@ namespace KufTheGame
 
                         this.Enemies = GameLevel.InitializeEnemies();
 
-                        this.BarSize = 167 / this.Enemies.Count - this.Enemies.Count * 2;
+                        this.BarSize = (167 / this.Enemies.Count) - (this.Enemies.Count * 2);
                     }
                 }
 
@@ -183,19 +194,19 @@ namespace KufTheGame
                     this.Enemies[0].ResetDirections();
                 }
 
-                //Check for Intersection between Player and Enemies
+                // Check for Intersection between Player and Enemies
                 foreach (var enemy in this.Enemies)
                 {
                     Player.Intersect(enemy);
                 }
 
-                //Enemy attacks when Player is in range
+                // Enemy attacks when Player is in range
                 foreach (var enemyAttack in from enemy in this.Enemies where enemy.InAttackRange(Player) select enemy.Attack())
                 {
                     Player.RespondToAttack(enemyAttack);
                 }
 
-                //Check for Intersection between Player and Objects
+                // Check for Intersection between Player and Objects
                 foreach (var obj in this.Objects)
                 {
                     Player.Intersect(obj);
@@ -212,11 +223,19 @@ namespace KufTheGame
                     for (var i = 0; i < this.Enemies.Count; i++)
                     {
                         var enemy = this.Enemies[i];
-                        if (!Player.InAttackRange(enemy)) continue;
+                        {
+                            if (!Player.InAttackRange(enemy))
+                            {
+                                continue;
+                            }
+                        }
 
                         enemy.RespondToAttack(attack);
 
-                        if (enemy.IsAlive()) continue;
+                        if (enemy.IsAlive())
+                        {
+                            continue;
+                        }
 
                         enemy.AddDrops();
                         Scoreboard.AddScore(ScorePerKill);
@@ -231,10 +250,14 @@ namespace KufTheGame
                     }
                 }
 
-                //Collecting dropped item
+                // Collecting dropped item
                 for (var i = 0; i < Drops.Count; i++)
                 {
-                    if (!Drops[i].Contains(Player)) continue;
+                    if (!Drops[i].Contains(Player))
+                    {
+                        continue;
+                    }
+
                     var item = Drops[i];
 
                     item.Use(Player);
@@ -263,7 +286,7 @@ namespace KufTheGame
                     this.FadeInCounter++;
                     this.FadeOutCounter = (this.FadeInCounter != 600) ? this.FadeOutCounter - 1 : 255;
 
-                    if ((this.FadeInCounter == 855) && (Player.IsAlive()))
+                    if ((this.FadeInCounter == 855) && Player.IsAlive())
                     {
                         this.IsPlaying = true;
                         MediaPlayer.Play(this.BackgroundSong);
@@ -293,8 +316,11 @@ namespace KufTheGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            var characterCenter = new Vector2(40, 70); //Characters' sprite center coordinates
-            var pen = new Texture2D(this.graphics.GraphicsDevice, 1, 1); //Drawing pen for Game HUD
+            // Characters' sprite center coordinates
+            var characterCenter = new Vector2(40, 70);
+
+            // Drawing pen for Game HUD
+            var pen = new Texture2D(this.graphics.GraphicsDevice, 1, 1);
             pen.SetData(new[] { Color.White });
 
             this.GraphicsDevice.Clear(Color.Black);
@@ -305,21 +331,21 @@ namespace KufTheGame
                 /* ------------- Drawing Background -------------*/
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Background_BackgroundTexture), new Rectangle(((-1) * this.Slider), 0, 3072, 800), Color.White);
 
-                //Drawing HUD Background
+                // Drawing HUD Background
                 this.spriteBatch.Draw(pen, new Rectangle(0, 0, ScreenWidth, 100), new Color(Color.Black, 0.7F));
 
-                //Drawing Dragon HUD
+                // Drawing Dragon HUD
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_DragonTexture), new Rectangle(50, 10, 100, 80), Color.White);
 
-                //Drawing Score 
+                // Drawing Score 
                 this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Score: ", new Vector2(200, 10), Color.Coral);
                 this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format("{0:00000000}", Scoreboard.Score), new Vector2(300, 10), Color.Coral);
 
-                //Drawing GameTime
+                // Drawing GameTime
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_ClockTexture), new Rectangle(405, 15, 15, 15), Color.White);
                 this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format("{0:0000}", (int)gameTime.TotalGameTime.TotalSeconds - 30), new Vector2(425, 10), Color.Coral);
 
-                //Drawing HealthBar
+                // Drawing HealthBar
                 this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Health: ", new Vector2(200, 40), Color.Coral);
                 this.spriteBatch.Draw(pen, new Rectangle(300, 40, 167, 20), Color.Coral);
                 this.spriteBatch.Draw(pen, new Rectangle(305, 42, 157, 16), Color.Black);
@@ -332,8 +358,7 @@ namespace KufTheGame
                     this.spriteBatch.Draw(pen, new Rectangle(307 + (bars * 10) + (bars * 2), 44, 10, 12), color);
                 }
 
-
-                //Drawing Enemies Count Bar
+                // Drawing Enemies Count Bar
                 this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Enemies: ", new Vector2(200, 70), Color.Coral);
                 this.spriteBatch.Draw(pen, new Rectangle(300, 70, 167, 20), Color.Coral);
                 this.spriteBatch.Draw(pen, new Rectangle(305, 72, 157, 16), Color.Black);
@@ -343,7 +368,7 @@ namespace KufTheGame
                     this.spriteBatch.Draw(pen, new Rectangle(307 + (enemy * this.BarSize) + (enemy * 2), 74, this.BarSize, 12), Color.Coral);
                 }
 
-                //Drawing Lives Left
+                // Drawing Lives Left
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_HeartTexture), new Rectangle(475, 73, 20, 20), Color.White);
                 this.spriteBatch.Draw(pen, new Rectangle(475, 10, 20, 60), Color.Coral);
                 this.spriteBatch.Draw(pen, new Rectangle(477, 12, 16, 56), Color.Black);
@@ -355,15 +380,14 @@ namespace KufTheGame
                     this.spriteBatch.Draw(pen, new Rectangle(479, (66 - livesBarHeight - (livesBarHeight * lives) - (lives * 2)), 12, livesBarHeight), Color.Red);
                 }
 
-
-                //Drawing Stash Pockets
+                // Drawing Stash Pockets
                 for (var item = 0; item < 5; item++)
                 {
                     this.spriteBatch.Draw(pen, new Rectangle(500 + (item * 65), 10, 60, 60), Color.Coral);
                     this.spriteBatch.Draw(pen, new Rectangle(502 + (item * 65), 12, 56, 56), Color.Black);
                 }
 
-                //Drawing Players Weapon
+                // Drawing Players Weapon
                 if (Player.Weapon != null)
                 {
                     var color = (Player.Weapon.Rarity == Rarities.Common)
@@ -378,16 +402,20 @@ namespace KufTheGame
                     this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "   + " + Player.Weapon.AttackPoints, new Vector2(505, 70), color);
                 }
 
-                //Drawing Players Armor
+                // Drawing Players Armor
                 foreach (var armor in Player.ArmorSet)
                 {
                     var position = new Vector2();
                     switch (armor.ArmorType)
                     {
-                        case Armors.Helmet: position = new Vector2(570, 70); break;
-                        case Armors.Chest: position = new Vector2(635, 70); break;
-                        case Armors.Gloves: position = new Vector2(700, 70); break;
-                        case Armors.Boots: position = new Vector2(765, 70); break;
+                        case Armors.Helmet: position = new Vector2(570, 70);
+                            break;
+                        case Armors.Chest: position = new Vector2(635, 70);
+                            break;
+                        case Armors.Gloves: position = new Vector2(700, 70);
+                            break;
+                        case Armors.Boots: position = new Vector2(765, 70);
+                            break;
                     }
 
                     var color = (armor.Rarity == Rarities.Common)
@@ -402,20 +430,20 @@ namespace KufTheGame
                     this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format(" +{0:F1}", armor.DefencePoints), position, color);
                 }
 
-                //Drawing Plaeyer StatInfo
-                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont),
+                // Drawing Plaeyer StatInfo
+                this.spriteBatch.DrawString(
+                    this.Content.Load<SpriteFont>(Resources.Font_GameFont),
                     string.Format("Damage: {0}", (Player.Weapon != null) ? Player.Weapon.AttackPoints + Player.AttackPoints : Player.AttackPoints),
                     new Vector2(830, 5),
-                    Color.Coral
-                );
+                    Color.Coral);
 
-                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont),
+                this.spriteBatch.DrawString(
+                    this.Content.Load<SpriteFont>(Resources.Font_GameFont),
                     string.Format("Armor:    {0:F1}", Player.GetTotalArmor()),
                     new Vector2(830, 30),
-                    Color.Coral
-                );
+                    Color.Coral);
 
-                //Flashing Light When Player is Immortal
+                // Flashing Light When Player is Immortal
                 if (Player.ImmortalDuration > 0)
                 {
                     if (this.FrameHandlerVariable.FrameIndex % 2 == 0)
@@ -430,7 +458,7 @@ namespace KufTheGame
                     }
                 }
 
-                //Drawing HUD Frame
+                // Drawing HUD Frame
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_BorderTexture), new Rectangle(0, 5, 1000, 100), Color.White);
 
                 /* ------------- Drawing Dropped Items -------------*/
@@ -442,17 +470,33 @@ namespace KufTheGame
                 /* ------------- Drawing Enemies -------------*/
                 foreach (var enemy in this.Enemies)
                 {
-                    this.spriteBatch.Draw(this.Content.Load<Texture2D>(enemy.GetTexturePath()), enemy.Velocity, this.FrameHandlerVariable.GetSpriteFrame(enemy), Color.White,
-                    0.0f, characterCenter, 1.5f, (enemy.SpriteRotation != 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1.0f);
+                    this.spriteBatch.Draw(
+                    this.Content.Load<Texture2D>(enemy.GetTexturePath()),
+                    enemy.Velocity,
+                    this.FrameHandlerVariable.GetSpriteFrame(enemy),
+                    Color.White,
+                    0.0f,
+                    characterCenter,
+                    1.5f,
+                    (enemy.SpriteRotation != 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
+                    1.0f);
                 }
 
                 /* ------------- Drawing Player -------------*/
-                this.spriteBatch.Draw(this.Content.Load<Texture2D>(Player.GetTexturePath()), Player.Velocity, this.FrameHandlerVariable.GetSpriteFrame(Player), Color.White,
-                    0.0f, characterCenter, 1.5f, (Player.SpriteRotation == 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1.0f);
+                this.spriteBatch.Draw(
+                    this.Content.Load<Texture2D>(Player.GetTexturePath()),
+                    Player.Velocity,
+                    this.FrameHandlerVariable.GetSpriteFrame(Player),
+                    Color.White,
+                    0.0f,
+                    characterCenter,
+                    1.5f,
+                    (Player.SpriteRotation == 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
+                    1.0f);
             }
             else
             {
-                //Drawing Game intro
+                // Drawing Game intro
                 if (Player.IsAlive())
                 {
                     var newColor = ((this.FadeInCounter - 255 < 255) && (this.FadeInCounter < 600))
@@ -461,21 +505,23 @@ namespace KufTheGame
 
                     if (this.FadeInCounter < 255)
                     {
-                        this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_CompanySplashTexture),
+                        this.spriteBatch.Draw(
+                            this.Content.Load<Texture2D>(Resources.Screen_CompanySplashTexture),
                             new Vector2(150, 335),
                             this.FrameHandlerVariable.GetSplashScreenFrame(),
                             new Color(this.FadeOutCounter, this.FadeOutCounter, this.FadeOutCounter, this.FadeOutCounter));
                     }
                     else
                     {
-                        this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_PrePlayTexture),
-                            new Vector2(0, 0), new Color(newColor, newColor, newColor, newColor));
+                        this.spriteBatch.Draw(
+                            this.Content.Load<Texture2D>(Resources.Screen_PrePlayTexture), new Vector2(0, 0), new Color(newColor, newColor, newColor, newColor));
 
                         if ((this.FadeInCounter >= 345) && (this.FadeInCounter < 600))
                         {
                             var innerNewColor = newColor - 90;
 
-                            this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_GameLogoSplashTexture),
+                            this.spriteBatch.Draw(
+                                this.Content.Load<Texture2D>(Resources.Screen_GameLogoSplashTexture),
                                 new Vector2(600, 200),
                                 new Color(innerNewColor, innerNewColor, innerNewColor, innerNewColor));
                         }
@@ -483,26 +529,25 @@ namespace KufTheGame
                 }
                 else
                 {
-                    //Drawing Scoreboard Screen
+                    // Drawing Scoreboard Screen
                     this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.Screen_GameOverScreenTexture), new Vector2(50, 0), Color.White);
 
                     for (var currScore = this.TopScores.Count - 1; currScore >= 0; currScore--)
                     {
-                        this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFontBold),
-                            string.Format("{0}.", currScore + 1), 
-                            new Vector2((currScore < this.TopScores.Count / 2) ? 250 : 550, 500 + (30 * (currScore % (this.TopScores.Count / 2)))), 
-                            Color.White
-                        );
+                        this.spriteBatch.DrawString(
+                            this.Content.Load<SpriteFont>(Resources.Font_GameFontBold),
+                            string.Format("{0}.", currScore + 1),
+                            new Vector2((currScore < this.TopScores.Count / 2) ? 250 : 550, 500 + (30 * (currScore % (this.TopScores.Count / 2)))),
+                            Color.White);
 
-                        this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFontBold),
+                        this.spriteBatch.DrawString(
+                            this.Content.Load<SpriteFont>(Resources.Font_GameFontBold),
                             string.Format("{0}", this.TopScores[currScore]),
                             new Vector2((currScore < this.TopScores.Count / 2) ? 300 : 600, 500 + (30 * (currScore % (this.TopScores.Count / 2)))),
-                            (this.TopScores[currScore] == Scoreboard.Score) ? Color.Yellow : Color.White
-                        );
+                            (this.TopScores[currScore] == Scoreboard.Score) ? Color.Yellow : Color.White);
                     }
                 }
             }
-
 
             this.spriteBatch.End();
 

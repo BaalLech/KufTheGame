@@ -1,18 +1,16 @@
 ﻿using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
 using KufTheGame.Models.Game.Models.Characters;
-using KufTheGame.Models.Interfaces;
 using KufTheGame.Properties;
-using Microsoft.Xna.Framework;
 
 namespace KufTheGame.Models.Game.Models.Items
 {
-    public class Weapon: Item
+    public class Weapon : Item
     {
         public const string ImagePath = "";
 
-        public Weapon(int x, int y, int width, int height, Rarities rarity,
-            Weapons weaponType, double attackPoints) : base(x, y,width,height, rarity)
+        public Weapon(int x, int y, int width, int height, Rarities rarity, Weapons weaponType, double attackPoints)
+            : base(x, y, width, height, rarity)
         {
             this.WeaponType = weaponType;
             this.AttackPoints = attackPoints;
@@ -22,11 +20,6 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public double AttackPoints { get; set; }
 
-        public override void ProduceSound()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override void Use(Player target)
         {
             target.SetWeapon(this);
@@ -34,7 +27,7 @@ namespace KufTheGame.Models.Game.Models.Items
 
         public override string GetTexturePath()
         {
-            switch (WeaponType)
+            switch (this.WeaponType)
             {
                 case Weapons.Axe: return Resources.Weapon_AxeWeaponTexture;
                 case Weapons.Dagger: return Resources.Weapon_DaggerWeaponTexture;

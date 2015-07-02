@@ -8,11 +8,11 @@ namespace KufTheGame.Models.Structures
     {
         public static readonly Dictionary<int, Dictionary<Rarities, double>> rarities = new Dictionary<int, Dictionary<Rarities, double>>()
         {
-           { 0, new Dictionary<Rarities, double>() {{Rarities.Common, 0.5}}},
-           { 1, new Dictionary<Rarities, double>() {{Rarities.Magic, 1}}},
-           { 2, new Dictionary<Rarities, double>() {{Rarities.Rare, 1.5}}},
-           { 3, new Dictionary<Rarities, double>() {{Rarities.Epic, 2.5}}},
-           { 4, new Dictionary<Rarities, double>() {{Rarities.Legendary, 5}}}
+           { 0, new Dictionary<Rarities, double>() { { Rarities.Common, 0.5 } } },
+           { 1, new Dictionary<Rarities, double>() { { Rarities.Magic, 1 } } },
+           { 2, new Dictionary<Rarities, double>() { { Rarities.Rare, 1.5 } } },
+           { 3, new Dictionary<Rarities, double>() { { Rarities.Epic, 2.5 } } },
+           { 4, new Dictionary<Rarities, double>() { { Rarities.Legendary, 5 } } }
         };
 
         public static Dictionary<Rarities, double> GetRandomRarity()
