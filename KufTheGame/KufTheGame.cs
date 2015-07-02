@@ -46,7 +46,7 @@ namespace KufTheGame
             {
                 PreferredBackBufferWidth = 1000,
                 PreferredBackBufferHeight = 800,
-                //IsFullScreen = true
+                IsFullScreen = true
             };
 
             this.Content.RootDirectory = "Content";
@@ -102,7 +102,7 @@ namespace KufTheGame
             this.FadeInCounter = 0;
             this.FadeOutCounter = 255;
 
-            this.IsPlaying = true;
+            //this.IsPlaying = true;
             this.LevelChanged = false;
 
             this.FrameHandlerVariable = new FrameHandler();
@@ -274,7 +274,10 @@ namespace KufTheGame
 
             if (this.IsPlaying && ((Player.Lives == 0) || (this.Enemies.Count == 0 && this.BackgroundSection == 3)))
             {
+                MediaPlayer.Stop();
+
                 this.IsPlaying = false;
+
                 Scoreboard.AddNewToScoreboard(Scoreboard.Score);
 
                 this.TopScores = Scoreboard.GetScoreboard();
@@ -314,7 +317,7 @@ namespace KufTheGame
 
                 //Drawing GameTime
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_ClockTexture), new Rectangle(405, 15, 15, 15), Color.White);
-                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format("{0:0000}", (int)gameTime.TotalGameTime.TotalSeconds), new Vector2(425, 10), Color.Coral);
+                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format("{0:0000}", (int)gameTime.TotalGameTime.TotalSeconds - 30), new Vector2(425, 10), Color.Coral);
 
                 //Drawing HealthBar
                 this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Health: ", new Vector2(200, 40), Color.Coral);
