@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KufTheGame.Core.FrameHandler" Collapsed="true">
+    <Position X="22.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQFAAAAACAAAAAAAAAAAMAAAAAEAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Core\FrameHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Core.KeyListener" Collapsed="true">
+    <Position X="24" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\KeyListener.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Core.RandomGenerator" Collapsed="true">
+    <Position X="22.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAACAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\RandomGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Core.Scoreboard" Collapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAIEAAAAgAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Scoreboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.KufTheGame" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiQAEEAAAEhgBwAEEAAAAJgAAEVAAAkAgEDAAQAANAQ=</HashCode>
+      <FileName>KufTheGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Program" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Abstracts.Character" Collapsed="true">
+    <Position X="14" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwgBgAAAQKKAEAACACAEAAAIAIAAAAQCBAAADQAAAAA=</HashCode>
+      <FileName>Models\Abstracts\Character.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="KufTheGame.Models.Abstracts.Consumable" Collapsed="true">
+    <Position X="1.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Abstracts\Consumable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Abstracts.Enemy" Collapsed="true">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAgAAAAIgAAEAAAAAAAAAAAIAAAAQAAAABCAAAAAA=</HashCode>
+      <FileName>Models\Abstracts\Enemy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="KufTheGame.Models.Abstracts.GameObject" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAACAAUAAA=</HashCode>
+      <FileName>Models\Abstracts\GameObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="KufTheGame.Models.Abstracts.Item" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAEQAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Abstracts\Item.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="KufTheGame.Models.Abstracts.Obsticle" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Abstracts\Obsticle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Abstracts.Potion" Collapsed="true">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Abstracts\Potion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Exceptions.ArmorException" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Exceptions\ArmorException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Exceptions.WeaponException" Collapsed="true">
+    <Position X="20.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Exceptions\WeaponException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Game.Models.BasicAttack" Collapsed="true">
+    <Position X="20.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game.Models\BasicAttack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Game.Models.Characters.Karateman" Collapsed="true">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Game.Models\Characters\Karateman.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Game.Models.Characters.Player" Collapsed="true">
+    <Position X="16.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAgAAAAIIAAAAAAAAAAARAAIAAAAggCAkCCAAEACA=</HashCode>
+      <FileName>Models\Game.Models\Characters\Player.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="KufTheGame.Models.Game.Models.Characters.StickmanNinja" Collapsed="true">
+    <Position X="14" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Game.Models\Characters\StickmanNinja.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Game.Models.Items.Armor" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAkAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Game.Models\Items\Armor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Game.Models.Items.HealthPotion" Collapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAIAAAAAEAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Game.Models\Items\HealthPotion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Game.Models.Items.ImmortalilyPotion" Collapsed="true">
+    <Position X="2.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAEAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Game.Models\Items\ImmortalilyPotion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Game.Models.Items.Weapon" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAIAAAAAEAAAAAAAACQAAAAA=</HashCode>
+      <FileName>Models\Game.Models\Items\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Models.Game.Models.Obsticles.Boundary" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Game.Models\Obsticles\Boundary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KufTheGame.Properties.Resources" Collapsed="true">
+    <Position X="24" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BBAAAAggCIAgAABAIAkDUAISAQIAAAAAAAAAUEADBOU=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="KufTheGame.Models.Structures.GameLevel" Collapsed="true">
+    <Position X="18.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIEAAAABAACAAAAAAAA=</HashCode>
+      <FileName>Models\Structures\GameLevel.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="KufTheGame.Models.Structures.Rarity" Collapsed="true">
+    <Position X="20.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Structures\Rarity.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="KufTheGame.Models.Interfaces.IAttackable" Collapsed="true">
+    <Position X="18.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Interfaces\IAttackable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="KufTheGame.Models.Interfaces.ICharacter" Collapsed="true">
+    <Position X="20.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwgAAAAAQCCAEAAAAAAEAAAIAAAAAAQCAAAAAQAAAAA=</HashCode>
+      <FileName>Models\Interfaces\ICharacter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="KufTheGame.Models.Interfaces.IEnemy" Collapsed="true">
+    <Position X="22.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Interfaces\IEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="KufTheGame.Models.Interfaces.IGameObject" Collapsed="true">
+    <Position X="24" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAACAAUAAA=</HashCode>
+      <FileName>Models\Interfaces\IGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="KufTheGame.Models.Interfaces.IItem" Collapsed="true">
+    <Position X="18.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Interfaces\IItem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="KufTheGame.Models.Interfaces.IMoveable" Collapsed="true">
+    <Position X="20.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Interfaces\IMoveable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="KufTheGame.Models.Interfaces.IPlayer" Collapsed="true">
+    <Position X="22.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAggCAkAAAAAACA=</HashCode>
+      <FileName>Models\Interfaces\IPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="KufTheGame.Models.Enums.Armors" Collapsed="true">
+    <Position X="18.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAABAAAAAQAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\Enums\Armors.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="KufTheGame.Models.Enums.BlockedDirections" Collapsed="true">
+    <Position X="20.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAEAAAE=</HashCode>
+      <FileName>Models\Enums\BlockedDirections.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="KufTheGame.Models.Enums.Direction" Collapsed="true">
+    <Position X="22.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAA=</HashCode>
+      <FileName>Models\Enums\Direction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="KufTheGame.Models.Enums.Frames" Collapsed="true">
+    <Position X="24" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABACAAAAAAAAAAAIAAAAAAAAEAAAAAAAAAAIAI=</HashCode>
+      <FileName>Models\Enums\Frames.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="KufTheGame.Models.Enums.PressedKey" Collapsed="true">
+    <Position X="18.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAgAAAAAAAAAAAAAAAIAAAAAIQAIAAAAAAAA=</HashCode>
+      <FileName>Models\Enums\PressedKey.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="KufTheGame.Models.Enums.Rarities" Collapsed="true">
+    <Position X="20.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAEAAAAAAAAAAQAAAAAAAQAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums\Rarities.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="KufTheGame.Models.Enums.State" Collapsed="true">
+    <Position X="22.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABACAAAAAAAAAAAIAAAAAAAAEAAAAAAAAAAIAI=</HashCode>
+      <FileName>Models\Enums\State.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="KufTheGame.Models.Enums.Weapons" Collapsed="true">
+    <Position X="24" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAQAAAAAAAAAIAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Models\Enums\Weapons.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

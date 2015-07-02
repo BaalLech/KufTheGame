@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using KufTheGame.Core;
 using KufTheGame.Models.Abstracts;
 using KufTheGame.Models.Enums;
@@ -8,6 +9,7 @@ using KufTheGame.Models.Game.Models.Characters;
 using KufTheGame.Models.Game.Models.Obsticles;
 using KufTheGame.Models.Structures;
 using KufTheGame.Properties;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,35 +53,26 @@ namespace KufTheGame
         }
 
         public static List<Item> Drops { get; set; }
-
         public static Player Player { get; set; }
 
         private List<int> TopScores { get; set; }
-
         private List<Enemy> Enemies { get; set; }
-
         private List<Obsticle> Objects { get; set; }
 
         private FrameHandler FrameHandlerVariable { get; set; }
 
         private bool LevelChanged { get; set; }
-
         private bool IsPlaying { get; set; }
 
         private int BackgroundSection { get; set; }
-
         private int BarSize { get; set; }
-
         private int Slider { get; set; }
 
         private int FadeInCounter { get; set; }
-
         private int FadeOutCounter { get; set; }
 
         private Song BackgroundSong { get; set; }
-
         private SoundEffect KickSound { get; set; }
-
         private SoundEffect DropSound { get; set; }
 
         /// <summary>
@@ -111,8 +104,6 @@ namespace KufTheGame
             this.FadeOutCounter = 255;
 
             //this.IsPlaying = true;
-
-            this.IsPlaying = false;
 
             this.LevelChanged = false;
 
@@ -343,7 +334,7 @@ namespace KufTheGame
 
                 // Drawing GameTime
                 this.spriteBatch.Draw(this.Content.Load<Texture2D>(Resources.HUD_ClockTexture), new Rectangle(405, 15, 15, 15), Color.White);
-                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format("{0:0000}", (int)gameTime.TotalGameTime.TotalSeconds - 30), new Vector2(425, 10), Color.Coral);
+                this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), string.Format("{0:0000}", (int)gameTime.TotalGameTime.TotalSeconds - 29), new Vector2(425, 10), Color.Coral);
 
                 // Drawing HealthBar
                 this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "Health: ", new Vector2(200, 40), Color.Coral);
@@ -391,12 +382,10 @@ namespace KufTheGame
                 if (Player.Weapon != null)
                 {
                     var color = (Player.Weapon.Rarity == Rarities.Common)
-                           ? Color.White
-                           : ((Player.Weapon.Rarity == Rarities.Magic)
-                               ? Color.AliceBlue
-                               : ((Player.Weapon.Rarity == Rarities.Rare)
-                                   ? Color.Yellow
-                                   : ((Player.Weapon.Rarity == Rarities.Epic) ? Color.Green : Color.Pink)));
+                           ? Color.White : ((Player.Weapon.Rarity == Rarities.Magic)
+                           ? Color.AliceBlue : ((Player.Weapon.Rarity == Rarities.Rare)
+                           ? Color.Yellow : ((Player.Weapon.Rarity == Rarities.Epic) 
+                           ? Color.Green : Color.Pink)));
 
                     this.spriteBatch.Draw(this.Content.Load<Texture2D>(Player.Weapon.GetTexturePath()), new Rectangle(502, 12, 56, 56), Color.White);
                     this.spriteBatch.DrawString(this.Content.Load<SpriteFont>(Resources.Font_GameFont), "   + " + Player.Weapon.AttackPoints, new Vector2(505, 70), color);
@@ -501,7 +490,8 @@ namespace KufTheGame
                 {
                     var newColor = ((this.FadeInCounter - 255 < 255) && (this.FadeInCounter < 600))
                         ? this.FadeInCounter - 255
-                        : ((this.FadeInCounter < 600) ? this.FadeInCounter - 255 : this.FadeOutCounter);
+                        : ((this.FadeInCounter < 600) ? this.FadeInCounter - 255 : this.FadeOutCounter
+                    );
 
                     if (this.FadeInCounter < 255)
                     {
@@ -509,7 +499,8 @@ namespace KufTheGame
                             this.Content.Load<Texture2D>(Resources.Screen_CompanySplashTexture),
                             new Vector2(150, 335),
                             this.FrameHandlerVariable.GetSplashScreenFrame(),
-                            new Color(this.FadeOutCounter, this.FadeOutCounter, this.FadeOutCounter, this.FadeOutCounter));
+                            new Color(this.FadeOutCounter, this.FadeOutCounter, this.FadeOutCounter, this.FadeOutCounter)
+                        );
                     }
                     else
                     {
@@ -523,7 +514,8 @@ namespace KufTheGame
                             this.spriteBatch.Draw(
                                 this.Content.Load<Texture2D>(Resources.Screen_GameLogoSplashTexture),
                                 new Vector2(600, 200),
-                                new Color(innerNewColor, innerNewColor, innerNewColor, innerNewColor));
+                                new Color(innerNewColor, innerNewColor, innerNewColor, innerNewColor)
+                            );
                         }
                     }
                 }
@@ -538,13 +530,15 @@ namespace KufTheGame
                             this.Content.Load<SpriteFont>(Resources.Font_GameFontBold),
                             string.Format("{0}.", currScore + 1),
                             new Vector2((currScore < this.TopScores.Count / 2) ? 250 : 550, 500 + (30 * (currScore % (this.TopScores.Count / 2)))),
-                            Color.White);
+                            Color.White
+                        );
 
                         this.spriteBatch.DrawString(
                             this.Content.Load<SpriteFont>(Resources.Font_GameFontBold),
                             string.Format("{0}", this.TopScores[currScore]),
                             new Vector2((currScore < this.TopScores.Count / 2) ? 300 : 600, 500 + (30 * (currScore % (this.TopScores.Count / 2)))),
-                            (this.TopScores[currScore] == Scoreboard.Score) ? Color.Yellow : Color.White);
+                            (this.TopScores[currScore] == Scoreboard.Score) ? Color.Yellow : Color.White
+                        );
                     }
                 }
             }
